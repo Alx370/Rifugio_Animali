@@ -1,0 +1,8 @@
+-- Crea l'utente
+CREATE USER 'catarsi'@'localhost' IDENTIFIED BY 'portale123';
+
+-- Concedi i permessi sulle tabelle del database ()
+GRANT ALL PRIVILEGES ON rifugio_animali.* TO 'catarsi'@'localhost';
+
+-- Applica le modifiche
+FLUSH PRIVILEGES;
