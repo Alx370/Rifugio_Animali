@@ -78,6 +78,17 @@ CREATE TABLE IF NOT EXISTS admin_app (
   PASSWORD    VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS diario (
+  Id_diario    INT PRIMARY KEY AUTO_INCREMENT,
+  Id_animale   INT ,
+  Storia_animale TEXT, 
+  Stato_salute    TEXT NOT NULL,
+  Stato_comportamentale TEXT NOT NULL,
+  Vaccinazioni TEXT,
+  Oprazioni_effettuate TEXT,
+  CONSTRAINT FK_id_animale FOREIGN KEY (Id_animale) REFERENCES Animale(Id_animale)
+);
+
 
 --popolamento delle tabelle
 
@@ -140,4 +151,12 @@ INSERT INTO admin_app (EMAIL, PASSWORD) VALUES
 ('admin@app.it', 'admin123'),
 ('root@app.it', 'rootpass');
 
+
+INSERT INTO diario (Id_animale, Storia_animale, Stato_salute, Stato_comportamentale, Vaccinazioni, Oprazioni_effettuate) VALUES
+(1, 'Recuperato da un canile abusivo, inizialmente molto diffidente. Adottato dopo un percorso di socializzazione.', 'Buona, vaccinato e in forma.', 'Tranquillo e socievole.', 'Vaccino trivalente, antirabbica', 'Sterilizzazione'),
+(2, 'Trovata abbandonata vicino a un cassonetto. Ha ricevuto cure veterinarie e sta recuperando peso.', 'In recupero, sotto osservazione per anemia.', 'Tende a nascondersi, ma non aggressiva.', 'Vaccino trivalente', NULL),
+(3, 'Consegnato da una famiglia che non poteva più tenerlo. Problemi respiratori al primo controllo.', 'Stabile, sotto controllo con terapia.', 'Affettuosa ma pigra.', 'Vaccino trivalente', 'Terapia respiratoria'),
+(4, 'Trovato randagio in zona periferica. Condizioni iniziali buone.', 'Ottima salute.', 'Vivace, ama il contatto umano.', 'Vaccino trivalente, antirabbica', NULL),
+(5, 'Donato da un allevatore. Abituato al contatto umano.', 'Molto buono, nessun problema riscontrato.', 'Docile e tranquillo.', NULL, NULL),
+(6, 'Recuperato da una situazione di maltrattamento. Presentava una zampa anteriore più corta.', 'In miglioramento dopo cura.', 'Ha bisogno di attenzione, ma risponde bene agli stimoli.', 'Vaccino trivalente, antirabbica', 'Terapia alla zampa');
 
