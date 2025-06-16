@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 
 @Entity
 
-public class Animali {
+public class Animale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -24,7 +24,7 @@ public class Animali {
     private String taglia;
     private String colore;
     private String segni_particolari;
-    
+
     public int getId_animale() {
         return id_animale;
     }
