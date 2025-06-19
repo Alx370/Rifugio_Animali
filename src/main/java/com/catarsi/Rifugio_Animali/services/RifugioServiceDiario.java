@@ -6,7 +6,7 @@ import com.catarsi.Rifugio_Animali.model.Diario;
 
 public interface RifugioServiceDiario {
     
-    Diario addDiario();
+    Diario addDiario(Diario d);
     List<Diario> addDiari();
     
 }
