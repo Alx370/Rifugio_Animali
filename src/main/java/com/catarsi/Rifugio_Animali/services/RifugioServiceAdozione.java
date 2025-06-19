@@ -6,7 +6,7 @@ import com.catarsi.Rifugio_Animali.model.Adozione;
 
 public interface RifugioServiceAdozione {
 
-	Adozione addAdozione();
+	Adozione addAdozione(Adozione a);
 	List<Adozione>getAdozioni();
 
 }
