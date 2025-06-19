@@ -7,5 +7,5 @@ import com.catarsi.Rifugio_Animali.model.Donazione;
 public interface RifugioServiceDonazione {
     
     Donazione addDonazione(Donazione d);
-    List<Donazione> addDonazioni();
+    List<Donazione> getDonazioni();
 }
