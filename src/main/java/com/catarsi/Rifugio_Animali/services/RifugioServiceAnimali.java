@@ -7,6 +7,5 @@ import java.util.List;
 public interface RifugioServiceAnimali {
 
     Animale addAnimale();
-
     List<Animale> getAnimali();
 }
