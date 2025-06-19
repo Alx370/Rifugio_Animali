@@ -7,5 +7,5 @@ import com.catarsi.Rifugio_Animali.model.Dottore;
 public interface RifugioServiceDottore {
     
     Dottore addDottore(Dottore d);
-    List<Dottore> addDottori();
+    List<Dottore> getDottori();
 }
