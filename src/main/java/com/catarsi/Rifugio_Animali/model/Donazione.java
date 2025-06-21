@@ -2,35 +2,50 @@ package com.catarsi.Rifugio_Animali.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
 
 @Entity
+@Table(name = "donazione")
 public class Donazione {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "Id_donazione")
     private int id_donazione;
 
     @ManyToOne
-    @JoinColumn(name = "id_utente")
+    @JoinColumn(name = "Id_utente")
     private Utente utente;
 
     @ManyToOne
     @JoinColumn(name = "id_ente")
     private Ente ente;
 
+    @Column(name = "nome_donatore", nullable = false)
     private String nome_donatore;
+
+    @Column(name = "email_donatore")
     private String email_donatore;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data", nullable = false)
     private Date data;
+
+    @Column(name = "somma", nullable = false)
     private double somma;
 
-    // GETTER & SETTER
+    public Donazione() {}
+
     public int getId_donazione() {
         return id_donazione;
     }

@@ -2,31 +2,43 @@ package com.catarsi.Rifugio_Animali.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
+@Table(name = "visita")
 public class Visita {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "Id_visita")
     private int id_visita;
 
     @ManyToOne
-    @JoinColumn(name = "id_animale")
+    @JoinColumn(name = "Id_animale", nullable = false)
     private Animale animale;
 
     @ManyToOne
-    @JoinColumn(name = "id_dottore")
+    @JoinColumn(name = "Id_dottore", nullable = false)
     private Dottore dottore;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data_visita", nullable = false)
     private Date data_visita;
 
+    @Column(name = "descrizione", columnDefinition = "TEXT")
     private String descrizione;
+
+    public Visita() {}
 
     public int getId_visita() {
         return id_visita;
@@ -67,5 +79,5 @@ public class Visita {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-}
 
+}
