@@ -2,78 +2,101 @@ package com.catarsi.Rifugio_Animali.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
 
 @Entity
+@Table(name = "donazione")
 public class Donazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "Id_donazione")
     private int id_donazione;
 
     @ManyToOne
-    @JoinColumn(name="Utente")
-    private int id_utente;
+    @JoinColumn(name="Id_utente")
+    private Utente utente;
 
     @ManyToOne
-    @JoinColumn(name="Ente")
-    private int id_ente;
+    @JoinColumn(name = "id_ente")
+    private Ente ente;
 
+    @Column(name = "nome_donatore", nullable = false)
     private String nome_donatore;
 
+    @Column(name = "email_donatore")
     private String email_donatore;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "data", nullable = false)
     private Date data;
 
+    @Column(name = "somma", nullable = false)
     private double somma;
 
-    
+    public Donazione() {}
 
     public int getId_donazione() {
         return id_donazione;
     }
+
     public void setId_donazione(int id_donazione) {
         this.id_donazione = id_donazione;
     }
-    public int getId_utente() {
-        return id_utente;
+
+    public Utente getUtente() {
+        return utente;
     }
-    public void setId_utente(int id_utente) {
-        this.id_utente = id_utente;
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
     }
-    public int getId_ente() {
-        return id_ente;
+
+    public Ente getEnte() {
+        return ente;
     }
-    public void setId_ente(int id_ente) {
-        this.id_ente = id_ente;
+
+    public void setEnte(Ente ente) {
+        this.ente = ente;
     }
+
     public String getNome_donatore() {
         return nome_donatore;
     }
+
     public void setNome_donatore(String nome_donatore) {
         this.nome_donatore = nome_donatore;
     }
+
     public String getEmail_donatore() {
         return email_donatore;
     }
+
     public void setEmail_donatore(String email_donatore) {
         this.email_donatore = email_donatore;
     }
+
     public Date getData() {
         return data;
     }
+
     public void setData(Date data) {
         this.data = data;
     }
+
     public double getSomma() {
         return somma;
     }
+
     public void setSomma(double somma) {
         this.somma = somma;
     }
