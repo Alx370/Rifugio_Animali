@@ -8,23 +8,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Visita {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int id_visita;
 
     @ManyToOne
-    @JoinColumn(name="Animale")
-    private int id_animale;
+    @JoinColumn(name = "id_animale")
+    private Animale animale;
 
-    @OneToMany
-    @JoinColumn(name="Dottore")
-    private int id_dottore;
+    @ManyToOne
+    @JoinColumn(name = "id_dottore")
+    private Dottore dottore;
 
     private Date data_visita;
 
@@ -38,20 +36,20 @@ public class Visita {
         this.id_visita = id_visita;
     }
 
-    public int getId_animale() {
-        return id_animale;
+    public Animale getAnimale() {
+        return animale;
     }
 
-    public void setId_animale(int id_animale) {
-        this.id_animale = id_animale;
+    public void setAnimale(Animale animale) {
+        this.animale = animale;
     }
 
-    public int getId_dottore() {
-        return id_dottore;
+    public Dottore getDottore() {
+        return dottore;
     }
 
-    public void setId_dottore(int id_dottore) {
-        this.id_dottore = id_dottore;
+    public void setDottore(Dottore dottore) {
+        this.dottore = dottore;
     }
 
     public Date getData_visita() {
@@ -69,7 +67,5 @@ public class Visita {
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
-    
-    
-
 }
+
