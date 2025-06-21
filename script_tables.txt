@@ -1,81 +1,81 @@
 --creazione delle tabelle
 
 CREATE TABLE IF NOT EXISTS Utente (
-  ID_UTENTE     INT PRIMARY KEY AUTO_INCREMENT,
-  NOME          VARCHAR(30) NOT NULL,
-  COGNOME       VARCHAR(30) NOT NULL,
-  EMAIL         VARCHAR(100) NOT NULL UNIQUE,
-  PASSWORD      VARCHAR(255) NOT NULL,
-  TELEFONO      VARCHAR(20),
-  SESSO         CHAR(1),
-  DATA_NASCITA  DATE
+  Id_utente     INT PRIMARY KEY AUTO_INCREMENT,
+  nome          VARCHAR(30) NOT NULL,
+  cognome       VARCHAR(30) NOT NULL,
+  email         VARCHAR(100) NOT NULL UNIQUE,
+  password      VARCHAR(255) NOT NULL,
+  telefono      VARCHAR(20),
+  sesso         CHAR(1),
+  data_nascita  DATE
 );
 
 CREATE TABLE IF NOT EXISTS Ente (
-  ID_ENTE     INT PRIMARY KEY AUTO_INCREMENT,
-  NOME        VARCHAR(100) NOT NULL,
-  EMAIL       VARCHAR(100),
-  TELEFONO    VARCHAR(20)
+  Id_ente     INT PRIMARY KEY AUTO_INCREMENT,
+  nome        VARCHAR(100) NOT NULL,
+  email       VARCHAR(100),
+  telefono    VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS Donazione (
-  ID_DONAZIONE     INT PRIMARY KEY AUTO_INCREMENT,
-  ID_UTENTE        INT,
-  ID_ENTE          INT,
-  NOME_DONATORE    VARCHAR(100),
-  EMAIL_DONATORE   VARCHAR(100),
-  DATA             DATE NOT NULL,
-  SOMMA            DECIMAL(10,2) NOT NULL,
-  CONSTRAINT FK_DON_UTENTE FOREIGN KEY (ID_UTENTE) REFERENCES Utente(ID_UTENTE),
-  CONSTRAINT FK_DON_ENTE FOREIGN KEY (ID_ENTE) REFERENCES Ente(ID_ENTE)
+  Id_donazione     INT PRIMARY KEY AUTO_INCREMENT,
+  Id_utente        INT,
+  Id_ente          INT,
+  nome_donatore    VARCHAR(100),
+  email_donatore   VARCHAR(100),
+  data             DATE NOT NULL,
+  somma            DECIMAL(10,2) NOT NULL,
+  CONSTRAINT fk_don_utente FOREIGN KEY (id_utente) REFERENCES Utente(id_utente),
+  CONSTRAINT fk_don_ente FOREIGN KEY (id_ente) REFERENCES Ente(id_ente)
 );
 
 CREATE TABLE IF NOT EXISTS Dottore (
-  ID_DOTTORE   INT PRIMARY KEY AUTO_INCREMENT,
-  NOME         VARCHAR(30) NOT NULL,
-  COGNOME      VARCHAR(30) NOT NULL,
-  EMAIL        VARCHAR(100) NOT NULL UNIQUE,
-  TELEFONO     VARCHAR(20),
-  SESSO        CHAR(1)
+  Id_dottore   INT PRIMARY KEY AUTO_INCREMENT,
+  nome         VARCHAR(30) NOT NULL,
+  cognome      VARCHAR(30) NOT NULL,
+  email        VARCHAR(100) NOT NULL UNIQUE,
+  telefono     VARCHAR(20),
+  sesso        CHAR(1)
 );
 
 CREATE TABLE IF NOT EXISTS Animale (
-  ID_ANIMALE          INT PRIMARY KEY AUTO_INCREMENT,
-  SPECIE              VARCHAR(20) NOT NULL,
-  DATA_ARRIVO         DATE NOT NULL,
-  DATA_ADOZIONE       DATE,
-  RAZZA               VARCHAR(20),
-  SESSO               CHAR(1) NOT NULL,
-  PESO                DECIMAL(5,2) NOT NULL,
-  ETA                 INT,
-  TAGLIA              VARCHAR(20) NOT NULL,
-  COLORE              VARCHAR(30) NOT NULL,
-  SEGNI_PARTICOLARI   TEXT
+  Id_animale          INT PRIMARY KEY AUTO_INCREMENT,
+  specie              VARCHAR(20) NOT NULL,
+  data_arrivo         DATE NOT NULL,
+  data_adozione       DATE,
+  razza               VARCHAR(20),
+  sesso               CHAR(1) NOT NULL,
+  peso                DECIMAL(5,2) NOT NULL,
+  eta                 INT,
+  taglia              VARCHAR(20) NOT NULL,
+  colore              VARCHAR(30) NOT NULL,
+  segni_particolari   TEXT
 );
 
 CREATE TABLE IF NOT EXISTS Adozione (
-  ID_ADOZIONE     INT PRIMARY KEY AUTO_INCREMENT,
-  ID_ANIMALE      INT NOT NULL UNIQUE,
-  ID_UTENTE       INT NOT NULL,
-  DATA_ADOZIONE   DATE NOT NULL,
-  CONSTRAINT FK_ADOZIONE_ANIMALE FOREIGN KEY (ID_ANIMALE) REFERENCES Animale(ID_ANIMALE),
-  CONSTRAINT FK_ADOZIONE_UTENTE FOREIGN KEY (ID_UTENTE) REFERENCES Utente(ID_UTENTE)
+  Id_adozione     INT PRIMARY KEY AUTO_INCREMENT,
+  Id_animale      INT NOT NULL UNIQUE,
+  Id_utente       INT NOT NULL,
+  data_adozione   DATE NOT NULL,
+  CONSTRAINT fk_adozione_animale FOREIGN KEY (id_animale) REFERENCES Animale(id_animale),
+  CONSTRAINT fk_adozione_utente FOREIGN KEY (id_utente) REFERENCES Utente(id_utente)
 );
 
 CREATE TABLE IF NOT EXISTS Visita (
-  ID_VISITA      INT PRIMARY KEY AUTO_INCREMENT,
-  ID_ANIMALE     INT NOT NULL,
-  ID_DOTTORE     INT NOT NULL,
-  DATA_VISITA    DATE NOT NULL,
-  DESCRIZIONE    TEXT,
-  CONSTRAINT FK_VISITA_ANIMALE FOREIGN KEY (ID_ANIMALE) REFERENCES Animale(ID_ANIMALE),
-  CONSTRAINT FK_VISITA_DOTTORE FOREIGN KEY (ID_DOTTORE) REFERENCES Dottore(ID_DOTTORE)
+  Id_visita      INT PRIMARY KEY AUTO_INCREMENT,
+  Id_animale     INT NOT NULL,
+  Id_dottore     INT NOT NULL,
+  data_visita    DATE NOT NULL,
+  descrizione    TEXT,
+  CONSTRAINT fk_visita_animale FOREIGN KEY (id_animale) REFERENCES Animale(id_animale),
+  CONSTRAINT fk_visita_dottore FOREIGN KEY (id_dottore) REFERENCES Dottore(id_dottore)
 );
 
-CREATE TABLE IF NOT EXISTS admin_app (
-  ID_ADMIN    INT PRIMARY KEY AUTO_INCREMENT,
-  EMAIL       VARCHAR(100) NOT NULL UNIQUE,
-  PASSWORD    VARCHAR(255) NOT NULL
+CREATE TABLE IF NOT EXISTS Admin_app (
+  Id_admin    INT PRIMARY KEY AUTO_INCREMENT,
+  email       VARCHAR(100) NOT NULL UNIQUE,
+  password    VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS diario (
