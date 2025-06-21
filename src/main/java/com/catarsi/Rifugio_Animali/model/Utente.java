@@ -3,24 +3,25 @@ package com.catarsi.Rifugio_Animali.model;
 
 import java.util.Date;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 @Entity
 public class Utente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "Id_utente")
     private int id_utente;
     private String nome;
     private String cognome;
+    @Email
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
     private String telefono;
     private String sesso;
+    @Column(name = "Data_nascita")
     private Date data_nascita;
 
     

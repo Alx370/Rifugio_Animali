@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <title>Animali</title>
+</head>
+<body>
+<div class="container">
+  <h1>Lista Animali</h1>
+
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+    </ul>
+  </nav>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Specie</th>
+      <th>Razza</th>
+      <th>Peso</th>
+      <th>Età</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="animale : ${animali}">
+      <td th:text="${animale.specie}"></td>
+      <td th:text="${animale.razza}"></td>
+      <td th:text="${animale.peso} + ' kg'"></td>
+      <td th:text="${animale.eta} + ' anni'"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
