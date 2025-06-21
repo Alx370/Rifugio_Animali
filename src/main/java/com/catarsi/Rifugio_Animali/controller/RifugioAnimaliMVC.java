@@ -19,7 +19,7 @@ public class RifugioAnimaliMVC {
         this.repoAnimale = repoAnimale;
     }
 
-    @GetMapping("Animali")
+    @GetMapping("/animali")
     public String addAnimali(Model m) {
         m.addAttribute("animali", srvAnimale.getAnimali());
         return "animali";
