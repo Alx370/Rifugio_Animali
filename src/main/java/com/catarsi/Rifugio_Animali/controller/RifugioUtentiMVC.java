@@ -6,8 +6,14 @@ import org.springframework.ui.Model;
 
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceUtenteImpl;
+import com.catarsi.Rifugio_Animali.sign_in.RegistrazioneUtente;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -27,6 +33,32 @@ public class RifugioUtentiMVC {
         m.addAttribute("utenti", srvUtente.getUtenti());
         return "utenti";
     }
+
+   @PostMapping("/signin")
+    public String registraUtente(
+            @RequestParam String nome,
+            @RequestParam String cognome,
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam String telefono,
+            @RequestParam String sesso,
+            @RequestParam String dataNascita
+    ) {
+        RegistrazioneUtente.registraUtente(nome, cognome, email, password, telefono, sesso, dataNascita);
+        return "redirect:/successo"; 
+    }
+
+    
+    @GetMapping("/successo")
+    public String mostraPaginaSuccesso() {
+        return "successo";  // Spring cercherà templates/successo.html
+    }
+
+
+
+    
+    
+    
     
 }
 

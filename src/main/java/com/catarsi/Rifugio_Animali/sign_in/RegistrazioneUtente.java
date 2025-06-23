@@ -34,7 +34,7 @@ public class RegistrazioneUtente {
             int righeInserite = stmt.executeUpdate();
 
             if (righeInserite > 0) {
-                System.out.println("Utente registrato con successo!");
+                System.out.println("Utente registrato con successo!" );
             } else {
                 System.out.println("Errore durante la registrazione.");
             }
