@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donazioni</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista Donazioni</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Nome Donatore</th>
+                    <th>Email Donatore</th>
+                    <th>Data</th>
+                    <th>Somma</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="donazione : ${donazioni}">
+                    
+                    <td th:text="${donazione.utente.nome}"></td>
+                    <td th:text="${donazione.utente.email}"></td>
+                    <td th:text="${#dates.format(donazione.data, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${donazione.somma + ' €'}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
