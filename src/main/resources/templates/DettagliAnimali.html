@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettagli Animale</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="'Dettagli di ' + ${animale.nome}">Dettagli</h1>
+
+    <ul>
+        <li><strong>Specie:</strong> <span th:text="${animale.specie}"></span></li>
+        <li><strong>Razza:</strong> <span th:text="${animale.razza}"></span></li>
+        <li><strong>Peso:</strong> <span th:text="${animale.peso} + ' kg'"></span></li>
+        <li><strong>Età:</strong> <span th:text="${animale.eta} + ' anni'"></span></li>
+    </ul>
+
+    <a href="/animali">← Torna alla lista</a>
+</div>
+</body>
+</html>

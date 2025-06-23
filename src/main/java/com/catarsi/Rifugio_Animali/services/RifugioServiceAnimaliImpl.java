@@ -22,4 +22,16 @@ public class RifugioServiceAnimaliImpl implements RifugioServiceAnimali {
     public List<Animale> getAnimali() {
         return animali_repo.findAll();
     }
+
+    @Override
+    public Animale getAnimaleByIdAnimale(int id) {
+        return animali_repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Animale non trovato con ID: " + id));
+    }
 }
+
+
+
+
+
+

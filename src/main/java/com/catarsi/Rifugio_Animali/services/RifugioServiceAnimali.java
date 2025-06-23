@@ -8,4 +8,9 @@ public interface RifugioServiceAnimali {
 
     Animale addAnimale(Animale a);
     List<Animale> getAnimali();
+
+
+    Animale getAnimaleByIdAnimale(int id); 
 }
+
+

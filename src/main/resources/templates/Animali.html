@@ -24,14 +24,19 @@
       <th>Età</th>
     </tr>
     </thead>
+
     <tbody>
-    <tr th:each="animale : ${animali}">
-      <td th:text="${animale.specie}"></td>
-      <td th:text="${animale.razza}"></td>
-      <td th:text="${animale.peso} + ' kg'"></td>
-      <td th:text="${animale.eta} + ' anni'"></td>
-    </tr>
+      <tr th:each="animale : ${animali}">
+        <td>
+          <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.specie}"></a>
+        </td>
+        <td th:text="${animale.razza}"></td>
+        <td th:text="|${animale.peso} kg|"></td>
+        <td th:text="|${animale.eta} anni|"></td>
+      </tr>
     </tbody>
+
+
   </table>
 </div>
 </body>
