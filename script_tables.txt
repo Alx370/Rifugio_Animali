@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS Dottore (
 CREATE TABLE IF NOT EXISTS Animale (
   Id_animale          INT PRIMARY KEY AUTO_INCREMENT,
   specie              VARCHAR(20) NOT NULL,
+  nome                VARCHAR(20) NULL,
   data_arrivo         DATE NOT NULL,
   data_adozione       DATE,
   razza               VARCHAR(20),
