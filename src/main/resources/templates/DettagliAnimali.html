@@ -10,6 +10,7 @@
     <h1 th:text="'Dettagli di ' + ${animale.nome}">Dettagli</h1>
 
     <ul>
+        <li><strong>Nome:</strong> <span th:text="${animale.nome}"></span></li>
         <li><strong>Specie:</strong> <span th:text="${animale.specie}"></span></li>
         <li><strong>Razza:</strong> <span th:text="${animale.razza}"></span></li>
         <li><strong>Peso:</strong> <span th:text="${animale.peso} + ' kg'"></span></li>
