@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utenti</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista Utenti</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+
+        <table>
+            <thead>
+                <tr>
+                    
+                    <th>Nome </th>
+                    <th>Cognome </th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Telefono</th> 
+                    <th>Sesso</th> 
+                    <th>Data nascita</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="utente : ${utenti}">
+                    
+                    <td th:text="${utente.nome}"></td>
+                    <td th:text="${utente.cognome}"></td>
+                    <td th:text="${utente.email}"></td>
+                    <td th:text="${utente.password}"></td>
+                    <td th:text="${utente.telefono}"></td>
+                    <td th:text="${utente.sesso}"></td>
+                    <td th:text="${#dates.format(utente.data_nascita, 'dd/MM/yyyy')}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
