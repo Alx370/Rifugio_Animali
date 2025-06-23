@@ -19,10 +19,13 @@ public class Animale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_animale")
-    private int id_animale; 
+    private int id_animale;
 
     @Column(name = "specie", nullable = false)
     private String specie;
+
+    @Column(name = "nome", nullable = true)
+    private String nome;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_arrivo", nullable = false)
@@ -132,5 +135,11 @@ public class Animale {
         this.segni_particolari = segni_particolari;
     }
 
+    public String getNome() {
+        return nome;
+    }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

@@ -32,7 +32,7 @@ public class Adozione {
     private Utente utente;
     
     @Temporal(TemporalType.DATE)
-    @Column(name = "DATA_ADOZIONE")
+    @Column(name = "data_adozione")
     private Date data_adozione;
 
     public int getId_adozione() {
