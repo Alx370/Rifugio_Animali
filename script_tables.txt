@@ -85,11 +85,11 @@ CREATE TABLE IF NOT EXISTS Admin_app (
 CREATE TABLE IF NOT EXISTS diario (
   Id_diario    INT PRIMARY KEY AUTO_INCREMENT,
   Id_animale   INT ,
-  Storia_animale TEXT, 
-  Stato_salute    TEXT NOT NULL,
-  Stato_comportamentale TEXT NOT NULL,
-  Vaccinazioni TEXT,
-  Oprazioni_effettuate TEXT,
+  storia_animale TEXT, 
+  stato_salute    TEXT NOT NULL,
+  stato_comportamentale TEXT NOT NULL,
+  vaccinazioni TEXT,
+  operazioni_effettuate TEXT,
   CONSTRAINT FK_id_animale FOREIGN KEY (Id_animale) REFERENCES Animale(Id_animale)
 );
 
