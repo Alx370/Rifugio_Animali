@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registrazione Utente</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #c3f798;
+      padding: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Registrazione</h2>
+
+    
+    <form action="signup" method="post">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label for="cognome">Cognome:</label>
+      <input type="text" id="cognome" name="cognome" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="telefono">Numero di telefono:</label>
+      <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10}" placeholder="es. 3331234567">
+
+      <label for="sesso">Sesso:</label>
+      <select id="sesso" name="sesso" required>
+        <option value="">--Seleziona--</option>
+        <option value="m">Maschio</option>       
+        <option value="f">Femmina</option>
+        <option value="a">Altro</option>
+      </select>
+
+      <label for="data_nascita">Data di nascita:</label>
+      <input type="date" id="data_nascita" name="data_nascita" required> 
+
+      <button type="submit">Invia</button>
+    </form>
+  </div>
+
+</body>
+</html>
+
+
