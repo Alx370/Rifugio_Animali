@@ -163,3 +163,13 @@ INSERT INTO diario (Id_animale, Storia_animale, Stato_salute, Stato_comportament
 (4, 'Trovato randagio in zona periferica. Condizioni iniziali buone.', 'Ottima salute.', 'Vivace, ama il contatto umano.', 'Vaccino trivalente, antirabbica', NULL),
 (5, 'Donato da un allevatore. Abituato al contatto umano.', 'Molto buono, nessun problema riscontrato.', 'Docile e tranquillo.', NULL, NULL),
 (6, 'Recuperato da una situazione di maltrattamento. Presentava una zampa anteriore più corta.', 'In miglioramento dopo cura.', 'Ha bisogno di attenzione, ma risponde bene agli stimoli.', 'Vaccino trivalente, antirabbica', 'Terapia alla zampa');
+
+-- Vincolo per il Delete 
+ALTER TABLE diario
+DROP FOREIGN KEY FK_id_animale;
+
+ALTER TABLE diario
+ADD CONSTRAINT FK_id_animale
+FOREIGN KEY (Id_animale)
+REFERENCES animale(Id_animale)
+ON DELETE CASCADE;
