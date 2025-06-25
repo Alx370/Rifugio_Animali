@@ -1,6 +1,7 @@
 package com.catarsi.Rifugio_Animali.services;
 
 import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Diario;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAnimale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class RifugioServiceAnimaliImpl implements RifugioServiceAnimali {
         return animali_repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Animale non trovato con ID: " + id));
     }
+
+
+
 }
 
 
