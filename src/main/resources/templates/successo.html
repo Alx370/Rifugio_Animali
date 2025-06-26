@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,6 +42,7 @@
 <body>
     <h1>Registrazione avvenuta con successo!</h1>
     <p>Grazie per esserti registrato.</p>
-    <a href="/signin.html">Torna alla home</a>
+    <a th:href="@{/}">Torna alla Home</a>
+
 </body>
 </html>

@@ -33,34 +33,12 @@ public class RifugioUtentiMVC {
         m.addAttribute("utenti", srvUtente.getUtenti());
         return "utenti";
     }
-
-   @PostMapping("/signin")
-    public String registraUtente(
-            @RequestParam String nome,
-            @RequestParam String cognome,
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam String telefono,
-            @RequestParam String sesso,
-            @RequestParam String dataNascita
-    ) {
-        RegistrazioneUtente.registraUtente(nome, cognome, email, password, telefono, sesso, dataNascita);
-        return "redirect:/successo"; 
-    }
-
-    
-    @GetMapping("/successo")
-    public String mostraPaginaSuccesso() {
-        return "successo";  // Spring cercherà templates/successo.html
-    }
-
-
-
-    
-    
-    
     
 }
+
+    
+    
+
 
 
 
