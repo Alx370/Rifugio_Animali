@@ -29,6 +29,15 @@ public class RifugioServiceDiarioImpl implements RifugioServiceDiario{
         return repo_diario.save(d);
     }
 
+    @Override
+    public List<Diario> getDiariByAnimaleId(int animaleId){
+        return repo_diario.findAll().stream()
+                .filter(diario -> diario.getAnimale().getId_animale() == animaleId)
+                .toList();
+    }
+
+
+
 }
 
 

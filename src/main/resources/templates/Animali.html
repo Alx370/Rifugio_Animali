@@ -18,6 +18,7 @@
   <table>
     <thead>
     <tr>
+      <th>Nome</th>
       <th>Specie</th>
       <th>Razza</th>
       <th>Peso</th>
@@ -28,8 +29,10 @@
     <tbody>
       <tr th:each="animale : ${animali}">
         <td>
-          <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.specie}"></a>
+          <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
         </td>
+        
+        <td th:text="${animale.specie}"></td>
         <td th:text="${animale.razza}"></td>
         <td th:text="|${animale.peso} kg|"></td>
         <td th:text="|${animale.eta} anni|"></td>

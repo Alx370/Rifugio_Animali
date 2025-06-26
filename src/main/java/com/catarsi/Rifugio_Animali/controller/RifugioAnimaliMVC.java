@@ -1,5 +1,7 @@
 package com.catarsi.Rifugio_Animali.controller;
 
+import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Diario;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAnimale;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDiario;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAnimali;
@@ -38,9 +40,13 @@ public class RifugioAnimaliMVC {
     }
 
     @GetMapping("/animali/{id}")
-    public String dettagliAnimale(@PathVariable("id") int id, Model m) {
-        m.addAttribute("animale", srvAnimale.getAnimaleByIdAnimale(id));
-        return "DettagliAnimali";
+    public String dettaglioAnimale(@PathVariable int id, Model model) {
+        Animale animale = srvAnimale.getAnimaleByIdAnimale(id); 
+        List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale()); 
+        model.addAttribute("animale", animale);
+        model.addAttribute("diari", diari);
+
+        return "dettagliAnimale"; 
     }
 
     @GetMapping("/animali/delete/{id}")
@@ -49,6 +55,14 @@ public class RifugioAnimaliMVC {
         srvAnimale.deleteAnimale(id);
         return "redirect:/animali";
     }
+
+
+
+
+
+
+
+    
 
 
 }

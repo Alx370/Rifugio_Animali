@@ -10,4 +10,7 @@ public interface RifugioServiceDiario {
     void deleteDiario(int id);
     List<Diario> getDiari();
     
+
+    List<Diario> getDiariByAnimaleId(int animaleId);
+
 }

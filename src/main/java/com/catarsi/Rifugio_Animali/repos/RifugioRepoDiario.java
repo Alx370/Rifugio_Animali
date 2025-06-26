@@ -17,3 +17,4 @@ public interface RifugioRepoDiario extends JpaRepository<Diario, Integer> {
     @Query("DELETE FROM Diario d WHERE d.animale.id = :id")
     void deleteByAnimaleId(@Param("id") int id);
 }
+
