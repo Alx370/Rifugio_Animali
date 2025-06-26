@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,6 @@
         <table>
             <thead>
                 <tr>
-                    
                     <th>Nome Donatore</th>
                     <th>Email Donatore</th>
                     <th>Data</th>
@@ -28,7 +27,6 @@
             </thead>
             <tbody>
                 <tr th:each="donazione : ${donazioni}">
-                    
                     <td th:text="${donazione.utente.nome}"></td>
                     <td th:text="${donazione.utente.email}"></td>
                     <td th:text="${#dates.format(donazione.data, 'dd/MM/yyyy')}"></td>
