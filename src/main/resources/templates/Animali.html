@@ -18,20 +18,32 @@
   <table>
     <thead>
     <tr>
+      <th>Nome</th>
       <th>Specie</th>
       <th>Razza</th>
       <th>Peso</th>
       <th>Età</th>
     </tr>
     </thead>
+
     <tbody>
-    <tr th:each="animale : ${animali}">
-      <td th:text="${animale.specie}"></td>
-      <td th:text="${animale.razza}"></td>
-      <td th:text="${animale.peso} + ' kg'"></td>
-      <td th:text="${animale.eta} + ' anni'"></td>
-    </tr>
+      <tr th:each="animale : ${animali}">
+        <td>
+          <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
+        </td>
+        
+        <td th:text="${animale.specie}"></td>
+        <td th:text="${animale.razza}"></td>
+        <td th:text="|${animale.peso} kg|"></td>
+        <td th:text="|${animale.eta} anni|"></td>
+        <td>
+        <button>
+          <a th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
+        </button>
+      </td>
+      </tr>
     </tbody>
+
   </table>
 </div>
 </body>

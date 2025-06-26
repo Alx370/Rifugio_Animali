@@ -1,4 +1,7 @@
---creazione delle tabelle
+create database rifugio_animali;
+use rifugio_animali;
+
+-- creazione delle tabelle
 
 CREATE TABLE IF NOT EXISTS Utente (
   Id_utente     INT PRIMARY KEY AUTO_INCREMENT,
@@ -42,6 +45,7 @@ CREATE TABLE IF NOT EXISTS Dottore (
 CREATE TABLE IF NOT EXISTS Animale (
   Id_animale          INT PRIMARY KEY AUTO_INCREMENT,
   specie              VARCHAR(20) NOT NULL,
+  nome                VARCHAR(20) NULL,
   data_arrivo         DATE NOT NULL,
   data_adozione       DATE,
   razza               VARCHAR(20),
@@ -81,16 +85,16 @@ CREATE TABLE IF NOT EXISTS Admin_app (
 CREATE TABLE IF NOT EXISTS diario (
   Id_diario    INT PRIMARY KEY AUTO_INCREMENT,
   Id_animale   INT ,
-  Storia_animale TEXT, 
-  Stato_salute    TEXT NOT NULL,
-  Stato_comportamentale TEXT NOT NULL,
-  Vaccinazioni TEXT,
-  Oprazioni_effettuate TEXT,
+  storia_animale TEXT, 
+  stato_salute    TEXT NOT NULL,
+  stato_comportamentale TEXT NOT NULL,
+  vaccinazioni TEXT,
+  operazioni_effettuate TEXT,
   CONSTRAINT FK_id_animale FOREIGN KEY (Id_animale) REFERENCES Animale(Id_animale)
 );
 
 
---popolamento delle tabelle
+-- popolamento delle tabelle
 
 INSERT INTO Utente (NOME, COGNOME, EMAIL, PASSWORD, TELEFONO, SESSO, DATA_NASCITA) VALUES
 ('Luca', 'Rossi', 'luca.rossi@email.com', 'pwd123', '3331112222', 'M', '1990-05-15'),
@@ -114,13 +118,13 @@ INSERT INTO Dottore (NOME, COGNOME, EMAIL, TELEFONO, SESSO) VALUES
 ('Lorenzo', 'Ferri', 'lorenzo.ferri@vet.it', '3455556666', 'M');
 
 
-INSERT INTO Animale (SPECIE, DATA_ARRIVO, DATA_ADOZIONE, RAZZA, SESSO, PESO, ETA, TAGLIA, COLORE, SEGNI_PARTICOLARI) VALUES
-('Cane', '2024-01-10', '2024-03-05', 'Labrador', 'M', 25.50, 3, 'Grande', 'Marrone', 'Cicatrice sulla zampa posteriore'),
-('Gatto', '2024-02-14', NULL, 'Europeo', 'F', 4.30, 2, 'Piccola', 'Tigrato', 'Coda storta'),
-('Cane', '2024-03-01', '2024-04-10', 'Bulldog', 'F', 18.20, 5, 'Media', 'Bianco', ''),
-('Gatto', '2024-03-20', NULL, 'Siamese', 'M', 3.90, 1, 'Piccola', 'Crema', 'Occhi azzurri'),
-('Coniglio', '2024-04-01', NULL, 'Nano', 'F', 1.10, 2, 'Piccola', 'Bianco e nero', ''),
-('Cane', '2024-04-15', '2024-06-01', 'Meticcio', 'M', 20.00, 4, 'Media', 'Nero', 'Zampa anteriore più corta');
+INSERT INTO Animale (SPECIE, NOME, DATA_ARRIVO, DATA_ADOZIONE, RAZZA, SESSO, PESO, ETA, TAGLIA, COLORE, SEGNI_PARTICOLARI) VALUES
+('Cane', '', '2024-01-10', '2024-03-05', 'Labrador', 'M', 25.50, 3, 'Grande', 'Marrone', 'Cicatrice sulla zampa posteriore'),
+('Gatto', 'Zorro', '2024-02-14', NULL, 'Europeo', 'F', 4.30, 2, 'Piccola', 'Tigrato', 'Coda storta'),
+('Cane', 'Luffy', '2024-03-01', '2024-04-10', 'Bulldog', 'F', 18.20, 5, 'Media', 'Bianco', ''),
+('Gatto', 'Bob', '2024-03-20', NULL, 'Siamese', 'M', 3.90, 1, 'Piccola', 'Crema', 'Occhi azzurri'),
+('Coniglio', 'Vera', '2024-04-01', NULL, 'Nano', 'F', 1.10, 2, 'Piccola', 'Bianco e nero', ''),
+('Cane', 'Max', '2024-04-15', '2024-06-01', 'Meticcio', 'M', 20.00, 4, 'Media', 'Nero', 'Zampa anteriore più corta');
 
 
 INSERT INTO Adozione (ID_ANIMALE, ID_UTENTE, DATA_ADOZIONE) VALUES
@@ -160,3 +164,12 @@ INSERT INTO diario (Id_animale, Storia_animale, Stato_salute, Stato_comportament
 (5, 'Donato da un allevatore. Abituato al contatto umano.', 'Molto buono, nessun problema riscontrato.', 'Docile e tranquillo.', NULL, NULL),
 (6, 'Recuperato da una situazione di maltrattamento. Presentava una zampa anteriore più corta.', 'In miglioramento dopo cura.', 'Ha bisogno di attenzione, ma risponde bene agli stimoli.', 'Vaccino trivalente, antirabbica', 'Terapia alla zampa');
 
+-- Vincolo per il Delete 
+ALTER TABLE diario
+DROP FOREIGN KEY FK_id_animale;
+
+ALTER TABLE diario
+ADD CONSTRAINT FK_id_animale
+FOREIGN KEY (Id_animale)
+REFERENCES animale(Id_animale)
+ON DELETE CASCADE;
