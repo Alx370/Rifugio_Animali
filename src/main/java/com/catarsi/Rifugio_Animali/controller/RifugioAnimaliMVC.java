@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class RifugioAnimaliMVC {
 
@@ -42,7 +44,7 @@ public class RifugioAnimaliMVC {
     @GetMapping("/animali/{id}")
     public String dettaglioAnimale(@PathVariable int id, Model model) {
         Animale animale = srvAnimale.getAnimaleByIdAnimale(id); 
-        List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale()); 
+        List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
         model.addAttribute("animale", animale);
         model.addAttribute("diari", diari);
 
