@@ -35,6 +35,9 @@ public class Animale {
     @Column(name = "data_adozione")
     private Date data_adozione;
 
+    @Column(name = "sesso")
+    private String sesso;
+
     @Column(name = "razza")
     private String razza;
 
@@ -141,5 +144,13 @@ public class Animale {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSesso() {
+        return sesso;
+    }
+
+    public void setSesso(String sesso) {
+        this.sesso = sesso;
     }
 }

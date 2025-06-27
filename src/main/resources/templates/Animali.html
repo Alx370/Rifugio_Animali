@@ -42,7 +42,7 @@
         <td>
           <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
         </td>
-        <td th:text="M"></td>
+        <td th:text="${animale.sesso}"></td>
         <td th:text="${animale.specie}"></td>
         <td th:text="${animale.razza}"></td>
         <td th:text="|${animale.peso} kg|"></td>
