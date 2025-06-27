@@ -1,0 +1,312 @@
+/* Stili specifici per la sezione animali */
+.animals-section {
+    background: #e4ffc1;
+    min-height: calc(100vh - 160px);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-title {
+    background: #4a7c59;
+    color: #e4ffc1;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(77, 124, 15, 0.3);
+    letter-spacing: 1px;
+}
+
+.animals-table-container {
+    background: rgba(255,255,255,0.7);
+    border-radius: 15px;
+    padding: 30px;
+    width: 100%;
+    max-width: 900px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 20px;
+}
+
+.animals-table-container a {
+    text-decoration: none;
+    color: #2d5016;
+}
+
+
+.table-headers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.header-btn {
+    background: #4a7c59;
+    color: white;
+    padding: 12px 20px;
+    /* margin: 10px 5px; */
+    border: none;
+    border-radius: 25px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: default;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(77, 124, 15, 0.2);
+
+}
+
+.table-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.table-row {
+    background: rgba(255, 255, 255, 0.7);
+    height: 50px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.table-row:hover {
+    background: rgba(160, 174, 192, 0.5);
+    transform: translateX(5px);
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    .table-headers {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .animals-section {
+        padding: 20px 15px;
+    }
+    
+    .animals-table-container {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-btn {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+    
+    .table-row {
+        height: 40px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #2d5016, #4a7c59);
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.logo {
+display: flex;
+align-items: center;
+color:#e4ffc1 ;
+font-size: 1.5rem;
+font-family:'Times New Roman', Times, serif;
+}
+
+.logo img {
+height: 40px;
+margin-right: 0.5rem;
+border-radius: 50px;
+
+}
+
+.logo::before {
+    
+    background: white;
+    padding: 0.3rem;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.house-icon {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    width: 30px;
+    height: 30px;
+}
+
+.house-icon img {
+    height: 100%;
+}
+
+
+
+
+
+/* Footer Styles */
+.footer {
+    background: #4a6b42;
+    padding: 15px 40px;
+    /* margin-top: 40px; */
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo img {
+    height: 100px;
+    border-radius: 50%;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.social-icon {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.social-icon:hover {
+    opacity: 0.8;
+}
+
+.social-svg {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-credits {
+    color: white;
+    font-size: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    padding-top: 5px;
+}
+
+
+
+
+
+
+
+
+.add-animal-btn {
+    background: green;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    margin : 20px 0;
+}
+
+
+.delete-animal-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.update-animal-btn {
+    background: orange;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin : 20px 0;
+}
+
+
+@media (max-width: 768px) {
+    .add-animal-btn, .delete-animal-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .add-animal-btn, .delete-animal-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
