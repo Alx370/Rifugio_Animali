@@ -3,14 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Dettagli Animale</title>
-    <link rel="stylesheet" href="/css/dettagliAnimali.css">
+    <link rel="stylesheet" href="/css/style3.css">
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="/image/logo.png" alt="Logo Catarsi Group">
+                
+                CATARSI GROUP
+              </div>
+              
+            <div class="house-icon"><a href="/index.html"><img src="/image/house.svg" alt="casa"></a>
+            </div>
+        </nav>
+    </header>
+
 <div class="container">
     <h1 th:text="'Dettagli di ' + ${animale.nome}">Dettagli</h1>
 
     <ul>
         <li><strong>Nome:</strong> <span th:text="${animale.nome}"></span></li>
+        <!-- <li><strong>Sesso:</strong> <span th:text="${animale.sesso}"></span></li> -->
         <li><strong>Specie:</strong> <span th:text="${animale.specie}"></span></li>
         <li><strong>Razza:</strong> <span th:text="${animale.razza}"></span></li>
         <li><strong>Peso:</strong> <span th:text="${animale.peso} + ' kg'"></span></li>
@@ -39,6 +54,30 @@
     <a href="/animali">← Torna alla lista</a> 
     
 </div> 
+
+        <div class="adoption-cta">
+            <a href="#" class="adopt-button"> Adotta Zorro</a>
+        </div>
+
+
+<!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="/image/logo.png" alt="Logo Catarsi">
+            </div>
+            <div class="footer-right">
+                <div class="social-icons">
+                    <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg"></a>
+                    <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg"></a>
+                    <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg"></a>
+                </div>
+                <div class="footer-credits">
+                    <p>Crediti alla Fondazione Catarsi</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 
