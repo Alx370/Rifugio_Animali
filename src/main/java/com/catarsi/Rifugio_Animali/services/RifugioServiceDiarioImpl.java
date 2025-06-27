@@ -20,6 +20,11 @@ public class RifugioServiceDiarioImpl implements RifugioServiceDiario{
     }
 
     @Override
+    public void deleteDiario(int id){
+        repo_diario.deleteById(id);
+    }
+
+    @Override
     public Diario addDiario(Diario d){
         return repo_diario.save(d);
     }

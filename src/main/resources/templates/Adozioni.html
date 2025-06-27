@@ -19,15 +19,15 @@
     <thead>
     <tr>
       <th>Data Adozione</th>
-      <th>Nome Utente</th>
+      <th>Utente</th>
       <th>Nome Animale</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="adozione : ${adozioni}">
+    <tr th:each="adozione : ${adozioni}" th:if="${adozione != null}">
       <td th:text="${adozione.data_adozione} ?: 'N/A'"></td>
       <td th:text="${adozione.utente != null ? (adozione.utente.nome + ' ' + adozione.utente.cognome) : 'N/A'}"></td>
-      <td th:text="${adozione.animale != null ? adozione.animale.nome : 'N/A'}"></td>
+      <td th:text="${adozione.animale?.nome != null and !#strings.isEmpty(#strings.trim(adozione.animale.nome))} ? ${adozione.animale.nome} : 'N/A'"></td>
     </tr>
     </tbody>
   </table>

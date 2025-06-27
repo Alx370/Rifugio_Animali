@@ -47,6 +47,11 @@
         <td th:text="${animale.razza}"></td>
         <td th:text="|${animale.peso} kg|"></td>
         <td th:text="|${animale.eta} anni|"></td>
+        <td>
+        <button>
+          <a th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
+        </button>
+      </td>
       </tr>
     </tbody>
   </table>
