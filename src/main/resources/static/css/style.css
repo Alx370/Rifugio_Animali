@@ -89,7 +89,7 @@ border-radius: 50px;
 
 /* Hero Section */
 .hero {
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect width="1200" height="400" fill="%23e8f5e8"/></svg>');
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect width="1200" height="400" fill="%23e4ffc1"/></svg>');
     height: 300px;
     display: flex;
     align-items: center;
