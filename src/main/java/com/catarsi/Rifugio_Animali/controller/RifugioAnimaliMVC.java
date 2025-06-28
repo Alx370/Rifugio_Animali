@@ -55,7 +55,13 @@ public class RifugioAnimaliMVC {
     public String deleteAnimale(@PathVariable("id") int id) {
         srvDiario.deleteDiario(id);
         srvAnimale.deleteAnimale(id);
-        return "redirect:/animali";
+        return "redirect:/backofficeAnimali";
+    }
+
+    @GetMapping("/animali/backoffice")
+    public String backofficeAnimali(Model m) {
+        m.addAttribute("animali", srvAnimale.getAnimali());
+        return "backofficeAnimali";
     }
 
 
