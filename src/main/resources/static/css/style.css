@@ -368,16 +368,18 @@ width: 100%;
             font-family: 'Times New Roman', Times, serif;
         }
 
-        .animal-list-btn a {
-            color: #e4ffc1;
-            text-decoration: none;
-        }
-        
-        .animal-list-btn:hover {
-            background: #2d5016;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-        }
+       .animal-list-btn {
+           display: inline-block;
+           padding: 10px 20px;
+           background-color: #4a6b42;
+           color: white;
+           text-align: center;
+           text-decoration: none;
+           border-radius: 5px;
+       }
+       .animal-list-btn:hover {
+           background-color: #45a049;
+       }
         
         .animal-list-btn:active {
             transform: translateY(0);
