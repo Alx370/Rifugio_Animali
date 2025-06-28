@@ -28,11 +28,17 @@ public class RifugioUtentiMVC {
         this.repoUtente = repoUtente;
     }
 
-    @GetMapping("/utenti")
-    public String addUtenti(Model m) {
-        m.addAttribute("utenti", srvUtente.getUtenti());
-        return "utenti";
+    // @GetMapping("/utenti")
+    // public String addUtenti(Model m) {
+    //     m.addAttribute("utenti", srvUtente.getUtenti());
+    //     return "utenti";
+    // }
+    @GetMapping ("/login") //ogni volta che sul link scrivi login e la richiesta è di tipo get esegui il meotodo sotto
+    public String login(){
+        return "login";
     }
+    
+    
     
 }
 
