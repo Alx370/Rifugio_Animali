@@ -42,15 +42,15 @@
         <td>
           <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
         </td>
-        <td th:text="M"></td>
+        <td th:text="${animale.sesso}"></td>
         <td th:text="${animale.specie}"></td>
         <td th:text="${animale.razza}"></td>
         <td th:text="|${animale.peso} kg|"></td>
         <td th:text="|${animale.eta} anni|"></td>
         <td>
-        <!-- <button>
+        <button class="delete-animal-btn" id="deleteBtn" disabled>
           <a th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
-        </button> -->
+        </button>
       </td>
       </tr>
     </tbody>
@@ -61,7 +61,7 @@
                 <button class="add-animal-btn" onclick="addAnimal()">
                     ➕ Aggiungi Animale
                 </button>
-                <button class="delete-animal-btn" onclick="deleteSelectedAnimal()" id="deleteBtn" disabled>
+                <button onclick="deleteSelectedAnimal()" disabled>
                     🗑️ Elimina Selezionato
                 </button>
                 <button class="update-animal-btn" onclick="updateSelectedAnimal()" id="updateBtn" disabled>
@@ -69,8 +69,6 @@
                 </button>
             </div>
 </section>
-
-
 
 <!-- Footer Section -->
     <footer class="footer">
