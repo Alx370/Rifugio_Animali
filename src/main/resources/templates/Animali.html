@@ -28,7 +28,7 @@
 
     <!-- Sezione Filtri -->
     <div class="filter-container">
-        <div class="filter-title">🔍 FILTRA I NOSTRI ANIMALI</div>
+        <div class="filter-title">FILTRA I NOSTRI ANIMALI</div>
 
         <div class="filter-grid">
             <div class="filter-group">
@@ -73,8 +73,8 @@
         </div>
 
         <div class="filter-buttons">
-            <button class="filter-btn" onclick="applyFilters()">🔍 Applica Filtri</button>
-            <button class="filter-btn clear-btn" onclick="clearFilters()">🗑️ Cancella Filtri</button>
+            <button class="filter-btn" onclick="applyFilters()">Applica Filtri</button>
+            <button class="filter-btn clear-btn" onclick="clearFilters()">Cancella Filtri</button>
         </div>
     </div>
 
@@ -95,17 +95,16 @@
             <!-- Esempio con dati Thymeleaf -->
             <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
                 <td data-label="Nome">
-                    <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
+                    <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${#strings.isEmpty(animale.nome) ? 'N/A' : animale.nome}"></a>
                 </td>
-                <td data-label="Sesso" th:text="${animale.sesso}"></td>
-                <td data-label="Specie" th:text="${animale.specie}"></td>
-                <td data-label="Razza" th:text="${animale.razza}"></td>
-                <td data-label="Peso" th:text="|${animale.peso} kg|"></td>
-                <td data-label="Età" th:text="|${animale.eta} anni|"></td>
+                <td data-label="Sesso" th:text="${#strings.isEmpty(animale.sesso) ? 'N/A' : animale.sesso}"></td>
+                <td data-label="Specie" th:text="${#strings.isEmpty(animale.specie) ? 'N/A' : animale.specie}"></td>
+                <td data-label="Razza" th:text="${#strings.isEmpty(animale.razza) ? 'N/A' : animale.razza}"></td>
+                <td data-label="Peso" th:text="${animale.peso != null ? animale.peso + ' kg' : 'N/A'}"></td>
+                <td data-label="Età" th:text="${animale.eta != null ? animale.eta + ' anni' : 'N/A'}"></td>
             </tr>
             </tbody>
         </table>
-
         <div class="no-results" id="noResults">
             Nessun animale trovato con i criteri di ricerca selezionati.
         </div>
