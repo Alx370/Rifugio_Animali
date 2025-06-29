@@ -17,7 +17,14 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#chi-siamo">Chi siamo?</a></li>
-                <li><a href="#login">Login</a></li>
+                <li th:if="${not #authorization.expr('isAuthenticated()')}"><a href="/login">Login</a></li>
+                <li th:if="${#authorization.expr('isAuthenticated()')}">
+                    <form th:action="@{/logout}" method="post" style="display: inline;">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: inherit; font: inherit;">
+                            Logout
+                        </button>
+                    </form>
+                </li>
                 <li><a href="/signin">Sign In</a></li>
             </ul>
             <a href="#contatti" class="contact-btn">DONA ORA</a>
@@ -70,9 +77,9 @@
     </section>
 
     <section class="animal-list-section">
-        <a href="/animali" class="animal-list-btn">
-            <p>La lista dei nostri animali</p>
-        </a>
+        <button class="animal-list-btn" onclick="goToAnimalList()">
+            <a href="/animali">La lista dei nostri animali</a>
+        </button>
     </section>
 
 
