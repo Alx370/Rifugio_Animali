@@ -1,5 +1,6 @@
 package com.catarsi.Rifugio_Animali.config;
 
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,18 +22,24 @@ public class SecurityConfig {
         //noinspection removal
         http
                 .authorizeHttpRequests(requests -> requests
-                .requestMatchers("/","/home","/css/**", "/js/**", "/images/**").permitAll()
-                .anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
+                // .requestMatchers("/","/home","/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/","/animali","/animali/**","/css/**", "/js/**", "/image/**").permitAll()
+                //.anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
                 )
-                .formLogin(form -> form
+                .formLogin(form -> form //tramite la libreria mi fa la trasformazione della password in hash
                 .loginPage("/login").permitAll()
                 )
                 .logout(logout -> logout
-                .permitAll());
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID")
+                    .permitAll()
+                );
 
                 
         return http.build();
-    }
+    } 
 
     // @Bean
     // public UserDetailsService userDetailsService(){
@@ -49,5 +56,8 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
 }
+
 

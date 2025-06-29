@@ -8,6 +8,6 @@ public class RifugioHomeControllerMVC {
 
     @GetMapping("/")
     public String home() {
-        return "index"; // cerca templates/index.html e lo renderizza con Thymeleaf
+        return "home"; // cerca templates/index.html e lo renderizza con Thymeleaf
     }
 }
