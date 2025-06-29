@@ -24,10 +24,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(requests -> requests
                 // .requestMatchers("/","/home","/css/**", "/js/**", "/images/**").permitAll()
                 .requestMatchers("/","/animali","/animali/**","/css/**", "/js/**", "/image/**").permitAll()
-                //.anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
+                .anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
                 )
                 .formLogin(form -> form //tramite la libreria mi fa la trasformazione della password in hash
-                .loginPage("/login").permitAll()
+                .loginPage("/login").defaultSuccessUrl("/",true).permitAll()
                 )
                 .logout(logout -> logout
                     .logoutUrl("/logout")
