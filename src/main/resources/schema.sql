@@ -1,3 +1,6 @@
+-- popolamento delle tabelle
+create database rifugio_animali;
+use rifugio_animali;
 -- creazione delle tabelle
 
 CREATE TABLE IF NOT EXISTS Utente (
@@ -89,13 +92,3 @@ CREATE TABLE IF NOT EXISTS diario (
   operazioni_effettuate TEXT,
   CONSTRAINT FK_id_animale FOREIGN KEY (Id_animale) REFERENCES Animale(Id_animale)
 );
-
--- Vincolo per il Delete
-ALTER TABLE diario
-DROP FOREIGN KEY FK_id_animale;
-
-ALTER TABLE diario
-ADD CONSTRAINT FK_id_animale
-FOREIGN KEY (Id_animale)
-REFERENCES animale(Id_animale)
-ON DELETE CASCADE;
