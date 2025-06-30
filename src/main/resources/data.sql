@@ -1,12 +1,12 @@
 -- popolamento delle tabelle
 
 INSERT INTO Utente (NOME, COGNOME, EMAIL, PASSWORD, TELEFONO, SESSO, DATA_NASCITA) VALUES
-('Luca', 'Rossi', 'luca.rossi@email.com', 'pwd123', '3331112222', 'M', '1990-05-15'),
-('Anna', 'Bianchi', 'anna.bianchi@email.com', 'pwd456', '3333334444', 'F', '1985-08-22'),
-('Marco', 'Verdi', 'marco.verdi@email.com', 'pwd789', NULL, 'M', '2000-01-10'),
-('Sara', 'Neri', 'sara.neri@email.com', 'pwd111', '3205551234', 'F', '1995-07-12'),
-('Paolo', 'Gallo', 'paolo.gallo@email.com', 'pwd222', '3396667777', 'M', '1988-11-30'),
-('Elisa', 'Fontana', 'elisa.fontana@email.com', 'pwd333', NULL, 'F', '1992-03-03');
+('Luca', 'Rossi', 'luca.rossi@email.com', '$2a$10$wE/f50E7z1LeT/n90/rIaeUd82PNQ3jv4v59guUcOJMvOqzaYmn7S', '3331112222', 'M', '1990-05-15'),
+('Anna', 'Bianchi', 'anna.bianchi@email.com', '$2a$10$wE/f50E7z1LeT/n90/rIaeUd82PNQ3jv4v59guUcOJMvOqzaYmn7S', '3333334444', 'F', '1985-08-22'),
+('Marco', 'Verdi', 'marco.verdi@email.com', '$2a$10$wE/f50E7z1LeT/n90/rIaeUd82PNQ3jv4v59guUcOJMvOqzaYmn7S', NULL, 'M', '2000-01-10'),
+('Sara', 'Neri', 'sara.neri@email.com', '$2a$10$wE/f50E7z1LeT/n90/rIaeUd82PNQ3jv4v59guUcOJMvOqzaYmn7S', '3205551234', 'F', '1995-07-12'),
+('Paolo', 'Gallo', 'paolo.gallo@email.com', '$2a$10$wE/f50E7z1LeT/n90/rIaeUd82PNQ3jv4v59guUcOJMvOqzaYmn7S', '3396667777', 'M', '1988-11-30'),
+('Elisa', 'Fontana', 'elisa.fontana@email.com', '$2a$10$wE/f50E7z1LeT/n90/rIaeUd82PNQ3jv4v59guUcOJMvOqzaYmn7S', NULL, 'F', '1992-03-03');
 
 
 INSERT INTO Ente (NOME, EMAIL, TELEFONO) VALUES
@@ -60,7 +60,7 @@ INSERT INTO admin_app (EMAIL, PASSWORD) VALUES
 ('root@app.it', 'rootpass');
 
 
-INSERT INTO diario (Id_animale, Storia_animale, Stato_salute, Stato_comportamentale, Vaccinazioni, Oprazioni_effettuate) VALUES
+INSERT INTO diario (Id_animale, storia_animale, stato_salute, stato_comportamentale, vaccinazioni, operazioni_effettuate) VALUES
 (1, 'Recuperato da un canile abusivo, inizialmente molto diffidente. Adottato dopo un percorso di socializzazione.', 'Buona, vaccinato e in forma.', 'Tranquillo e socievole.', 'Vaccino trivalente, antirabbica', 'Sterilizzazione'),
 (2, 'Trovata abbandonata vicino a un cassonetto. Ha ricevuto cure veterinarie e sta recuperando peso.', 'In recupero, sotto osservazione per anemia.', 'Tende a nascondersi, ma non aggressiva.', 'Vaccino trivalente', NULL),
 (3, 'Consegnato da una famiglia che non poteva più tenerlo. Problemi respiratori al primo controllo.', 'Stabile, sotto controllo con terapia.', 'Affettuosa ma pigra.', 'Vaccino trivalente', 'Terapia respiratoria'),
