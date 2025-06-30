@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -63,6 +65,19 @@ public class RifugioAnimaliMVC {
         m.addAttribute("animali", srvAnimale.getAnimali());
         return "backofficeAnimali";
     }
+
+    @GetMapping("/animali/add")
+public String showForm(Model model) {
+    model.addAttribute("animale", new Animale());
+    return "addAnimale";
+}
+
+@PostMapping("/animali/add")
+public String processForm(@ModelAttribute Animale animale) {
+    srvAnimale.addAnimale(animale); 
+    return "redirect:/animali";
+}
+
 
 
 
