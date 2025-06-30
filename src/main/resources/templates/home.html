@@ -20,7 +20,7 @@
                 <li th:if="${not #authorization.expr('isAuthenticated()')}"><a href="/login">Login</a></li>
                 <li th:if="${#authorization.expr('isAuthenticated()')}">
                     <form th:action="@{/logout}" method="post" style="display: inline;">
-                        <button type="submit" style="background: none; border: none; cursor: pointer; color: inherit; font: inherit;">
+                        <button type="submit" style="background: none; border: none; cursor: pointer; color: white; font: 2rem;">
                             Logout
                         </button>
                     </form>
