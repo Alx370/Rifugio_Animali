@@ -67,16 +67,16 @@ public class RifugioAnimaliMVC {
     }
 
     @GetMapping("/animali/add")
-public String showForm(Model model) {
-    model.addAttribute("animale", new Animale());
-    return "addAnimale";
-}
+    public String showForm(Model model) {
+        model.addAttribute("animale", new Animale());
+        return "addAnimale";
+    }
 
-@PostMapping("/animali/add")
-public String processForm(@ModelAttribute Animale animale) {
-    srvAnimale.addAnimale(animale); 
-    return "redirect:/animali";
-}
+    @PostMapping("/animali/add")
+    public String processForm(@ModelAttribute Animale animale) {
+        srvAnimale.addAnimale(animale);
+        return "redirect:/animali";
+    }
 
 
 
