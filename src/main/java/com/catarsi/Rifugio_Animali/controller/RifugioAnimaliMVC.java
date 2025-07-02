@@ -63,7 +63,7 @@ public class RifugioAnimaliMVC {
     @GetMapping("/backoffice/animali")
     public String backofficeAnimali(Model m) {
         m.addAttribute("animali", srvAnimale.getAnimali());
-        return "backofficeAnimali";
+        return "/backofficeAnimali";
     }
 
     @GetMapping("/backoffice/animali/add")
@@ -75,6 +75,25 @@ public String showForm(Model model) {
 @PostMapping("/backoffice/animali/add")
 public String processForm(@ModelAttribute Animale animale) {
     srvAnimale.addAnimale(animale); 
+    return "redirect:/backoffice/animali";
+}
+
+@GetMapping("/animali/edit/{id}")
+public String showUpdateForm(@PathVariable("id") int id, Model model) {
+    Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
+    model.addAttribute("animale", animale);
+    return "UpdateAnimale";
+}
+
+@PostMapping("/animali/update/{id}")
+public String updateAnimale(@PathVariable("id") int id, @ModelAttribute("animale") Animale aggiornato) {
+    Animale esistente = srvAnimale.getAnimaleByIdAnimale(id);
+    esistente.setSpecie(aggiornato.getSpecie());
+    esistente.setRazza(aggiornato.getRazza());
+    esistente.setPeso(aggiornato.getPeso());
+    esistente.setEta(aggiornato.getEta());
+    esistente.setSesso(aggiornato.getSesso());
+    srvAnimale.addAnimale(esistente);
     return "redirect:/backoffice/animali";
 }
 
