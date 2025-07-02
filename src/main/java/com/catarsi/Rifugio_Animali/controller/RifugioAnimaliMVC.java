@@ -60,22 +60,22 @@ public class RifugioAnimaliMVC {
         return "redirect:/backofficeAnimali";
     }
 
-    @GetMapping("/animali/backoffice")
+    @GetMapping("/backoffice/animali")
     public String backofficeAnimali(Model m) {
         m.addAttribute("animali", srvAnimale.getAnimali());
         return "backofficeAnimali";
     }
 
-    @GetMapping("/animali/add")
+    @GetMapping("/backoffice/animali/add")
 public String showForm(Model model) {
     model.addAttribute("animale", new Animale());
-    return "addAnimale";
+    return "backofficeAggiungi"; // Nome del template HTML per il form di aggiunta
 }
 
-@PostMapping("/animali/add")
+@PostMapping("/backoffice/animali/add")
 public String processForm(@ModelAttribute Animale animale) {
     srvAnimale.addAnimale(animale); 
-    return "redirect:/animali";
+    return "redirect:/backoffice/animali";
 }
 
 
