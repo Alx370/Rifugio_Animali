@@ -30,8 +30,8 @@
     <div class="main-content">
         <div class="form-container">
             <h2>Modifica Animale</h2>
-            <form th:action="@{'/animali/update/' + ${animale.idAnimale}}" method="post" th:object="${animale}">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <form th:action="@{'/animali/update/' + ${animale.id_animale}}" method="post" th:object="${animale}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <div class="form-group">
                     <label for="nome">Nome</label>
