@@ -34,7 +34,7 @@ public class RifugioAdozioniMVC {
 
     @GetMapping("/backoffice/adozione")
     public String backofficeAdozione(Model m) {
-        m.addAttribute("animali", srvAdozione.getAdozioni());
+        m.addAttribute("adozioni", srvAdozione.getAdozioni());
         return "backofficeAdozioni";
     }
 
@@ -44,10 +44,10 @@ public class RifugioAdozioniMVC {
         return "backofficeAdozioni"; 
     }
 
-    @PostMapping("/backoffice/animali/add")
-    public String processForm(@ModelAttribute Adozione adozione) {
-        srvAdozione.addAdozione(adozione); 
-        return "redirect:/backoffice/adozione";
-    }
+    // @PostMapping("/backoffice/animali/add")
+    // public String processForm(@ModelAttribute Adozione adozione) {
+    //     srvAdozione.addAdozione(adozione); 
+    //     return "redirect:/backoffice/adozione";
+    // }
 
     }
