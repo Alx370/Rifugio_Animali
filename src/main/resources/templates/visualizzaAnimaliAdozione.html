@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animali</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.png">
+    <link rel="stylesheet" href="/css/style2.css">
+</head>
+<body>
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo">
+            <img src="/image/logo.png" alt="Logo Catarsi Group">
+            CATARSI GROUP
+        </div>
+        <div class="house-icon">
+            <a href="/">
+                <img src="/image/house.svg" alt="casa">
+            </a>
+        </div>
+    </nav>
+</header>
+
+<!-- Sezione I Nostri Animali -->
+<section class="animals-section">
+    <div class="section-title"> GLI ANIMALI PRONTI ALL'ADOZIONE</div>
+    <div class="section-title">I NOSTRI ANIMALI</div>
+
+    <!-- Sezione Filtri -->
+    <div class="filter-container">
+        <div class="filter-title">FILTRA I NOSTRI ANIMALI</div>
+
+        <div class="filter-grid">
+            <div class="filter-group">
+                <label class="filter-label">Nome</label>
+                <input type="text" class="filter-input" id="filterNome" placeholder="Cerca per nome...">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Sesso</label>
+                <select class="filter-select" id="filterSesso">
+                    <option value="">Tutti</option>
+                    <option value="Maschio">Maschio</option>
+                    <option value="Femmina">Femmina</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Specie</label>
+                <select class="filter-select" id="filterSpecie">
+                    <option value="">Tutte le specie</option>
+                    <option value="Cane">Cane</option>
+                    <option value="Gatto">Gatto</option>
+                    <option value="Coniglio">Coniglio</option>
+                    <option value="Uccello">Uccello</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Razza</label>
+                <input type="text" class="filter-input" id="filterRazza" placeholder="Cerca per razza...">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Peso (kg)</label>
+                <input type="number" class="filter-input" id="filterPeso" placeholder="Peso massimo" min="0" step="0.1">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Età (anni)</label>
+                <input type="number" class="filter-input" id="filterEta" placeholder="Età massima" min="0">
+            </div>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn" onclick="applyFilters()">Applica Filtri</button>
+            <button class="filter-btn clear-btn" onclick="clearFilters()">Cancella Filtri</button>
+        </div>
+    </div>
+
+    <!-- Tabella Animali -->
+    <div class="animals-table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sesso</th>
+                <th>Specie</th>
+                <th>Razza</th>
+                <th>Peso</th>
+                <th>Età</th>
+            </tr>
+            </thead>
+            <tbody id="animalTableBody">
+            <!-- Esempio con dati Thymeleaf -->
+            <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
+                <td data-label="Nome">
+                    <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${#strings.isEmpty(animale.nome) ? 'N/A' : animale.nome}"></a>
+                </td>
+                <td data-label="Sesso" th:text="${#strings.isEmpty(animale.sesso) ? 'N/A' : animale.sesso}"></td>
+                <td data-label="Specie" th:text="${#strings.isEmpty(animale.specie) ? 'N/A' : animale.specie}"></td>
+                <td data-label="Razza" th:text="${#strings.isEmpty(animale.razza) ? 'N/A' : animale.razza}"></td>
+                <td data-label="Peso" th:text="${animale.peso != null ? animale.peso + ' kg' : 'N/A'}"></td>
+                <td data-label="Età" th:text="${animale.eta != null ? animale.eta + ' anni' : 'N/A'}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="no-results" id="noResults">
+            Nessun animale trovato con i criteri di ricerca selezionati.
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="/image/logo.png" alt="Logo Catarsi">
+        </div>
+        <div class="footer-right">
+            <div class="social-icons">
+                <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon">
+                    <img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg">
+                </a>
+                <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon">
+                    <img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg">
+                </a>
+                <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon">
+                    <img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg">
+                </a>
+            </div>
+            <div class="footer-credits">
+                <p>Crediti alla Fondazione Catarsi</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
