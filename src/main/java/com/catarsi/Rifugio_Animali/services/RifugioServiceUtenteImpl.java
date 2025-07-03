@@ -25,4 +25,8 @@ public class RifugioServiceUtenteImpl implements UserDetailsService{
             .roles("USER")
             .build();
     }
+    
+
+
+
 }

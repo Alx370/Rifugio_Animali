@@ -3,8 +3,13 @@ package com.catarsi.Rifugio_Animali.controller;
 
 import com.catarsi.Rifugio_Animali.model.Adozione;
 import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Utente;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAdozione;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAdozione;
+import com.catarsi.Rifugio_Animali.services.RifugioServiceUtente;
+
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +22,9 @@ public class RifugioAdozioniMVC {
 
     @Autowired
     private RifugioRepoAdozione repoAdozione;
+
+    @Autowired
+private RifugioServiceUtente rifugioServiceUtente;
 
     @Autowired
     private RifugioServiceAdozione srvAdozione;
@@ -49,6 +57,16 @@ public String visualizzaAnimaliAdozione(Model m) {
     m.addAttribute("adozioni", srvAdozione.getAdozioni());
     return "visualizzaAnimaliAdozione"; 
 }
+
+
+@GetMapping("/backoffice/adozioni/add")
+public String mostraFormAdozione(Model model, Principal principal) {
+    Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+    model.addAttribute("utenteLoggato", utente);
+    return "formAdozioni";
+}
+
+
 
 
     // @PostMapping("/backoffice/animali/add")

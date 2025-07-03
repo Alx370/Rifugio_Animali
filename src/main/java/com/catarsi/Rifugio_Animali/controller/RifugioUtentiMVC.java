@@ -1,9 +1,13 @@
 package com.catarsi.Rifugio_Animali.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.catarsi.Rifugio_Animali.model.Utente;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceUtenteImpl;
 import com.catarsi.Rifugio_Animali.sign_in.RegistrazioneUtente;
@@ -38,7 +42,14 @@ public class RifugioUtentiMVC {
         return "login";
     }
     
-    
+    @GetMapping("/backoffice/adozioni/add")
+public String mostraFormAdozione(Model model, Principal principal) {
+    Utente utente = repoUtente.findByEmail(principal.getName())
+        .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
+    model.addAttribute("utenteLoggato", utente);
+    return "formAdozioni";
+}
+
     
 }
 
