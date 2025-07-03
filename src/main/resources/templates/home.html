@@ -15,18 +15,22 @@
                 <img src="/image/logo.png" alt="Logo Catarsi Group">
                 CATARSI GROUP
             </div>
-            <ul class="nav-links">
-                <li><a href="#chi-siamo">Chi siamo?</a></li>
-                <li th:if="${not #authorization.expr('isAuthenticated()')}"><a href="/login">Login</a></li>
-                <li th:if="${#authorization.expr('isAuthenticated()')}">
-                    <form th:action="@{/logout}" method="post" style="display: inline;">
-                        <button type="submit" style="background: none; border: none; cursor: pointer; color: white; font: 2rem;">
-                            Logout
-                        </button>
-                    </form>
-                </li>
-                <li><a href="/signin">Sign In</a></li>
-            </ul>
+                <ul class="nav-links">
+                    <li><a href="#chi-siamo">Chi siamo?</a></li>
+                    
+                    <li th:if="${not #authorization.expr('isAuthenticated()')}">
+                        <a href="/login">Login</a>
+                    </li>
+                    
+                    <li th:if="${#authorization.expr('isAuthenticated()')}">
+                        <form th:action="@{/logout}" method="post" style="display: inline;">
+                            <button type="submit" class="logout-button">Logout</button>
+                        </form>
+                    </li>
+                    
+                    <li><a href="/signin">Sign In</a></li>
+                </ul>
+
             <a href="#contatti" class="contact-btn">DONA ORA</a>
         </nav>
     </header>
