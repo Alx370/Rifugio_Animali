@@ -81,12 +81,12 @@ public String mostraFormAdozione(Model model, Principal principal, @RequestParam
 
 
 
-@PostMapping("/backoffice/adozioni/add")
-public String processForm(@ModelAttribute Adozione adozione) {
-    srvAdozione.addAdozione(adozione); 
-    return "redirect:/backoffice/adozione";
+// @PostMapping("/backoffice/adozioni/add")
+// public String processForm(@ModelAttribute Adozione adozione) {
+//     srvAdozione.addAdozione(adozione); 
+//     return "redirect:/backoffice/adozione";
 }
 
 
 
-}
+

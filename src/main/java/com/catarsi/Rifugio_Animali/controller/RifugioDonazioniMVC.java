@@ -1,14 +1,21 @@
 package com.catarsi.Rifugio_Animali.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.catarsi.Rifugio_Animali.model.Adozione;
+import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Donazione;
+import com.catarsi.Rifugio_Animali.model.Utente;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDonazione;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceDonazioneImpl;
-
+import com.catarsi.Rifugio_Animali.services.RifugioServiceUtente;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -19,6 +26,9 @@ public class RifugioDonazioniMVC {
     @Autowired
     private RifugioServiceDonazioneImpl srvDonazione;
 
+    @Autowired
+    private RifugioServiceUtente rifugioServiceUtente;
+
     public RifugioDonazioniMVC(RifugioRepoDonazione repoDonazione){
         this.repoDonazione = repoDonazione;
     }
@@ -28,6 +38,25 @@ public class RifugioDonazioniMVC {
         m.addAttribute("donazioni", srvDonazione.getDonazioni());
         return "donazioni";
     }
+
+    @GetMapping("/donazioni/form")
+    public String mostraFormDonazione(Model model, Principal principal) {
+        if (principal != null) {
+            Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+            model.addAttribute("utenteLoggato", utente);
+        }
+
+        return "formDonazioni";
+    }
+
+        @GetMapping("/backoffice/donazioni/add")
+    public String showForm(Model model) {
+        model.addAttribute("donazione", new Donazione());
+        return "backofficeDonazioni"; 
+    }
+
+
+    
     
 }
 
