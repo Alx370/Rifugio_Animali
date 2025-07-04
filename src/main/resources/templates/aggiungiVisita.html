@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aggiungi Visita Veterinaria</title>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
+</head>
+<body>
+    <main class="container">
+        <h1>Nuova Visita Veterinaria</h1>
+
+        <form method="post" th:action="@{/visite-veterinarie/nuova-visita}" th:object="${visita}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+            <!-- Data visita -->
+            <label for="data_visita">Data visita</label>
+            <input type="date" th:field="*{data_visita}" required />
+
+            <!-- Animale -->
+            <label for="animale">Animale</label>
+          <select th:field="*{animale}" required>
+    <option value="" disabled selected>-- Seleziona un animale --</option>
+    <option th:each="animale : ${animali}"
+            th:value="${animale.id_animale}"
+            th:text="${animale.nome}">
+    </option>
+</select>
+
+
+            <!-- Dottore (da implementare nel controller) -->
+            <label for="dottore">Dottore</label>
+            <select th:field="*{dottore}" required>
+    <option value="" disabled selected>-- Seleziona un dottore --</option>
+    <option th:each="dottore : ${dottori}"
+            th:value="${dottore.id_dottore}"
+            th:text="${dottore.nome + ' ' + dottore.cognome}">
+    </option>
+</select>
+
+
+            <!-- Descrizione -->
+            <label for="descrizione">Descrizione</label>
+            <textarea th:field="*{descrizione}" rows="4" placeholder="Inserisci la descrizione..."></textarea>
+
+            <button type="submit">Salva Visita</button>
+        </form>
+    </main>
+</body>
+</html>

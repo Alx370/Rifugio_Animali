@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
+    <title>Document</title>
+</head>
+<body>
+    <h1>Visite Veterinarie</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Animale</th>
+                <th>Dottore</th>
+                <th>Descrizione</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="visita : ${visite}" th:if="${visite != null}">
+                <td th:text="${visita.data_visita}"></td>
+                <td th:text="${visita.animale.nome}"></td>
+                <td th:text="${visita.dottore.nome + ' ' + visita.dottore.cognome}"></td>
+                <td th:text="${visita.descrizione}"></td>
+            </tr>
+            
+
+        </tbody>
+    </table>
+
+</body>
+</html>

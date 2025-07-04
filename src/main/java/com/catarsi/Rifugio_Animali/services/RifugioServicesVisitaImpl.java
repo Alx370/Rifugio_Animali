@@ -22,4 +22,8 @@ public class RifugioServicesVisitaImpl implements RifugioServicesVisita{
     public List<Visita> getVisite() {
         return visita_repo.findAll();
     }
+
+    public Visita salvaVisita(Visita v){
+        return visita_repo.save(v);
+    }
 }
