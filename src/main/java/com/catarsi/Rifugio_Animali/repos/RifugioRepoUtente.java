@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RifugioRepoUtente extends JpaRepository<Utente, Integer> {
     Optional<Utente> findByEmail(String email);
+    
 }
