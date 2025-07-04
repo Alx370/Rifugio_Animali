@@ -20,7 +20,7 @@ public class VisitaREST {
     }
 
     @GetMapping("/{id}")
-    public Visita getById(@PathVariable Long id) {
+    public Visita getById(@PathVariable Integer id) {
         return service.getById(id);
     }
 
@@ -30,11 +30,11 @@ public class VisitaREST {
     }
 
     @PutMapping("/{id}")
-    public Visita update(@PathVariable Long id, @RequestBody Visita aggiornato) {
+    public Visita update(@PathVariable Integer id, @RequestBody Visita aggiornato) {
         Visita esistente = service.getById(id);
 
         // Aggiorna manualmente i campi di Visita
-        esistente.setData(aggiornato.getData_visita());
+        esistente.setData_visita (aggiornato.getData_visita());
         esistente.setDescrizione(aggiornato.getDescrizione());
         esistente.setDottore(aggiornato.getDottore());
         esistente.setAnimale(aggiornato.getAnimale());
@@ -44,7 +44,7 @@ public class VisitaREST {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
 }

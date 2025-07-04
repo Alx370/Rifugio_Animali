@@ -20,7 +20,7 @@ public class EnteREST {
     }
 
     @GetMapping("/{id}")
-    public Ente getById(@PathVariable Long id) {
+    public Ente getById(@PathVariable Integer id) {
         return service.getById(id);
     }
 
@@ -30,7 +30,7 @@ public class EnteREST {
     }
 
     @PutMapping("/{id}")
-    public Ente update(@PathVariable Long id, @RequestBody Ente aggiornato) {
+    public Ente update(@PathVariable Integer id, @RequestBody Ente aggiornato) {
         Ente esistente = service.getById(id);
 
         // aggiorna manualmente i campi dell'ente
@@ -44,7 +44,7 @@ public class EnteREST {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
 }
