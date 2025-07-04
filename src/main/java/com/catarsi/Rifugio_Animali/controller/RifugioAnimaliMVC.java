@@ -43,7 +43,7 @@ public class RifugioAnimaliMVC {
         return "animali";
     }
 
-    @GetMapping("/animali/{id}")
+    @GetMapping("/animali/dettaglio/{id}")
     public String dettaglioAnimale(@PathVariable int id, Model model) {
         Animale animale = srvAnimale.getAnimaleByIdAnimale(id); 
         List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
@@ -57,25 +57,47 @@ public class RifugioAnimaliMVC {
     public String deleteAnimale(@PathVariable("id") int id) {
         srvDiario.deleteDiario(id);
         srvAnimale.deleteAnimale(id);
-        return "redirect:/backofficeAnimali";
+        return "redirect:/backoffice/animali";
     }
 
-    @GetMapping("/animali/backoffice")
+    @GetMapping("/backoffice/animali")
     public String backofficeAnimali(Model m) {
         m.addAttribute("animali", srvAnimale.getAnimali());
-        return "backofficeAnimali";
+        return "/backofficeAnimali";
     }
 
-    @GetMapping("/animali/add")
+    @GetMapping("/backoffice/animali/add")
 public String showForm(Model model) {
     model.addAttribute("animale", new Animale());
-    return "addAnimale";
+    return "/backofficeAggiungi"; // Nome del template HTML per il form di aggiunta
 }
 
-@PostMapping("/animali/add")
+@PostMapping("/backoffice/animali/add")
 public String processForm(@ModelAttribute Animale animale) {
     srvAnimale.addAnimale(animale); 
-    return "redirect:/animali";
+    return "redirect:/backoffice/animali";
+}
+
+@GetMapping("/animali/edit/{id}")
+public String showUpdateForm(@PathVariable("id") int id, Model model) {
+    Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
+    model.addAttribute("animale", animale);
+    return "AnimaliEdit";
+}
+
+@PostMapping("/animali/update/{id}")
+public String updateAnimale(@PathVariable("id") int id, @ModelAttribute("animale") Animale aggiornato) {
+    Animale esistente = srvAnimale.getAnimaleByIdAnimale(id);
+    esistente.setNome(aggiornato.getNome());
+    esistente.setSpecie(aggiornato.getSpecie());
+    esistente.setRazza(aggiornato.getRazza());
+    esistente.setPeso(aggiornato.getPeso());
+    esistente.setEta(aggiornato.getEta());
+    esistente.setSesso(aggiornato.getSesso());
+    esistente.setColore(aggiornato.getColore());
+    esistente.setData_arrivo(aggiornato.getData_arrivo());
+    srvAnimale.addAnimale(esistente);
+    return "redirect:/backoffice/animali";
 }
 
 

@@ -26,7 +26,7 @@
 
     <ul>
         <li><strong>Nome:</strong> <span th:text="${animale.nome}"></span></li>
-        <!-- <li><strong>Sesso:</strong> <span th:text="${animale.sesso}"></span></li> -->
+        <li><strong>Sesso:</strong> <span th:text="${animale.sesso}"></span></li>
         <li><strong>Specie:</strong> <span th:text="${animale.specie}"></span></li>
         <li><strong>Razza:</strong> <span th:text="${animale.razza}"></span></li>
         <li><strong>Peso:</strong> <span th:text="${animale.peso} + ' kg'"></span></li>
@@ -57,7 +57,10 @@
 </div> 
 
         <div class="adoption-cta">
-            <a href="#" class="adopt-button" th:text="'Adotta ' + ${animale.nome}"></a>
+            <a th:href="@{/adozioni/form(idAnimale=${animale.id_animale})}"
+                class="adopt-button"
+                th:text="'Adotta ' + ${animale.nome}">
+            </a>
         </div>
 
 

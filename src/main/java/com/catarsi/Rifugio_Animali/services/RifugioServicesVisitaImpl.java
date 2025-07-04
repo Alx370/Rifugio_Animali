@@ -39,4 +39,8 @@ public class RifugioServicesVisitaImpl implements RifugioServicesVisita {
         Visita visita = visitaRepo.findById(id).orElse(null);
         return (visita != null) ? visita.getData_visita() : null;
     }
+
+    public Visita salvaVisita(Visita v){
+        return visita_repo.save(v);
+    }
 }

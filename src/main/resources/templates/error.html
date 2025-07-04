@@ -5,18 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Errore</title>
   <link rel="stylesheet" href="/css/error.css">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .main-content {
-      flex: 1;
-    }
-  </style>
 </head>
 <body>
   <!-- Header -->
@@ -37,8 +25,15 @@
       </div>
       <h2>Si è verificato un errore</h2>
       <p class="intro-text">Qualcosa è andato storto. Stiamo lavorando per risolvere il problema.</p>
+      <div class="error-details">
+        <p><strong>Status:</strong> <span th:text="${status}">Codice</span></p>
+        <p><strong>Errore:</strong> <span th:text="${error}">Tipo errore</span></p>
+        <p><strong>Messaggio:</strong> <span th:text="${message}">Dettaglio</span></p>
+        <p><strong>Path:</strong> <span th:text="${path}">Percorso</span></p>
+        <p><strong>Timestamp:</strong> <span th:text="${timestamp}">Ora</span></p>
+      </div>
       <div class="back-home">
-        <a href="/index.html" class="home-button">Torna alla Home</a>
+        <a href="/" class="home-button">Torna alla Home</a>
       </div>
     </div>
   </div>

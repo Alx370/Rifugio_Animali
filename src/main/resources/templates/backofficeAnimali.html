@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Animali</title>
     <link rel="icon" type="image/x-icon" href="/image/favicon.png">
-  <link rel="stylesheet" href="/css/style4.css">
+  <link rel="stylesheet" href="/css/backofficeAnimali.css">
 </head>
 <body>
       <!-- Header -->
@@ -41,7 +41,7 @@
     <tbody >
       <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
         <td>
-          <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
+          <a th:href="@{/animali/dettaglio/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
         </td>
         <td th:text="${animale.sesso}"></td>
         <td th:text="${animale.specie}"></td>
@@ -49,25 +49,28 @@
         <td th:text="|${animale.peso} kg|"></td>
         <td th:text="|${animale.eta} anni|"></td>
         <td>
-        <button class="delete-animal-btn" id="deleteBtn" disabled>
-          <a th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
-        </button>
+          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
       </td>
+          <td>
+              <a id="updateBtn" class="update-animal-btn" th:href="@{'/animali/edit/' + ${animale.id_animale}}">Modifica</a>
+          </td>
       </tr>
     </tbody>
   </table>
 </div>
         <!-- Bottoni di controllo -->
             <div class="control-buttons">
-                <button class="add-animal-btn" onclick="addAnimal()">
+                <a href="/backoffice/animali/add" class="add-animal-btn" onclick="addAnimal()">
                     ➕ Aggiungi Animale
-                </button>
-                <button onclick="deleteSelectedAnimal()" disabled>
-                    🗑️ Elimina Selezionato
-                </button>
-                <button class="update-animal-btn" onclick="updateSelectedAnimal()" id="updateBtn" disabled>
+                </a>
+
+                <a href="/backoffice/diario/add" class="add-diario-btn" onclick="addAnimal()">
+                    ➕ Aggiungi Diario
+                </a>
+
+                <!-- <button class="update-animal-btn" onclick="updateSelectedAnimal()" id="updateBtn" disabled>
                     ✏️ Modifica Selezionato
-                </button>
+                </button> -->
             </div>
 </section>
 
