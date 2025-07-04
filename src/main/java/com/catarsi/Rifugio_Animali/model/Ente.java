@@ -14,7 +14,7 @@ public class Ente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_ente")
-    private Long id_ente;
+    private Integer id_ente;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -27,11 +27,11 @@ public class Ente {
 
     public Ente() {}
 
-    public Long getId_ente() {
+    public Integer getId_ente() {
         return id_ente;
     }
 
-    public void setId_ente(Long id_ente) {
+    public void setId_ente(Integer id_ente) {
         this.id_ente = id_ente;
     }
 
