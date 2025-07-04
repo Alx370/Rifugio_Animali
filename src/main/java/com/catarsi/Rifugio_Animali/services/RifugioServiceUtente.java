@@ -12,8 +12,8 @@ public interface RifugioServiceUtente {
     List<Utente> getAll();
 
     // recupera un utente per id
-    Utente getById(Long id);
+    Utente getById(Integer id);
 
     // elimina un utente per id
-    void delete(Long id);
+    void delete(Integer id);
 }

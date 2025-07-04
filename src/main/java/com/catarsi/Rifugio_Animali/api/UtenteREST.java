@@ -20,7 +20,7 @@ public class UtenteREST {
     }
 
     @GetMapping("/{id}")
-    public Utente getById(@PathVariable Long id) {
+    public Utente getById(@PathVariable Integer id) {
         return service.getById(id);
     }
 
@@ -30,7 +30,7 @@ public class UtenteREST {
     }
 
     @PutMapping("/{id}")
-    public Utente update(@PathVariable Long id, @RequestBody Utente aggiornato) {
+    public Utente update(@PathVariable Integer id, @RequestBody Utente aggiornato) {
         Utente esistente = service.getById(id);
 
         // aggiorna manualmente i campi
@@ -44,7 +44,7 @@ public class UtenteREST {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(@PathVariable Integer id) {
         service.delete(id);
     }
 }
