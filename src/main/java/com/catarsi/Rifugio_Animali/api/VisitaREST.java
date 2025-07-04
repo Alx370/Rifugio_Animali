@@ -34,7 +34,7 @@ public class VisitaREST {
         Visita esistente = service.getById(id);
 
         // Aggiorna manualmente i campi di Visita
-        esistente.setData(aggiornato.getData());
+        esistente.setData(aggiornato.getData_visita());
         esistente.setDescrizione(aggiornato.getDescrizione());
         esistente.setDottore(aggiornato.getDottore());
         esistente.setAnimale(aggiornato.getAnimale());

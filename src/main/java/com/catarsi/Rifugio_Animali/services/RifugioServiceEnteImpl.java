@@ -8,18 +8,28 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class RifugioServiceEnteImpl implements RifugioServiceEnte{
+public class RifugioServiceEnteImpl implements RifugioServiceEnte {
 
     @Autowired
-    private RifugioRepoEnte ente_repo;
+    private RifugioRepoEnte enteRepo;
 
     @Override
-    public Ente addEnte(Ente e) {
-        return ente_repo.save(e);
+    public Ente save(Ente e) {
+        return enteRepo.save(e);
     }
 
     @Override
-    public List<Ente> getEnti() {
-        return ente_repo.findAll();
+    public List<Ente> getAll() {
+        return enteRepo.findAll();
+    }
+
+    @Override
+    public Ente getById(Integer id) {
+        return enteRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        enteRepo.deleteById(id);
     }
 }

@@ -35,7 +35,7 @@ public class EnteREST {
 
         // aggiorna manualmente i campi dell'ente
         esistente.setNome(aggiornato.getNome());
-        esistente.setIndirizzo(aggiornato.getIndirizzo());
+        
         esistente.setEmail(aggiornato.getEmail());
         esistente.setTelefono(aggiornato.getTelefono());
         // aggiungi altri campi se ci sono
