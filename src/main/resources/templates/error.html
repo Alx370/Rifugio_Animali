@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Errore</title>
+  <link rel="stylesheet" href="/css/error.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="/image/logo.png" alt="Logo Catarsi Group">
+        CATARSI GROUP
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <div class="logo-container">
+        <img src="/image/logo.png" alt="Logo Rifugio" class="logo-img">
+      </div>
+      <h2>Si è verificato un errore</h2>
+      <p class="intro-text">Qualcosa è andato storto. Stiamo lavorando per risolvere il problema.</p>
+      <div class="error-details">
+        <p><strong>Status:</strong> <span th:text="${status}">Codice</span></p>
+        <p><strong>Errore:</strong> <span th:text="${error}">Tipo errore</span></p>
+        <p><strong>Messaggio:</strong> <span th:text="${message}">Dettaglio</span></p>
+        <p><strong>Path:</strong> <span th:text="${path}">Percorso</span></p>
+        <p><strong>Timestamp:</strong> <span th:text="${timestamp}">Ora</span></p>
+      </div>
+      <div class="back-home">
+        <a href="/" class="home-button">Torna alla Home</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img src="/image/logo.png" alt="Logo Catarsi">
+      </div>
+      <div class="footer-right">
+        <div class="social-icons">
+          <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg"></a>
+          <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg"></a>
+          <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg"></a>
+        </div>
+        <div class="footer-credits">
+          <p>Crediti alla Fondazione Catarsi</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

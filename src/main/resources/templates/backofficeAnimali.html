@@ -49,10 +49,11 @@
         <td th:text="|${animale.peso} kg|"></td>
         <td th:text="|${animale.eta} anni|"></td>
         <td>
-        <button class="delete-animal-btn" id="deleteBtn" disabled>
-          <a th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
-        </button>
+          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
       </td>
+          <td>
+              <a id="updateBtn" class="update-animal-btn" th:href="@{'/animali/edit/' + ${animale.id_animale}}">Modifica</a>
+          </td>
       </tr>
     </tbody>
   </table>

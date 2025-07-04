@@ -71,6 +71,22 @@ border-radius: 50px;
 .nav-links a:hover {
     color: white;
 }
+.logout-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #e4ffc1;
+    font-size: 0.9rem;
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 0;
+}
+
+.logout-button:hover {
+    color: white;
+}
+
 
 .contact-btn {
     background: #E4FFC1;
