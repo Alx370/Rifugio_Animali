@@ -29,11 +29,18 @@ public class RifugioVisiteMVC {
     private RifugioServiceAnimaliImpl srvAnimali;
     @Autowired
     private RifugioServiceDottoreImpl srvDottori;
-    @GetMapping("/")
+    // @GetMapping("/")
+    // public String getVisite(Model m) {
+    //     m.addAttribute("visite",srvVisite.getVisite());
+    //     return "Visite"; //ritorna una Stringa(i nomi dei templates)
+    // }
+
+    @GetMapping({"", "/"})
     public String getVisite(Model m) {
         m.addAttribute("visite",srvVisite.getVisite());
         return "Visite"; //ritorna una Stringa(i nomi dei templates)
     }
+
 
 
     @GetMapping("/nuova-visita")
