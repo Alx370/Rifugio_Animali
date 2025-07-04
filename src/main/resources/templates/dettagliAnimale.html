@@ -57,7 +57,10 @@
 </div> 
 
         <div class="adoption-cta">
-            <a href="#" class="adopt-button" th:text="'Adotta ' + ${animale.nome}"></a>
+            <a th:href="@{/adozioni/form(idAnimale=${animale.id_animale})}"
+                class="adopt-button"
+                th:text="'Adotta ' + ${animale.nome}">
+            </a>
         </div>
 
 

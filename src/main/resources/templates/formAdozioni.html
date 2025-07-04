@@ -31,27 +31,33 @@
             <div class="form-container">
                 <h2>Adotta</h2>
                 <form id="animalForm" method="post" th:action="@{/backoffice/adozioni/add}">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                    
-                    <!-- <div class="form-group">
-                        <label for="Id_utente">Id utente</label>
-                        <input type="text" class="form-control" id="Id_utente" name="Id_utente" required>
-                    </div> -->
-
+                    <div class="form-group">
+                        <label for="Id_utente">Utente</label>
+                <th:block th:if="${utenteLoggato != null}">
                     <input type="hidden" id="Id_utente" name="Id_utente" th:value="${utenteLoggato.email}" />
-<span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
+                    <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
+                </th:block>
+
+                <th:block th:if="${utenteLoggato == null}">
+                    <span>Utente non loggato</span>
+                </th:block>
+</div>
+
 
                     <div class="form-group">
-                        <label for="Id_animale">Id animale</label>
-                        <input type="text" class="form-control" id="Id_animale" name="Id_animale" required>
-                    </div>
+    <label for="Id_animale">Animale da adottare</label>
+    <select id="Id_animale" name="Id_animale" class="form-control" required>
+        <option th:value="${animaleSelezionato.id_animale}" th:text="${animaleSelezionato.nome}" selected></option>
+    </select>
+</div>
+
                     
                     <div class="form-group">
                         <label for="dataAdozione">Data di adozione</label>
                         <input type="date" class="form-control" id="dataAdozione" name="dataAdozione" required>
                     </div>
 
-                    <button type="submit" class="btn-primary">Aggiungi Animale</button>
+                    <button type="submit" class="btn-primary">Aggiungi Adozione</button>
                 </form>
             </div>
 

@@ -93,8 +93,9 @@
             </thead>
             <tbody id="animalTableBody">
             <!-- Esempio con dati Thymeleaf -->
-            <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}" th:if="${animale.data_adozione == null}">
-                <td data-label="Nome">
+<tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
+    <th:block th:if="${animale.data_adozione == null}">
+                        <td data-label="Nome">
                     <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${#strings.isEmpty(animale.nome) ? 'N/A' : animale.nome}"></a>
                 </td>
                 <td data-label="Sesso" th:text="${#strings.isEmpty(animale.sesso) ? 'N/A' : animale.sesso}"></td>

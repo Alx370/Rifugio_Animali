@@ -32,23 +32,18 @@ public class RifugioUtentiMVC {
         this.repoUtente = repoUtente;
     }
 
-    // @GetMapping("/utenti")
-    // public String addUtenti(Model m) {
-    //     m.addAttribute("utenti", srvUtente.getUtenti());
-    //     return "utenti";
-    // }
+
     @GetMapping ("/login") //ogni volta che sul link scrivi login e la richiesta è di tipo get esegui il meotodo sotto
     public String login(){
         return "login";
     }
-    
-    @GetMapping("/backoffice/adozioni/add")
-public String mostraFormAdozione(Model model, Principal principal) {
-    Utente utente = repoUtente.findByEmail(principal.getName())
-        .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato"));
-    model.addAttribute("utenteLoggato", utente);
-    return "formAdozioni";
-}
+
+    @GetMapping("/backoffice/utenti")
+    public String backofficeUtenti(Model m) {
+        m.addAttribute("utenti", srvUtente.getUtenti());
+        return "backofficeUtenti";
+    }
+
 
     
 }
