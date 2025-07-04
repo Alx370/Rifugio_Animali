@@ -304,15 +304,15 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+
             .form-container {
                 position: static;
             }
-            
+
             .header h1 {
                 font-size: 2rem;
             }
-            
+
             .statistics {
                 gap: 15px;
             }
@@ -320,7 +320,7 @@
 
 
 
-        
+
 /* Header */
 header {
     background: linear-gradient(135deg, #2d5016, #4a7c59);
@@ -354,7 +354,7 @@ border-radius: 50px;
 }
 
 .logo::before {
-    
+
     background: white;
     padding: 0.3rem;
     border-radius: 50%;

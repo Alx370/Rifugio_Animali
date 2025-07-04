@@ -41,7 +41,7 @@
     <tbody >
       <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
         <td>
-          <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
+          <a th:href="@{/animali/dettaglio/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
         </td>
         <td th:text="${animale.sesso}"></td>
         <td th:text="${animale.specie}"></td>
