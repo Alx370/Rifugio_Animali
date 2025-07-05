@@ -46,13 +46,13 @@ INSERT INTO Visita (ID_ANIMALE, ID_DOTTORE, DATA_VISITA, DESCRIZIONE) VALUES
 (6, 2, '2024-04-20', 'Cura zampa anteriore, miglioramento visibile.');
 
 
-INSERT INTO Donazione (ID_UTENTE, ID_ENTE, NOME_DONATORE, EMAIL_DONATORE, DATA, SOMMA) VALUES
-(2, 1, 'Anna Bianchi', 'anna.bianchi@email.com', '2024-04-10', 100.00),
-(3, 2, 'Marco Verdi', 'marco.verdi@email.com', '2024-05-15', 50.00),
-(1, 3, 'Luca Rossi', 'luca.rossi@email.com', '2024-06-01', 75.00),
-(4, 2, 'Sara Neri', 'sara.neri@email.com', '2024-06-10', 120.00),
-(5, 1, 'Paolo Gallo', 'paolo.gallo@email.com', '2024-05-30', 80.00),
-(6, 3, 'Elisa Fontana', 'elisa.fontana@email.com', '2024-06-12', 60.00);
+INSERT INTO Donazione (ID_UTENTE, ID_ENTE, DATA, SOMMA) VALUES
+(2, 1, '2024-04-10', 100.00),
+(3, 2, '2024-05-15', 50.00),
+(1, 3, '2024-06-01', 75.00),
+(4, 2, '2024-06-10', 120.00),
+(5, 1, '2024-05-30', 80.00),
+(6, 3, '2024-06-12', 60.00);
 
 
 INSERT INTO admin_app (EMAIL, PASSWORD) VALUES

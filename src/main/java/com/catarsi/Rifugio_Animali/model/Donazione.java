@@ -2,6 +2,8 @@ package com.catarsi.Rifugio_Animali.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-
+import jakarta.persistence.Version;  // Import per @Version
 
 @Entity
 @Table(name = "donazione")
@@ -23,7 +25,7 @@ public class Donazione {
     @Column(name = "Id_donazione")
     private int id_donazione;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "Id_utente")
     private Utente utente;
 
@@ -31,18 +33,19 @@ public class Donazione {
     @JoinColumn(name = "Id_ente")
     private Ente ente;
 
-    @Column(name = "nome_donatore", nullable = false)
-    private String nome_donatore;
-
-    @Column(name = "email_donatore")
-    private String email_donatore;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "data", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data;
+
 
     @Column(name = "somma", nullable = false)
     private double somma;
+
+    // --- NUOVO CAMPO per la gestione della concorrenza ---
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
     public Donazione() {}
 
@@ -70,22 +73,6 @@ public class Donazione {
         this.ente = ente;
     }
 
-    public String getNome_donatore() {
-        return nome_donatore;
-    }
-
-    public void setNome_donatore(String nome_donatore) {
-        this.nome_donatore = nome_donatore;
-    }
-
-    public String getEmail_donatore() {
-        return email_donatore;
-    }
-
-    public void setEmail_donatore(String email_donatore) {
-        this.email_donatore = email_donatore;
-    }
-
     public Date getData() {
         return data;
     }
@@ -100,5 +87,14 @@ public class Donazione {
 
     public void setSomma(double somma) {
         this.somma = somma;
+    }
+
+    // Getter e Setter per version (campo nuovo)
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 }

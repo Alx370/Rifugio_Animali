@@ -24,6 +24,15 @@ public class RifugioServiceDottoreImpl implements RifugioServiceDottore{
         return repo_dottore.save(d);
     }
 
+    @Override
+    public Dottore getDottoreById(int id) {
+        return repo_dottore.findById(id).orElse(null); // Restituisce null se non trovato
+    }
+    @Override
+    public void deleteDottore(int id) {
+        repo_dottore.deleteById(id); // Elimina il dottore per ID
+    }
+
 }
 
 

@@ -80,7 +80,9 @@ public class RifugioAdozioniMVC {
         srvAdozione.addAdozione(adozione);
         return "redirect:/backoffice/adozione";
     }
-
-
-
 }
+
+
+
+
+
