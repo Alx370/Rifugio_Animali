@@ -1,95 +1,84 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Gestione Animali</title>
-    <link rel="stylesheet" href="/css/backofficeAggiungi.css">
-
+    <link rel="stylesheet" href="/css/backofficeAggiungi.css" />
 </head>
+<body>
 <header>
     <nav>
         <div class="logo">
-            <img src="/image/logo.png" alt="Logo Catarsi Group">
+            <img src="/image/logo.png" alt="Logo Catarsi Group" />
             CATARSI GROUP
         </div>
         <div class="house-icon">
             <a href="/">
-                <img src="/image/house.svg" alt="casa">
+                <img src="/image/house.svg" alt="casa" />
             </a>
         </div>
     </nav>
 </header>
 
-<body>
-    <div class="container">
-        <div class="header">
-        </div>
+<div class="container">
+    <div class="main-content">
+        <div class="form-container">
+            <h2>Aggiungi Nuovo Diario</h2>
+            <form id="diarioForm" method="post" th:action="@{/backoffice/diario/add}" th:object="${diario}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-
-        <div class="main-content">
-            <div class="form-container">
-                <h2>Aggiungi Nuovo Diario</h2>
-                <form id="diarioForm" method="post" th:action="@{/backoffice/diario/add}">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                    
-
-            <!-- <div class="form-group">
-                <label for="animale">Seleziona Animale</label>
-                <select class="form-control" th:field="*{animale}" required>
-                    <option value="" disabled selected>Scegli un animale</option>
+                <label for="animale">Animale</label>
+                <select th:field="*{animale}" required>
+                    <option value="" disabled selected>-- Seleziona un animale --</option>
                     <option th:each="animale : ${animali}"
-                            th:value="${animale.id}"
-                            th:text="${animale.nome + ' - ' + animale.specie}">
+                            th:value="${animale.id_animale}"
+                            th:text="${animale.nome}">
                     </option>
                 </select>
-            </div> -->
 
+                <div class="form-group">
+                    <label for="storia_animale">Storia dell'animale</label>
+                    <input type="text" class="form-control" th:field="*{storia_animale}" id="storia_animale" required />
+                </div>
+                <div class="form-group">
+                    <label for="stato_salute">Stato di salute</label>
+                    <input type="text" class="form-control" th:field="*{stato_salute}" id="stato_salute" required />
+                </div>
+                <div class="form-group">
+                    <label for="stato_comportamentale">Stato comportamentale</label>
+                    <input type="text" class="form-control" th:field="*{stato_comportamentale}" id="stato_comportamentale" required />
+                </div>
+                <div class="form-group">
+                    <label for="vaccinazioni">Vaccinazioni</label>
+                    <input type="text" class="form-control" th:field="*{vaccinazioni}" id="vaccinazioni" required />
+                </div>
+                <div class="form-group">
+                    <label for="operazioni_effettuate">Operazioni effettuate</label>
+                    <input type="text" class="form-control" th:field="*{operazioni_effettuate}" id="operazioni_effettuate" required />
+                </div>
 
-
-                    <div class="form-group">
-                        <label for="storia_animale">Storia dell'animale</label>
-                        <input type="text" class="form-control" id="storia_animale" name="storia_animale" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="stato_salute">Stato di salute</label>
-                        <input type="text" class="form-control" id="stato_salute" name="stato_salute" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="stato_comportamentale">Stato comportamentale</label>
-                        <input type="text" class="form-control" id="stato_comportamentale" name="stato_comportamentale" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="vaccinazioni">Vaccinazioni</label>
-                        <input type="text" class="form-control" id="vaccinazioni" name="vaccinazioni" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="operazioni_effettuate">Operazioni effettuate</label>
-                        <input type="text" class="form-control" id="operazioni_effettuate" name="operazioni_effettuate"  required>
-                    </div>
-                        <button type="submit" class="btn-primary">Aggiungi Diario</button>
-
-
-            
+                <button type="submit" class="btn-primary">Aggiungi Diario</button>
+            </form>
         </div>
     </div>
+</div>
 
-    <!-- Footer Section -->
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-logo">
-            <img src="/image/logo.png" alt="Logo Catarsi">
+            <img src="/image/logo.png" alt="Logo Catarsi" />
         </div>
         <div class="footer-right">
             <div class="social-icons">
                 <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon">
-                    <img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg">
+                    <img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg" />
                 </a>
                 <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon">
-                    <img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg">
+                    <img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg" />
                 </a>
                 <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon">
-                    <img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg">
+                    <img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg" />
                 </a>
             </div>
             <div class="footer-credits">
@@ -98,7 +87,5 @@
         </div>
     </div>
 </footer>
-
-
 </body>
 </html>
