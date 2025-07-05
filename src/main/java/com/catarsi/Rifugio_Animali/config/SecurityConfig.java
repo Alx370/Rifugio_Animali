@@ -17,39 +17,42 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    // @Bean
-    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    //     //noinspection removal
-    //     http
-    //             .authorizeHttpRequests(requests -> requests
-    //             // .requestMatchers("/","/home","/css/**", "/js/**", "/images/**").permitAll()
-    //             // .requestMatchers("/","/signin","/animali","/animali/**","/css/**", "/js/**", "/image/**").permitAll()
-    //             // .anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
-    //             .anyRequest().permitAll() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
-    //             );
-    //             // .formLogin(form -> form //tramite la libreria mi fa la trasformazione della password in hash
-    //             // .loginPage("/login").defaultSuccessUrl("/",true).permitAll()
-    //             // )
-    //             // .logout(logout -> logout
-    //             //     .logoutUrl("/logout")
-    //             //     .logoutSuccessUrl("/")
-    //             //     .invalidateHttpSession(true)
-    //             //     .deleteCookies("JSESSIONID")
-    //             //     .permitAll()
-    //             // );
 
-                
-    //     return http.build();
-    // } 
-@Bean
-public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-    http
-        .csrf(csrf -> csrf.disable()) // ❗Disabilita CSRF per consentire PUT, POST, DELETE
-        .authorizeHttpRequests(auth -> auth
-            .anyRequest().permitAll() // ❗Permette tutte le richieste senza autenticazione
-        );
-    return http.build();
-}
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        //noinspection removal
+        http
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/", "/home", "/css/", "/js/", "/images/").permitAll()
+                        .requestMatchers("/signin", "/animali", "/animali/", "/image/**").permitAll()
+                        .anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
+                )
+                .formLogin(form -> form
+                        .loginPage("/login").defaultSuccessUrl("/", true).permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()
+                );
+
+        return http.build();
+    }
+
+    // OMAR---------------
+// @Bean
+// public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//     http
+//         .csrf(csrf -> csrf.disable()) // ❗Disabilita CSRF per consentire PUT, POST, DELETE
+//         .authorizeHttpRequests(auth -> auth
+//             .anyRequest().permitAll() // ❗Permette tutte le richieste senza autenticazione
+//         );
+//     return http.build();
+// }
+
+//------------------
 
     // @Bean
     // public UserDetailsService userDetailsService(){
@@ -66,6 +69,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
 
 
 }

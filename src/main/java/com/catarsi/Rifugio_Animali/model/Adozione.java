@@ -2,6 +2,8 @@ package com.catarsi.Rifugio_Animali.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,7 +35,8 @@ public class Adozione {
     private Utente utente;
     
     @Temporal(TemporalType.DATE)
-    @Column(name = "data_adozione")
+    @Column(name = "data_adozione", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data_adozione;
 
     public int getId_adozione() {

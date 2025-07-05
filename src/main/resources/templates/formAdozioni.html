@@ -30,11 +30,13 @@
         <div class="main-content">
             <div class="form-container">
                 <h2>Adotta</h2>
-                <form id="animalForm" method="post" th:action="@{/backoffice/adozioni/add}">
+                <form id="animalForm" method="post" th:action="@{/adozioni/add}">
+                    <th:block th:if="${_csrf != null}">
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    </th:block>
                     <div class="form-group">
                         <label for="Id_utente">Utente</label>
                 <th:block th:if="${utenteLoggato != null}">
-                    <input type="hidden" id="Id_utente" name="Id_utente" th:value="${utenteLoggato.email}" />
                     <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
                 </th:block>
 
@@ -45,19 +47,19 @@
 
 
                     <div class="form-group">
-    <label for="Id_animale">Animale da adottare</label>
-    <select id="Id_animale" name="Id_animale" class="form-control" required>
+    <label for="id_animale">Animale da adottare</label>
+    <select id="id_animale" name="id_animale" class="form-control" required>
         <option th:value="${animaleSelezionato.id_animale}" th:text="${animaleSelezionato.nome}" selected></option>
     </select>
 </div>
 
                     
                     <div class="form-group">
-                        <label for="dataAdozione">Data di adozione</label>
-                        <input type="date" class="form-control" id="dataAdozione" name="dataAdozione" required>
+                        <label for="data_adozione">Data di adozione</label>
+                        <input type="date" class="form-control" id="data_adozione" name="data_adozione" required>
                     </div>
 
-                    <button type="submit" class="btn-primary">Aggiungi Adozione</button>
+                    <button type="submit" class="btn-primary">Conferma adozione</button>
                 </form>
             </div>
 

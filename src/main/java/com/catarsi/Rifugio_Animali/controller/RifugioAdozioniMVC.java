@@ -3,6 +3,7 @@ package com.catarsi.Rifugio_Animali.controller;
 
 import com.catarsi.Rifugio_Animali.model.Adozione;
 import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Donazione;
 import com.catarsi.Rifugio_Animali.model.Utente;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAdozione;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAdozione;
@@ -46,17 +47,17 @@ public class RifugioAdozioniMVC {
     }
 
 
-    @GetMapping("/backoffice/adozione")
-    public String backofficeAdozione(Model m) {
-        m.addAttribute("adozioni", srvAdozione.getAdozioni());
-        return "backofficeAdozioni";
-    }
+    // @GetMapping("/backoffice/adozione")
+    // public String backofficeAdozione(Model m) {
+    //     m.addAttribute("adozioni", srvAdozione.getAdozioni());
+    //     return "backofficeAdozioni";
+    // }
 
-        @GetMapping("/backoffice/adozioni/add")
-    public String showForm(Model model) {
-        model.addAttribute("adozione", new Adozione());
-        return "backofficeAdozioni"; 
-    }
+    //     @GetMapping("/backoffice/adozioni/add")
+    // public String showForm(Model model) {
+    //     model.addAttribute("adozione", new Adozione());
+    //     return "backofficeAdozioni"; 
+    // }
 
     @GetMapping("/adozioni/visualizza")
     public String visualizzaAnimaliAdozione(Model m) {
@@ -75,11 +76,25 @@ public class RifugioAdozioniMVC {
     return "formAdozioni";
     }
 
-    @PostMapping("/backoffice/adozioni/add")
-    public String processForm(@ModelAttribute Adozione adozione) {
+    @PostMapping("/adozioni/add")
+    public String processForm(@ModelAttribute Adozione adozione, Principal principal) {
+
+        if (principal != null) {
+            Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+            adozione.setUtente(utente);
+        }
+
         srvAdozione.addAdozione(adozione);
-        return "redirect:/backoffice/adozione";
+        return "redirect:/";
     }
+
+        @GetMapping("/adozioni/add")
+        public String showForm(Model model) {
+            model.addAttribute("adozione", new Adozione());
+            return "formAdozioni";
+        }
+
+        
 }
 
 
