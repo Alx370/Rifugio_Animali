@@ -25,7 +25,7 @@ public class Donazione {
     @Column(name = "Id_donazione")
     private int id_donazione;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "Id_utente")
     private Utente utente;
 

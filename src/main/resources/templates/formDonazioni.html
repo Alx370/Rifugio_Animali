@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label for="Id_utente">Utente</label>
                 <th:block th:if="${utenteLoggato != null}">
-                    <input type="hidden" id="Id_utente" name="Id_utente" th:value="${utenteLoggato.email}" />
+                    <!-- <input type="hidden" id="Id_utente" name="Id_utente" th:value="${utenteLoggato.email}" /> -->
                     <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
                 </th:block>
 
@@ -46,6 +46,10 @@
 </div>
 
 
+                    <!-- <div class="form-group">
+                        <label for="Id_utente">Id utente</label>
+                        <input type="number" class="form-control" id="Id_utente" name="Id_utente" required>
+                    </div>    -->
 
                     <div class="form-group">
                         <label for="somma">Somma</label>

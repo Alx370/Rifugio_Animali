@@ -52,18 +52,30 @@ public class RifugioDonazioniMVC {
         return "formDonazioni";
     }
 
+
+
+    @PostMapping("/donazioni/add")
+public String processForm(@ModelAttribute Donazione donazione, Principal principal) {
+
+    if (principal != null) {
+        Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+        donazione.setUtente(utente); 
+    }
+
+    srvDonazione.addDonazione(donazione); 
+    return "redirect:/";
+}
+
+
         @GetMapping("/donazioni/add")
     public String showForm(Model model) {
         model.addAttribute("donazione", new Donazione());
         return "formDonazioni"; 
     }
 
-    @PostMapping("/donazioni/add")
-    public String processForm(@ModelAttribute Donazione donazione) {
-        srvDonazione.addDonazione(donazione); 
-        return "redirect:/";
-    }
 
+
+    
     
     
 }
