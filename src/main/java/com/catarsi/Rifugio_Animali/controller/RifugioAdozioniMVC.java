@@ -3,6 +3,7 @@ package com.catarsi.Rifugio_Animali.controller;
 
 import com.catarsi.Rifugio_Animali.model.Adozione;
 import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Diario;
 import com.catarsi.Rifugio_Animali.model.Donazione;
 import com.catarsi.Rifugio_Animali.model.Utente;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAdozione;
@@ -54,12 +55,11 @@ public class RifugioAdozioniMVC {
     }
 
 
-
-    //     @GetMapping("/backoffice/adozioni/add")
-    // public String showForm(Model model) {
-    //     model.addAttribute("adozione", new Adozione());
-    //     return "backofficeAdozioni"; 
-    // }
+    @GetMapping("/backoffice/adozioni/add")
+    public String addAdozioneBackoffice(Model model) {
+        model.addAttribute("adozione", new Adozione());
+        return "backofficeAggiungiAdozione";
+    }
 
     @GetMapping("/adozioni/visualizza")
     public String visualizzaAnimaliAdozione(Model m) {
