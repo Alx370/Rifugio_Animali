@@ -1,5 +1,26 @@
 package com.catarsi.Rifugio_Animali.controller;
 
+
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+
+import com.catarsi.Rifugio_Animali.model.Adozione;
+import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Diario;
+import com.catarsi.Rifugio_Animali.model.Donazione;
+import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.repos.RifugioRepoDonazione;
+import com.catarsi.Rifugio_Animali.services.RifugioServiceDonazioneImpl;
+import com.catarsi.Rifugio_Animali.services.RifugioServiceUtente;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.catarsi.Rifugio_Animali.model.Donazione;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDonazione;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceDonazioneImpl;
@@ -9,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Controller
 public class RifugioDonazioniMVC {
 
@@ -17,7 +39,11 @@ public class RifugioDonazioniMVC {
     @Autowired
     private RifugioServiceDonazioneImpl srvDonazione;
 
-    public RifugioDonazioniMVC(RifugioRepoDonazione repoDonazione) {
+
+    @Autowired
+    private RifugioServiceUtente rifugioServiceUtente;
+
+    public RifugioDonazioniMVC(RifugioRepoDonazione repoDonazione){
         this.repoDonazione = repoDonazione;
     }
 
@@ -25,20 +51,43 @@ public class RifugioDonazioniMVC {
     @GetMapping("/donazioni")
     public String listDonazioni(Model m) {
         m.addAttribute("donazioni", srvDonazione.getDonazioni());
-        return "donazioni"; // nome della pagina HTML
+        return "donazioni"; 
     }
 
-    // ✅ Mostra il form per creare nuova donazione
-    @GetMapping("/donazioni/nuova")
+    @GetMapping("/donazioni/form")
+    public String mostraFormDonazione(Model model, Principal principal) {
+        if (principal != null) {
+            Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+            model.addAttribute("utenteLoggato", utente);
+        }
+
+        return "formDonazioni";
+    }
+
+
+
+    @PostMapping("/donazioni/add")
+public String processForm(@ModelAttribute Donazione donazione, Principal principal) {
+
+    if (principal != null) {
+        Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+        donazione.setUtente(utente); 
+    }
+
+    srvDonazione.addDonazione(donazione); 
+    return "redirect:/";
+}
+
+
+        @GetMapping("/donazioni/add")
     public String showForm(Model model) {
-        model.addAttribute("donazione", new Donazione()); // oggetto vuoto
-        return "form_donazione"; // nome del template HTML da creare
+        model.addAttribute("donazione", new Donazione());
+        return "formDonazioni"; 
     }
 
-    // ✅ Salva nuova donazione (POST dal form)
-    @PostMapping("/donazioni")
-    public String salvaDonazione(@ModelAttribute Donazione donazione) {
-        srvDonazione.addDonazione(donazione);
-        return "redirect:/donazioni"; // dopo il salvataggio torna alla lista
-    }
+
+
+    
+    
+    
 }

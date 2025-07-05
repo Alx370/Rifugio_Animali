@@ -25,8 +25,6 @@ CREATE TABLE IF NOT EXISTS Donazione (
   Id_donazione     INT PRIMARY KEY AUTO_INCREMENT,
   Id_utente        INT,
   Id_ente          INT,
-  nome_donatore    VARCHAR(100),
-  email_donatore   VARCHAR(100),
   data             DATE NOT NULL,
   somma            DECIMAL(10,2) NOT NULL,
   CONSTRAINT fk_don_utente FOREIGN KEY (id_utente) REFERENCES Utente(id_utente),
