@@ -54,14 +54,14 @@
 
     <a href="/animali">← Torna alla lista</a> 
     
-</div> 
+</div>
 
-        <div class="adoption-cta">
-            <a th:href="@{/adozioni/form(idAnimale=${animale.id_animale})}"
-                class="adopt-button"
-                th:text="'Adotta ' + ${animale.nome}">
-            </a>
-        </div>
+    <div class="adoption-cta" th:if="${animale.data_adozione == null}">
+        <a th:href="@{/adozioni/form(idAnimale=${animale.id_animale})}"
+           class="adopt-button"
+           th:text="'Adotta ' + ${animale.nome}">
+        </a>
+    </div>
 
 
 <!-- Footer Section -->
