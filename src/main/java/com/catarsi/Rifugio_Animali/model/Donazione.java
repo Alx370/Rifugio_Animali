@@ -2,6 +2,8 @@ package com.catarsi.Rifugio_Animali.model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,15 +33,11 @@ public class Donazione {
     @JoinColumn(name = "Id_ente")
     private Ente ente;
 
-    @Column(name = "nome_donatore", nullable = false)
-    private String nome_donatore;
-
-    @Column(name = "email_donatore")
-    private String email_donatore;
-
     @Temporal(TemporalType.DATE)
     @Column(name = "data", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date data;
+
 
     @Column(name = "somma", nullable = false)
     private double somma;
@@ -68,22 +66,6 @@ public class Donazione {
 
     public void setEnte(Ente ente) {
         this.ente = ente;
-    }
-
-    public String getNome_donatore() {
-        return nome_donatore;
-    }
-
-    public void setNome_donatore(String nome_donatore) {
-        this.nome_donatore = nome_donatore;
-    }
-
-    public String getEmail_donatore() {
-        return email_donatore;
-    }
-
-    public void setEmail_donatore(String email_donatore) {
-        this.email_donatore = email_donatore;
     }
 
     public Date getData() {

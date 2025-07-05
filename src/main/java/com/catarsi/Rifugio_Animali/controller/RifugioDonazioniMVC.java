@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 
 import com.catarsi.Rifugio_Animali.model.Adozione;
 import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Diario;
 import com.catarsi.Rifugio_Animali.model.Donazione;
 import com.catarsi.Rifugio_Animali.model.Utente;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDonazione;
@@ -15,6 +16,8 @@ import com.catarsi.Rifugio_Animali.services.RifugioServiceDonazioneImpl;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceUtente;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -34,7 +37,7 @@ public class RifugioDonazioniMVC {
     }
 
     @GetMapping("/donazioni")
-    public String addDonazioni(Model m) {
+    public String getMethodName(Model m) {
         m.addAttribute("donazioni", srvDonazione.getDonazioni());
         return "donazioni";
     }
@@ -49,12 +52,17 @@ public class RifugioDonazioniMVC {
         return "formDonazioni";
     }
 
-        @GetMapping("/backoffice/donazioni/add")
+        @GetMapping("/donazioni/add")
     public String showForm(Model model) {
         model.addAttribute("donazione", new Donazione());
-        return "backofficeDonazioni"; 
+        return "formDonazioni"; 
     }
 
+    @PostMapping("/donazioni/add")
+    public String processForm(@ModelAttribute Donazione donazione) {
+        srvDonazione.addDonazione(donazione); 
+        return "redirect:/";
+    }
 
     
     
