@@ -24,6 +24,15 @@ public class RifugioServiceDonazioneImpl implements RifugioServiceDonazione{
         return repo_donazione.save(d);
     }
     
+    @Override
+    public Donazione getDonazioneById(int id) {
+        return repo_donazione.findById(id).orElse(null); // Restituisce null se non trovata
+    }
+
+    @Override
+    public void delete(int id) {
+        repo_donazione.deleteById(id); // Elimina la donazione per ID
+    }
 }
 
 
