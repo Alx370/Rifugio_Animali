@@ -49,7 +49,6 @@ public class RifugioAnimaliMVC {
         List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
         model.addAttribute("animale", animale);
         model.addAttribute("diari", diari);
-
         return "dettagliAnimale"; 
     }
 
@@ -67,38 +66,47 @@ public class RifugioAnimaliMVC {
     }
 
     @GetMapping("/backoffice/animali/add")
-public String showForm(Model model) {
-    model.addAttribute("animale", new Animale());
-    return "/backofficeAggiungi"; // Nome del template HTML per il form di aggiunta
-}
+    public String showForm(Model model) {
+        model.addAttribute("animale", new Animale());
+        return "/backofficeAggiungi"; // Nome del template HTML per il form di aggiunta
+    }
 
-@PostMapping("/backoffice/animali/add")
-public String processForm(@ModelAttribute Animale animale) {
-    srvAnimale.addAnimale(animale); 
-    return "redirect:/backoffice/animali";
-}
+    @PostMapping("/backoffice/animali/add")
+    public String processForm(@ModelAttribute Animale animale) {
+        srvAnimale.addAnimale(animale);
+        return "redirect:/backoffice/animali";
+    }
 
-@GetMapping("/animali/edit/{id}")
-public String showUpdateForm(@PathVariable("id") int id, Model model) {
-    Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
-    model.addAttribute("animale", animale);
-    return "AnimaliEdit";
-}
+    @GetMapping("backoffice/animali/dettaglio/{id}")
+    public String BackofficedettaglioAnimale(@PathVariable int id, Model model) {
+        Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
+        List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
+        model.addAttribute("animale", animale);
+        model.addAttribute("diari", diari);
+        return "backofficeDettagliAnimali";
+    }
 
-@PostMapping("/animali/update/{id}")
-public String updateAnimale(@PathVariable("id") int id, @ModelAttribute("animale") Animale aggiornato) {
-    Animale esistente = srvAnimale.getAnimaleByIdAnimale(id);
-    esistente.setNome(aggiornato.getNome());
-    esistente.setSpecie(aggiornato.getSpecie());
-    esistente.setRazza(aggiornato.getRazza());
-    esistente.setPeso(aggiornato.getPeso());
-    esistente.setEta(aggiornato.getEta());
-    esistente.setSesso(aggiornato.getSesso());
-    esistente.setColore(aggiornato.getColore());
-    esistente.setData_arrivo(aggiornato.getData_arrivo());
-    srvAnimale.addAnimale(esistente);
-    return "redirect:/backoffice/animali";
-}
+    @GetMapping("/animali/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") int id, Model model) {
+        Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
+        model.addAttribute("animale", animale);
+        return "AnimaliEdit";
+    }
+
+    @PostMapping("/animali/update/{id}")
+    public String updateAnimale(@PathVariable("id") int id, @ModelAttribute("animale") Animale aggiornato) {
+        Animale esistente = srvAnimale.getAnimaleByIdAnimale(id);
+        esistente.setNome(aggiornato.getNome());
+        esistente.setSpecie(aggiornato.getSpecie());
+        esistente.setRazza(aggiornato.getRazza());
+        esistente.setPeso(aggiornato.getPeso());
+        esistente.setEta(aggiornato.getEta());
+        esistente.setSesso(aggiornato.getSesso());
+        esistente.setColore(aggiornato.getColore());
+        esistente.setData_arrivo(aggiornato.getData_arrivo());
+        srvAnimale.addAnimale(esistente);
+        return "redirect:/backoffice/animali";
+    }
 
 
 
