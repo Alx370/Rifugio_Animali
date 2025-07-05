@@ -60,7 +60,7 @@ private RifugioServiceUtente rifugioServiceUtente;
 
     @GetMapping("/adozioni/visualizza")
 public String visualizzaAnimaliAdozione(Model m) {
-    m.addAttribute("adozioni", srvAdozione.getAdozioni());
+    m.addAttribute("animali", srvAnimale.getAnimali());
     return "visualizzaAnimaliAdozione"; 
 }
 
@@ -77,9 +77,6 @@ public String mostraFormAdozione(Model model, Principal principal, @RequestParam
 
     return "formAdozioni";
 }
-
-
-
 
 @PostMapping("/backoffice/adozioni/add")
 public String processForm(@ModelAttribute Adozione adozione) {
