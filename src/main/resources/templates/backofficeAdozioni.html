@@ -23,21 +23,19 @@
     
 
 <section class="animals-section">
-    <div class="section-title">LE DONAZIONOI EFFETTUATE</div>
+    <div class="section-title">LE ADOZIONI EFFETTUATE</div>
 
                 
 <div class="animals-table-container">
   <table style="width: 100%;">
     <thead>
       <tr>
-        <th class="header-btn">Data</th>
-        <th class="header-btn">Somma</th>
+        <th class="header-btn">Data adozione</th>
       </tr>
     </thead>
     <tbody >
-      <tr class="table-row" onclick="selectRow(this)" th:each="donazione : ${donazioni}">
-        <td th:text="${donazione.data}"></td>
-        <td th:text="${donazione.somma}"></td>
+      <tr class="table-row" onclick="selectRow(this)" th:each="adozione : ${adozioni}">
+        <td th:text="${adozione.data_adozione}"></td>
       </tr>
         
 
