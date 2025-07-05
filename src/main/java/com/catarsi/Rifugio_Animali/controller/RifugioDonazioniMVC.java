@@ -89,6 +89,10 @@ public String processForm(@ModelAttribute Donazione donazione, Principal princip
 
 
     
-    
+    @GetMapping("/backoffice/donazioni")
+    public String backofficeDonazioni(Model m) {
+        m.addAttribute("donazioni", srvDonazione.getDonazioni());
+        return "backofficeDonazioni";
+    }
     
 }
