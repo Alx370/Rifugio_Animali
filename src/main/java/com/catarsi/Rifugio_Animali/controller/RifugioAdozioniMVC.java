@@ -26,7 +26,7 @@ public class RifugioAdozioniMVC {
     private RifugioRepoAdozione repoAdozione;
 
     @Autowired
-private RifugioServiceUtente rifugioServiceUtente;
+    private RifugioServiceUtente rifugioServiceUtente;
 
     @Autowired
     private RifugioServiceAdozione srvAdozione;
@@ -59,33 +59,29 @@ private RifugioServiceUtente rifugioServiceUtente;
     }
 
     @GetMapping("/adozioni/visualizza")
-public String visualizzaAnimaliAdozione(Model m) {
-    m.addAttribute("adozioni", srvAdozione.getAdozioni());
+    public String visualizzaAnimaliAdozione(Model m) {
+    m.addAttribute("animali", srvAnimale.getAnimali());
     return "visualizzaAnimaliAdozione"; 
-}
+    }
 
-
-@GetMapping("/adozioni/form")
-public String mostraFormAdozione(Model model, Principal principal, @RequestParam Integer idAnimale) {
+    @GetMapping("/adozioni/form")
+    public String mostraFormAdozione(Model model, Principal principal, @RequestParam Integer idAnimale) {
     if (principal != null) {
         Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
         model.addAttribute("utenteLoggato", utente);
     }
-
     Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
     model.addAttribute("animaleSelezionato", animale);
-
     return "formAdozioni";
+    }
+
+    @PostMapping("/backoffice/adozioni/add")
+    public String processForm(@ModelAttribute Adozione adozione) {
+        srvAdozione.addAdozione(adozione);
+        return "redirect:/backoffice/adozione";
+    }
 }
 
-
-
-
-// @PostMapping("/backoffice/adozioni/add")
-// public String processForm(@ModelAttribute Adozione adozione) {
-//     srvAdozione.addAdozione(adozione); 
-//     return "redirect:/backoffice/adozione";
-}
 
 
 
