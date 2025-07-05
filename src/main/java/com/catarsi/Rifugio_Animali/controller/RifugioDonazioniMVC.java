@@ -58,9 +58,10 @@ public class RifugioDonazioniMVC {
     public String mostraFormDonazione(Model model, Principal principal) {
         if (principal != null) {
             Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
-            model.addAttribute("utenteLoggato", utente);
+            if (utente != null) {
+                model.addAttribute("utenteLoggato", utente);
+            }
         }
-
         return "formDonazioni";
     }
 

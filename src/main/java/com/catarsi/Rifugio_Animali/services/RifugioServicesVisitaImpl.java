@@ -41,6 +41,6 @@ public class RifugioServicesVisitaImpl implements RifugioServicesVisita {
     }
 
     public Visita salvaVisita(Visita v){
-        return visita_repo.save(v);
+        return visitaRepo.save(v);
     }
 }

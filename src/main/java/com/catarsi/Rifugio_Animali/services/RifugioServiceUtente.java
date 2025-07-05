@@ -16,4 +16,8 @@ public interface RifugioServiceUtente {
 
     // elimina un utente per id
     void delete(Integer id);
+
+    Utente findByEmail(String name);
+
+    List <Utente> getUtenti();
 }

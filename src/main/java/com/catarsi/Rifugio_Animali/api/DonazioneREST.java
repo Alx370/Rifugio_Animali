@@ -42,8 +42,6 @@ public class DonazioneREST {
         // aggiorno campi (esempio, aggiorna quelli che vuoi)
         esistente.setUtente(nuovo.getUtente());
         esistente.setEnte(nuovo.getEnte());
-        esistente.setNome_donatore(nuovo.getNome_donatore());
-        esistente.setEmail_donatore(nuovo.getEmail_donatore());
         esistente.setData(nuovo.getData());
         esistente.setSomma(nuovo.getSomma());
         return service.addDonazione(esistente); // salvo aggiornato
