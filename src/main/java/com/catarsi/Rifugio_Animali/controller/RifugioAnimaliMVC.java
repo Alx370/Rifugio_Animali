@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 import java.util.List;
 
 @Controller
 public class RifugioAnimaliMVC {
-
 
     @Autowired
     private final RifugioRepoAnimale repoAnimale;
@@ -40,16 +40,16 @@ public class RifugioAnimaliMVC {
     @GetMapping("/animali")
     public String getAnimali(Model m) {
         m.addAttribute("animali", srvAnimale.getAnimali());
-        return "animali";
+        return "Animali";
     }
 
     @GetMapping("/animali/dettaglio/{id}")
     public String dettaglioAnimale(@PathVariable int id, Model model) {
-        Animale animale = srvAnimale.getAnimaleByIdAnimale(id); 
+        Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
         List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
         model.addAttribute("animale", animale);
         model.addAttribute("diari", diari);
-        return "dettagliAnimale"; 
+        return "dettagliAnimale";
     }
 
     @GetMapping("/animali/delete/{id}")
@@ -62,13 +62,13 @@ public class RifugioAnimaliMVC {
     @GetMapping("/backoffice/animali")
     public String backofficeAnimali(Model m) {
         m.addAttribute("animali", srvAnimale.getAnimali());
-        return "/backofficeAnimali";
+        return "backofficeVistaAnimali";
     }
 
     @GetMapping("/backoffice/animali/add")
     public String showForm(Model model) {
         model.addAttribute("animale", new Animale());
-        return "/backofficeAggiungi"; // Nome del template HTML per il form di aggiunta
+        return "backofficeAddAnimali";
     }
 
     @PostMapping("/backoffice/animali/add")
@@ -107,17 +107,4 @@ public class RifugioAnimaliMVC {
         srvAnimale.addAnimale(esistente);
         return "redirect:/backoffice/animali";
     }
-
-
-
-
-
-
-
-
-    
-
-
 }
-
-
