@@ -39,7 +39,10 @@ public class RifugioServiceAdozioneImpl implements RifugioServiceAdozione {
     //             .orElseThrow(() -> new RuntimeException("Adozione non trovata con ID: " + id));
     // }
 
-
+    @Override
+    public Adozione getAdozioneById(int id) {
+        return repo_adozione.findById(id).orElse(null);
+    }
 
     @Override
     public Adozione getById(int id) {
