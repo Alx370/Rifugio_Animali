@@ -6,8 +6,10 @@
     <link rel="icon" type="image/x-icon" href="/image/favicon.png">
   <link rel="stylesheet" href="/css/style4.css">
 </head>
-      <!-- Header -->
-    <header>
+    
+<body>
+          <!-- Header -->
+    <!-- <header> -->
         <nav>
             <div class="logo">
                 <img src="/image/logo.png" alt="Logo Catarsi Group">
@@ -20,11 +22,10 @@
         </nav>
     </header>
 
-<section class="animals-section">
+<!-- <section class="animals-section"> -->
     <div class="section-title">LE VISITE</div>
 
-<div class="animals-table-container">
-    <body>
+    <div class="animals-table-container">
         <h1>Visite Veterinarie</h1>
         <table style="width: 100%;">
             <thead>
@@ -33,6 +34,8 @@
                     <th class="header-btn">Animale</th>
                     <th class="header-btn">Dottore</th>
                     <th class="header-btn">Descrizione</th>
+                    <th></th>
+                    <!-- <th></th> -->
                 </tr>
             </thead>
             <tbody>
@@ -41,21 +44,32 @@
                     <td th:text="${visita.animale.nome}"></td>
                     <td th:text="${visita.dottore.nome + ' ' + visita.dottore.cognome}"></td>
                     <td th:text="${visita.descrizione}"></td>
+                    <td >
+                        <form th:action="@{/visite-veterinarie/{id}(id=${visita.id_visita})}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit">Elimina</button>
+                        </form>
+                    </td>
+                    <!-- <td>
+                    <form th:action="@{'/visite-veterinarie/' + ${visita.id_visita} + '/modifica'}" method="get">
+                        <button type="submit">Modifica</button>
+                    </form>
+
+                        
+                    </td> -->
                 </tr>
                 
 
             </tbody>
         </table>
-</div>
-<div class="control-buttons" style="margin-top: 60px;">
-      <a href="/visite-veterinarie/nuova-visita" class="add-animal-btn">
-        Aggiungi Visita
-      </a>
     </div>
-<form action="/visite-veterinarie/elimina" method="post">
-    <input type="hidden" name="idVisita" value="${visita.id_visita}">
-    <button type="submit">Elimina</button>
-</form>
+    <div class="control-buttons" style="margin-top: 60px;">
+        <a href="/visite-veterinarie/nuova-visita" class="add-animal-btn">
+            Aggiungi Visita
+        </a>
+    </div>
+
+
 
     </body>
 </html>

@@ -44,11 +44,9 @@ public class RifugioServicesVisitaImpl implements RifugioServicesVisita {
         return visitaRepo.save(v);
     }
 
-@Autowired
-private RifugioRepoVisita visitaRepo;
-
-public void eliminaVisitePerId(int idVisita) {
-    visitaRepo.deleteById(idVisita); // Usa deleteById fornito da JpaRepository
-}
+    //mi serve il metodo eliminaVisitePerId perchè lo chiamo nel controller 
+    public void eliminaVisitePerId(int idVisita) {
+        visitaRepo.deleteById(idVisita); // Usa deleteById fornito da JpaRepository
+    }
 
 }
