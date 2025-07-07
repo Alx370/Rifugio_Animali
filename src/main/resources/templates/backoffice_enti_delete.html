@@ -1,30 +1,23 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Elimina Ente</title>
-  <link rel="stylesheet" href="/css/backofficeenti.css">
+  <link rel="stylesheet" href="/css/backofficeenti.css" />
 </head>
 <body>
   <header class="bo-header">
-    <nav class="bo-nav"><div class="bo-logo">❌ Elimina Ente</div></nav>
+    <nav class="bo-nav">
+      <div class="bo-logo">❌ Elimina Ente</div>
+    </nav>
   </header>
   <section class="bo-section">
-    <form id="delForm" class="bo-form">
-      <label class="bo-label">ID Ente da eliminare</label><input name="id" type="number" class="bo-input" required>
-      <button type="submit" class="bo-btn">Elimina</button>
-    </form>
-    <p id="msg"></p>
+    <form action="/backoffice/enti/delete" method="post" class="bo-form">
+  <label class="bo-label">ID Ente da eliminare</label>
+  <input name="id" type="number" class="bo-input" required>
+  <button type="submit" class="bo-btn">Elimina</button>
+</form>
+<p th:text="${msg}"></p>
   </section>
-  <script>
-    document.getElementById('delForm').onsubmit = e => {
-      e.preventDefault();
-      fetch('/api/enti/' + e.target.id.value, {method: 'DELETE'})
-        .then(res => {
-          if (res.ok) msg.textContent = 'Ente eliminato';
-          else msg.textContent = 'Errore in eliminazione';
-        }).catch(err => msg.textContent = 'Errore: ' + err);
-    }
-  </script>
 </body>
 </html>
