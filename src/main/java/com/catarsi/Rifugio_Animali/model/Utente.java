@@ -19,7 +19,7 @@ public class Utente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id_utente")
-    private int id_utente;
+    private Integer id_utente;
 
     @Column(name = "nome", nullable = false)
     private String nome;
@@ -46,11 +46,11 @@ public class Utente {
 
     public Utente() {}
 
-    public int getId_utente() {
+    public Integer getId_utente() {
         return id_utente;
     }
 
-    public void setId_utente(int id_utente) {
+    public void setId_utente(Integer id_utente) {
         this.id_utente = id_utente;
     }
 

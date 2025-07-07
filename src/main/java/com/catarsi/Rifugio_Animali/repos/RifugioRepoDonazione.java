@@ -6,5 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.catarsi.Rifugio_Animali.model.Donazione;
 
 @Repository
-public interface RifugioRepoDonazione extends JpaRepository<Donazione, Integer> {}
+public interface RifugioRepoDonazione extends JpaRepository<Donazione, Integer> {
+
+    
+}
 

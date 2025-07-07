@@ -28,8 +28,8 @@
             </thead>
             <tbody>
                 <tr th:each="donazione : ${donazioni}">
-                    <td th:text="${donazione.utente.nome}"></td>
-                    <td th:text="${donazione.utente.email}"></td>
+<td th:text="${donazione.utente != null ? donazione.utente.id_utente : 'N/D'}"></td>
+
                     <td th:text="${#dates.format(donazione.data, 'dd/MM/yyyy')}"></td>
                     <td th:text="${donazione.somma + ' €'}"></td>
                 </tr>

@@ -9,7 +9,7 @@ public interface RifugioServiceDiario {
     Diario addDiario(Diario d);
     void deleteDiario(int id);
     List<Diario> getDiari();
-    
+    Diario getDiarioById(int id);
 
     List<Diario> getDiariByAnimaleId(int animaleId);
 

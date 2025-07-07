@@ -37,7 +37,7 @@ public class RifugioVisiteMVC {
 
     @GetMapping({"", "/"})
     public String getVisite(Model m) {
-        m.addAttribute("visite",srvVisite.getVisite());
+        m.addAttribute("visite",srvVisite.getAll());
         return "Visite"; //ritorna una Stringa(i nomi dei templates)
     }
 

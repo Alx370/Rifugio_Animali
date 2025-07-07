@@ -5,26 +5,43 @@ import com.catarsi.Rifugio_Animali.repos.RifugioRepoVisita;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
-public class RifugioServicesVisitaImpl implements RifugioServicesVisita{
+public class RifugioServicesVisitaImpl implements RifugioServicesVisita {
 
     @Autowired
-    private RifugioRepoVisita visita_repo;
+    private RifugioRepoVisita visitaRepo;
 
     @Override
-    public Visita addVisita(Visita v) {
-        return visita_repo.save(v);
+    public Visita save(Visita v) {
+        return visitaRepo.save(v);
     }
 
     @Override
-    public List<Visita> getVisite() {
-        return visita_repo.findAll();
+    public List<Visita> getAll() {
+        return visitaRepo.findAll();
+    }
+
+    @Override
+    public Visita getById(int id) {
+        return visitaRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(int id) {
+        visitaRepo.deleteById(id);
+    }
+
+    @Override
+    public Date getDataVisita(int id) {
+        Visita visita = visitaRepo.findById(id).orElse(null);
+        return (visita != null) ? visita.getData_visita() : null;
     }
 
     public Visita salvaVisita(Visita v){
-        return visita_repo.save(v);
+        return visitaRepo.save(v);
     }
 
 @Autowired

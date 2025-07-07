@@ -32,9 +32,9 @@ public class Visita {
     @JoinColumn(name = "Id_dottore", nullable = false)
     private Dottore dottore;
 
-    //@Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     @Column(name = "data_visita", nullable = false)
-    private LocalDate data_visita;
+    private Date data_visita;
 
     @Column(name = "descrizione", columnDefinition = "TEXT")
     private String descrizione;
@@ -65,11 +65,11 @@ public class Visita {
         this.dottore = dottore;
     }
 
-    public LocalDate getData_visita() {
+    public Date getData_visita() {
         return data_visita;
     }
 
-    public void setData_visita(LocalDate data_visita) {
+    public void setData_visita(Date data_visita) {
         this.data_visita = data_visita;
     }
 

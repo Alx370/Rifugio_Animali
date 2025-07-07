@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Animali</title>
     <link rel="icon" type="image/x-icon" href="/image/favicon.png">
-  <link rel="stylesheet" href="/css/style4.css">
+  <link rel="stylesheet" href="/css/backofficeAnimali.css">
 </head>
 <body>
       <!-- Header -->
@@ -16,7 +16,7 @@
                 CATARSI GROUP
               </div>
               
-            <div class="house-icon"><a href="/index.html"><img src="/image/house.svg" alt="casa"></a>
+            <div class="house-icon"><a href="/"><img src="/image/house.svg" alt="casa"></a>
             </div>
         </nav>
     </header>
@@ -41,7 +41,7 @@
     <tbody >
       <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
         <td>
-          <a th:href="@{/animali/{id}(id=${animale.Id_animale})}" th:text="${animale.nome}"></a>
+            <a th:href="@{/backoffice/animali/dettaglio/{id}(id=${animale.id_animale})}" th:text="${animale.nome}"></a>
         </td>
         <td th:text="${animale.sesso}"></td>
         <td th:text="${animale.specie}"></td>
@@ -63,6 +63,11 @@
                 <a href="/backoffice/animali/add" class="add-animal-btn"  onclick="addAnimal()">
                    Aggiungi Animale
                 </a>
+
+                <a href="/backoffice/diario/add" class="add-diario-btn" onclick="addAnimal()">
+                    ➕ Aggiungi Diario
+                </a>
+
             </div>
 </section>
 
