@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Aggiorna Ente</title>
+  <link rel="stylesheet" href="/css/backofficeenti.css">
+</head>
+<body>
+  <header class="bo-header">
+    <nav class="bo-nav"><div class="bo-logo">✏️ Aggiorna Ente</div></nav>
+  </header>
+  <section class="bo-section">
+    <form id="searchForm" class="bo-form">
+      <label class="bo-label">ID Ente da cercare</label><input name="id" type="number" class="bo-input" required>
+      <button type="submit" class="bo-btn">Cerca</button>
+    </form>
+    <form id="updForm" class="bo-form" style="display:none;">
+      <input name="id" type="hidden">
+      <label class="bo-label">Nome</label><input name="nome" class="bo-input" required>
+      <label class="bo-label">Email</label><input name="email" type="email" class="bo-input" required>
+      <label class="bo-label">Telefono</label><input name="telefono" class="bo-input">
+      <button type="submit" class="bo-btn">Aggiorna</button>
+    </form>
+    <p id="msg"></p>
+  </section>
+  <script>
+    const sf = document.getElementById('searchForm'), uf = document.getElementById('updForm'), msg = document.getElementById('msg');
+    sf.onsubmit = e => {
+      e.preventDefault();
+      fetch('/api/enti/' + e.target.id.value)
+        .then(res => res.json())
+        .then(ent => {
+          uf.style.display = 'flex';
+          uf.id.value = ent.id_ente;
+          uf.nome.value = ent.nome;
+          uf.email.value = ent.email;
+          uf.telefono.value = ent.telefono || '';
+        })
+        .catch(() => msg.textContent = 'Ente non trovato');
+    };
+    uf.onsubmit = e => {
+      e.preventDefault();
+      const data = {nome: e.target.nome.value, email: e.target.email.value, telefono: e.target.telefono.value || null};
+      fetch('/api/enti/' + e.target.id.value, {
+        method: 'PUT',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+        .then(ent => msg.textContent = 'Aggiornato ente ' + ent.id_ente)
+        .catch(err => msg.textContent = 'Errore: ' + err);
+    };
+  </script>
+</body>
+</html>
