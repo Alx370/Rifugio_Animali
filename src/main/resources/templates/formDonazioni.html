@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adozione Animali</title>
-    <!-- <link rel="stylesheet" href="/css/backofficeAggiungi.css"> -->
-<link rel="stylesheet" href="/css/formDonazioni.css">
-
+    <link rel="stylesheet" href="/css/formDonazioni.css">
 </head>
+
+<body>
 <header>
     <nav>
         <div class="logo">
@@ -15,261 +15,140 @@
             CATARSI GROUP
         </div>
         <div class="house-icon">
-            <a href="/">
-                <img src="/image/house.svg" alt="casa">
-            </a>
+            <a href="/"><img src="/image/house.svg" alt="casa"></a>
         </div>
     </nav>
 </header>
 
-<body>
-<div class="container">
-    <div class="header">
-    </div>
-
-
 <main class="main-content">
     <section class="hero">
         <h1>Sostieni Rifugio Catarsi</h1>
-        <p>Ogni donazione ci aiuta a prenderci cura degli animali abbandonati e a garantire loro tutto l'amore e le cure di cui hanno bisogno.</p>
+        <p>Ogni donazione ci aiuta a prenderci cura degli animali abbandonati.</p>
     </section>
 
     <div class="content-grid">
         <div class="support-section">
-            <h2 class="section-title">
-                ❤️ Il tuo aiuto fa la differenza
-            </h2>
+            <h2 class="section-title">❤️ Il tuo aiuto fa la differenza</h2>
             <div class="support-options">
-                <div class="support-option">
-                    <div class="icon">🐕</div>
-                    <div class="details">
-                        <h3>€10 al mese</h3>
-                        <p>Cibo per un cane per una settimana</p>
-                    </div>
-                </div>
-                <div class="support-option">
-                    <div class="icon">🏥</div>
-                    <div class="details">
-                        <h3>€50</h3>
-                        <p>Visita veterinaria completa</p>
-                    </div>
-                </div>
-                <div class="support-option">
-                    <div class="icon">🏠</div>
-                    <div class="details">
-                        <h3>€100</h3>
-                        <p>Sistemazione per un mese</p>
-                    </div>
-                </div>
-                <div class="support-option">
-                    <div class="icon">🚑</div>
-                    <div class="details">
-                        <h3>€200</h3>
-                        <p>Intervento chirurgico di emergenza</p>
-                    </div>
-                </div>
+                <div class="support-option"><div class="icon">🐕</div><div class="details"><h3>€10 al mese</h3><p>Cibo per un cane</p></div></div>
+                <div class="support-option"><div class="icon">🏥</div><div class="details"><h3>€50</h3><p>Visita veterinaria</p></div></div>
+                <div class="support-option"><div class="icon">🏠</div><div class="details"><h3>€100</h3><p>Sistemazione mensile</p></div></div>
+                <div class="support-option"><div class="icon">🚑</div><div class="details"><h3>€200</h3><p>Emergenza chirurgica</p></div></div>
             </div>
         </div>
 
         <div class="donation-section">
             <h2 class="section-title">Fai una donazione</h2>
-            <p style="color: #666; margin-bottom: 1.5rem;">Scegli l'importo che preferisci per sostenere la nostra missione:</p>
-
-            <form id="donazioneForm" method="post" th:action="@{/donazioni/add}" >
+            
+            <form id="donazioneForm" method="post" th:action="@{/donazioni/add}">
                 <th:block th:if="${_csrf != null}">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 </th:block>
-
+                
                 <div class="form-group">
                     <label for="Id_utente">Utente</label>
                     <th:block th:if="${utenteLoggato != null}">
                         <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
                     </th:block>
-
+                    
                     <th:block th:if="${utenteLoggato == null}">
                         <span>Utente non loggato</span>
                     </th:block>
-                </div>
+                    <p style="color:#666;">Scegli l'importo che preferisci:</p>
+</div>
+
+
+                <input type="hidden" name="somma" id="sommaHidden" value="0.00" />
 
                 <div class="donation-amounts">
-                    <button type="button" class="amount-btn" onclick="selectAmount(10)">€10</button>
-                    <button type="button" class="amount-btn" onclick="selectAmount(25)">€25</button>
-                    <button type="button" class="amount-btn" onclick="selectAmount(50)">€50</button>
-                    <button type="button" class="amount-btn" onclick="selectAmount(100)">€100</button>
-                    <button type="button" class="amount-btn" onclick="selectAmount(200)">€200</button>
-                    <button type="button" class="amount-btn custom-btn" onclick="showCustomInput()">Altro</button>
+                    <button type="button" class="amount-btn" onclick="selectAmount(10, event)">€10</button>
+                    <button type="button" class="amount-btn" onclick="selectAmount(25, event)">€25</button>
+                    <button type="button" class="amount-btn" onclick="selectAmount(50, event)">€50</button>
+                    <button type="button" class="amount-btn" onclick="selectAmount(100, event)">€100</button>
+                    <button type="button" class="amount-btn" onclick="selectAmount(200, event)">€200</button>
+                    <button type="button" class="amount-btn custom-btn" onclick="showCustomInput(event)">Altro</button>
                 </div>
 
                 <div class="custom-amount" id="customAmount" style="display: none;">
-                    <label for="customInput">Oppure inserisci un importo personalizzato</label>
-                    <input type="number" id="customInput" name="somma" placeholder="0.00" min="1" onchange="updateTotal()" required>
+                    <label for="customInput">Importo personalizzato</label>
+                    <input type="number" id="customInput" placeholder="0.00" min="1" onchange="updateTotal()" />
                 </div>
-
-                <!-- <div class="form-group">
-                    <label for="somma">Somma</label>
-                    <input type="number" class="form-control" id="somma" name="somma" required>
-                </div> -->
-
 
                 <div class="form-group">
                     <label for="data">Data di donazione</label>
-                    <input type="date" class="form-control" id="data" name="data" required>
+                    <input type="date" class="form-control" id="data" name="data" required />
                 </div>
 
                 <div class="donation-total">
-                    <label for="somma"><strong>Importo da donare: €<span id="totalAmount">0.00</span></strong></label>
-                    
+                    <label><strong>Importo da donare: €<span id="totalAmount">0.00</span></strong></label>
                 </div>
 
+ 
                 <button type="submit" class="donate-btn">Dona ora</button>
-                
 
-                <p style="font-size: 0.9rem; color: #666; margin-top: 1rem; text-align: center;">
-                    Donazione sicura e protetta. I tuoi dati sono al sicuro.
+                <p style="font-size: 0.9rem; color: #666; text-align: center;">
+                    Donazione sicura. I tuoi dati sono al sicuro.
                 </p>
             </form>
-                <script>
-        let selectedAmount = 0;
-
-        function selectAmount(amount) {
-            selectedAmount = amount;
-            updateTotal();
-            
-
-            document.querySelectorAll('.amount-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-
-            event.target.classList.add('selected');
-            
-
-            document.getElementById('customAmount').style.display = 'none';
-            document.getElementById('customInput').value = '';
-        }
-
-        function showCustomInput() {
-            document.getElementById('customAmount').style.display = 'block';
-            document.getElementById('customInput').focus();
-            
-
-            document.querySelectorAll('.amount-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            
-
-            event.target.classList.add('selected');
-            
-            selectedAmount = 0;
-            updateTotal();
-        }
-
-        function updateTotal() {
-            const customInput = document.getElementById('customInput');
-            const totalElement = document.getElementById('totalAmount');
-            
-            if (customInput.value && parseFloat(customInput.value) > 0) {
-                selectedAmount = parseFloat(customInput.value);
-            }
-            
-            totalElement.textContent = selectedAmount.toFixed(2);
-        }
-
-        function donate() {
-            if (selectedAmount > 0) {
-                alert(`Grazie per la tua donazione di €${selectedAmount.toFixed(2)}! Questo aiuterà molto i nostri animali.`);
-            } else {
-                alert('Per favore seleziona un importo da donare.');
-            }
-        }
-
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
         </div>
     </div>
 
     <div class="success-story">
         <h3>⭐ Storie di successo</h3>
-        <p>"Grazie alle donazioni ricevute, Luna, una cagnolina abbandonata, ha ricevuto le cure necessarie e ora vive felice con la sua nuova famiglia!"</p>
+        <p>"Grazie alle donazioni, Luna ha trovato casa e cure!"</p>
     </div>
 </main>
 
-
-
-
-
-        <!-- <div class="form-container">
-            <h2>Dona</h2>
-            <form id="donazioneForm" method="post" th:action="@{/donazioni/add}" >
-                <th:block th:if="${_csrf != null}">
-                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                </th:block>
-
-                <div class="form-group">
-                    <label for="Id_utente">Utente</label>
-                    <th:block th:if="${utenteLoggato != null}">
-                        <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
-                    </th:block>
-
-                    <th:block th:if="${utenteLoggato == null}">
-                        <span>Utente non loggato</span>
-                    </th:block>
-                </div>
-
-                <div class="form-group">
-                    <label for="somma">Somma</label>
-                    <input type="number" class="form-control" id="somma" name="somma" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="data">Data di donazione</label>
-                    <input type="date" class="form-control" id="data" name="data" required>
-                </div>
-
-                <button type="submit" class="btn-primary">Conferma donazione</button>
-            </form>
-        </div> -->
-
-
-    </div>
-</div>
-
-<!-- Footer Section -->
 <footer class="footer">
     <div class="footer-content">
-        <div class="footer-logo">
-            <img src="/image/logo.png" alt="Logo Catarsi">
-        </div>
+        <div class="footer-logo"><img src="/image/logo.png" alt="Logo Catarsi"></div>
         <div class="footer-right">
             <div class="social-icons">
-                <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon">
-                    <img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg">
-                </a>
-                <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon">
-                    <img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg">
-                </a>
-                <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon">
-                    <img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg">
-                </a>
+                <a href="https://facebook.com/catarsigroup" target="_blank"><img src="/image/facebook-icon.svg" alt="Facebook"></a>
+                <a href="https://instagram.com/catarsigroup" target="_blank"><img src="/image/instagram-icon.svg" alt="Instagram"></a>
+                <a href="https://tiktok.com/catarsigroup" target="_blank"><img src="/image/tiktok-icon.svg" alt="TikTok"></a>
             </div>
-            <div class="footer-credits">
-                <p>Crediti alla Fondazione Catarsi</p>
-            </div>
+            <p>Crediti alla Fondazione Catarsi</p>
         </div>
     </div>
 </footer>
 
+<script>
+    let selectedAmount = 0;
 
+    function selectAmount(amount, event) {
+        selectedAmount = amount;
+        document.getElementById('totalAmount').textContent = selectedAmount.toFixed(2);
+        document.getElementById('sommaHidden').value = selectedAmount.toFixed(2);
+
+        document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+        event.target.classList.add('selected');
+
+        document.getElementById('customAmount').style.display = 'none';
+        document.getElementById('customInput').value = '';
+    }
+
+    function showCustomInput(event) {
+        document.getElementById('customAmount').style.display = 'block';
+        document.getElementById('customInput').focus();
+
+        document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('selected'));
+        event.target.classList.add('selected');
+
+        selectedAmount = 0;
+        updateTotal();
+    }
+
+    function updateTotal() {
+        const input = document.getElementById('customInput');
+        const value = parseFloat(input.value);
+
+        if (!isNaN(value) && value > 0) {
+            selectedAmount = value;
+            document.getElementById('totalAmount').textContent = selectedAmount.toFixed(2);
+            document.getElementById('sommaHidden').value = selectedAmount.toFixed(2);
+        }
+    }
+</script>
 </body>
 </html>
