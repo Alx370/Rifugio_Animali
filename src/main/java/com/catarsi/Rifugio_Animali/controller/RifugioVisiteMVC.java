@@ -57,6 +57,13 @@ public String salvaVisita(Visita visita) {
     return "redirect:/visite-veterinarie/";
 }
 
+@PostMapping("/visite-veterinarie/elimina")
+public String eliminaVisite(@RequestParam("idVisita") int idVisita) {
+    srvVisite.eliminaVisitePerId(idVisita); // Usa il metodo corretto del servizio
+    return "redirect:/visite-veterinarie";
+}
+
+
     
 
 

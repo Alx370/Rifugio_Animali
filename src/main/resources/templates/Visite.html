@@ -1,36 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    >
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <title>Visite</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.png">
+  <link rel="stylesheet" href="/css/style4.css">
 </head>
-<body>
-    <h1>Visite Veterinarie</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Animale</th>
-                <th>Dottore</th>
-                <th>Descrizione</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="visita : ${visite}" th:if="${visite != null}">
-                <td th:text="${visita.data_visita}"></td>
-                <td th:text="${visita.animale.nome}"></td>
-                <td th:text="${visita.dottore.nome + ' ' + visita.dottore.cognome}"></td>
-                <td th:text="${visita.descrizione}"></td>
-            </tr>
-            
+      <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="/image/logo.png" alt="Logo Catarsi Group">
+                
+                CATARSI GROUP
+              </div>
+              
+            <div class="house-icon"><a href="/home.html"><img src="/image/house.svg" alt="casa"></a>
+            </div>
+        </nav>
+    </header>
 
-        </tbody>
-    </table>
+<section class="animals-section">
+    <div class="section-title">LE VISITE</div>
 
-</body>
+<div class="animals-table-container">
+    <body>
+        <h1>Visite Veterinarie</h1>
+        <table style="width: 100%;">
+            <thead>
+                <tr>
+                    <th class="header-btn">Data</th>
+                    <th class="header-btn">Animale</th>
+                    <th class="header-btn">Dottore</th>
+                    <th class="header-btn">Descrizione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-row" th:each="visita : ${visite}" th:if="${visite != null}">
+                    <td th:text="${visita.data_visita}"></td>
+                    <td th:text="${visita.animale.nome}"></td>
+                    <td th:text="${visita.dottore.nome + ' ' + visita.dottore.cognome}"></td>
+                    <td th:text="${visita.descrizione}"></td>
+                </tr>
+                
+
+            </tbody>
+        </table>
+</div>
+<div class="control-buttons" style="margin-top: 60px;">
+      <a href="/visite-veterinarie/nuova-visita" class="add-animal-btn">
+        Aggiungi Visita
+      </a>
+    </div>
+<form action="/visite-veterinarie/elimina" method="post">
+    <input type="hidden" name="idVisita" value="${visita.id_visita}">
+    <button type="submit">Elimina</button>
+</form>
+
+    </body>
 </html>

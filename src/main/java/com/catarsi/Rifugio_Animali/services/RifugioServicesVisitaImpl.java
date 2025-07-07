@@ -26,4 +26,12 @@ public class RifugioServicesVisitaImpl implements RifugioServicesVisita{
     public Visita salvaVisita(Visita v){
         return visita_repo.save(v);
     }
+
+@Autowired
+private RifugioRepoVisita visitaRepo;
+
+public void eliminaVisitePerId(int idVisita) {
+    visitaRepo.deleteById(idVisita); // Usa deleteById fornito da JpaRepository
+}
+
 }
