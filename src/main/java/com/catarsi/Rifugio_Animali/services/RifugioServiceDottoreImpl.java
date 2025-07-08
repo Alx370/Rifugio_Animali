@@ -26,11 +26,12 @@ public class RifugioServiceDottoreImpl implements RifugioServiceDottore{
 
     @Override
     public Dottore getDottoreById(int id) {
-        return repo_dottore.findById(id).orElse(null); // Restituisce null se non trovato
+        return repo_dottore.findById(id).orElse(null); 
     }
+
     @Override
     public void deleteDottore(int id) {
-        repo_dottore.deleteById(id); // Elimina il dottore per ID
+        repo_dottore.deleteById(id); 
     }
 
 }
