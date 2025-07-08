@@ -43,4 +43,10 @@ public class RifugioServicesVisitaImpl implements RifugioServicesVisita {
     public Visita salvaVisita(Visita v){
         return visitaRepo.save(v);
     }
+
+    //mi serve il metodo eliminaVisitePerId perchè lo chiamo nel controller 
+    public void eliminaVisitePerId(int idVisita) {
+        visitaRepo.deleteById(idVisita); // Usa deleteById fornito da JpaRepository
+    }
+
 }

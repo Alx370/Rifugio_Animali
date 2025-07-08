@@ -11,11 +11,12 @@ import com.catarsi.Rifugio_Animali.services.RifugioServiceAnimaliImpl;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceDottoreImpl;
 import com.catarsi.Rifugio_Animali.services.RifugioServicesVisitaImpl;
 
-
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -51,11 +52,35 @@ public class RifugioVisiteMVC {
         return "aggiungiVisita";
     }
 
-@PostMapping("/nuova-visita")
-public String salvaVisita(Visita visita) {
-    srvVisite.salvaVisita(visita); // Assicurati che esista questo metodo
-    return "redirect:/visite-veterinarie/";
-}
+    @PostMapping("/nuova-visita")
+    public String salvaVisita(Visita visita) {
+        srvVisite.salvaVisita(visita); // Assicurati che esista questo metodo
+        return "redirect:/visite-veterinarie/";
+    }
+
+    //Per leggere i dati si usa GET, per creare e inviare POST, per eliminare DELETE, per modificare PUT
+    @DeleteMapping("/{id}") 
+    public String eliminaVisite(@PathVariable int id) { //qualsiasi cosa gli metti nelle graffe poi te lo salva come Id
+        srvVisite.eliminaVisitePerId(id); // Usa il metodo corretto del servizio
+        return "redirect:/visite-veterinarie";
+    }
+
+    // @PutMapping("/{id}") 
+    // public String modificaVisita(@PathVariable int id){
+        
+    // }
+
+    //modifica in due parti prima vai nella pagina di modifica
+    // @GetMapping("/{id}/modifica")
+    // public String showModificaForm(@PathVariable int id, Model m){
+    //     Visita v=srvVisite.getById(id);
+    //     m.addAttribute("animali", srvAnimali.getAnimali());
+    //     m.addAttribute("dottori", srvDottori.getDottori()); 
+    //     m.addAttribute("visita",v); //passo due argomenti il primo nome dell'attributo e il secondo il valore associato all'attributo
+    //     return "modificaVisita";
+    // }
+    
+
 
     
 
