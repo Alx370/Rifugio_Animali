@@ -34,6 +34,8 @@ public class RifugioServiceDottoreImpl implements RifugioServiceDottore{
         repo_dottore.deleteById(id); 
     }
 
+
+
 }
 
 

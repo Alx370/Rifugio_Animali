@@ -67,6 +67,12 @@ public class RifugioDottoriMVC {
         return "redirect:/backoffice/dottori";
     }
 
+    @GetMapping("/dottori/delete/{id}")
+    public String deleteDottore(@PathVariable("id") int id) {
+        srvDottori.deleteDottore(id);
+        return "redirect:/backoffice/dottori";
+    }
+
 
 }
 

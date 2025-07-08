@@ -46,7 +46,7 @@
         <td th:text="${dottore.telefono}"></td>
         <td th:text="${dottore.sesso}"></td>
         <td>
-          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/dottore/delete/' + ${dottore.Id_dottore}}">Elimina</a>
+          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/dottori/delete/' + ${dottore.Id_dottore}}">Elimina</a>
       </td>
           <td>
               <a id="updateBtn" class="update-animal-btn" th:href="@{'/dottore/edit/' + ${dottore.id_dottore}}">Modifica</a>
