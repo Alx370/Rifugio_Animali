@@ -14,4 +14,6 @@ public interface RifugioServiceAdozione {
     Adozione getById(int id);
 
     void delete(int id);
+
+    Adozione getAdozioneById(int id);
 }

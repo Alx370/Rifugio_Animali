@@ -92,15 +92,15 @@
         grid-template-columns: 1fr;
         gap: 10px;
     }
-    
+
     .animals-section {
         padding: 20px 15px;
     }
-    
+
     .animals-table-container {
         padding: 20px;
     }
-    
+
     .section-title {
         font-size: 14px;
         padding: 10px 20px;
@@ -112,7 +112,7 @@
         padding: 10px 15px;
         font-size: 12px;
     }
-    
+
     .table-row {
         height: 40px;
     }
@@ -164,7 +164,7 @@ border-radius: 50px;
 }
 
 .logo::before {
-    
+
     background: white;
     padding: 0.3rem;
     border-radius: 50%;

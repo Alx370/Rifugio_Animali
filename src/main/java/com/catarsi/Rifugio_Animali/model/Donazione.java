@@ -14,7 +14,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.persistence.Version;  // Import per @Version
 
 @Entity
 @Table(name = "donazione")
@@ -42,7 +41,6 @@ public class Donazione {
     @Column(name = "somma", nullable = false)
     private double somma;
 
-   
 
 
     public Donazione() {}
@@ -86,5 +84,6 @@ public class Donazione {
     public void setSomma(double somma) {
         this.somma = somma;
     }
+
 
 }
