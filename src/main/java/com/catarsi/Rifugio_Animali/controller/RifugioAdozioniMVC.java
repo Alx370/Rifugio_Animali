@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Date;
 
 @Controller
 public class RifugioAdozioniMVC {
@@ -28,6 +29,9 @@ public class RifugioAdozioniMVC {
 
     @Autowired
     private RifugioServiceAnimali srvAnimale;
+
+    @Autowired
+    private RifugioServiceUtente srvUtente;
 
     public RifugioAdozioniMVC(RifugioRepoAdozione repoAdozione) {
         this.repoAdozione = repoAdozione;
@@ -46,13 +50,21 @@ public class RifugioAdozioniMVC {
     }
 
     @GetMapping("/backoffice/adozioni/add")
-    public String showForm(Model model) {
+    public String showForm(@RequestParam int idAnimale, Model model) {
+        Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
         model.addAttribute("adozione", new Adozione());
+        model.addAttribute("animaleSelezionato", animale);
         return "formAdozioni";
     }
 
     @PostMapping("/backoffice/adozioni/add")
-    public String processForm(@ModelAttribute Adozione adozione) {
+    public String processForm(@ModelAttribute Adozione adozione, @RequestParam int idAnimale, @RequestParam int idUtente) {
+        Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
+        Utente utente = srvUtente.getById(idUtente);
+        adozione.setAnimale(animale);
+        adozione.setUtente(utente);
+        adozione.setData_adozione(new Date());
+        animale.setData_adozione(new Date());
         srvAdozione.addAdozione(adozione);
         return "redirect:/backoffice/adozione";
     }

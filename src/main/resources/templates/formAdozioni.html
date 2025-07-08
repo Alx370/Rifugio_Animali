@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" xmlns:th="http://www.thymeleaf.org">>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="Id_utente">Utente</label>
                 <th:block th:if="${utenteLoggato != null}">
-                    <input type="hidden" id="Id_utente" name="Id_utente" th:value="${utenteLoggato.email}" />
+                    <input type="hidden" name="idUtente" th:value="${utenteLoggato.id_utente}" />
                     <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
                 </th:block>
 
@@ -45,16 +45,9 @@
 
 
                     <div class="form-group">
-    <label for="Id_animale">Animale da adottare</label>
-    <select id="Id_animale" name="Id_animale" class="form-control" required>
-        <option th:value="${animaleSelezionato.id_animale}" th:text="${animaleSelezionato.nome}" selected></option>
-    </select>
-</div>
-
-                    
-                    <div class="form-group">
-                        <label for="dataAdozione">Data di adozione</label>
-                        <input type="date" class="form-control" id="dataAdozione" name="dataAdozione" required>
+                        <label>Animale da adottare</label>
+                        <input type="hidden" name="idAnimale" th:value="${animaleSelezionato.id_animale}" />
+                        <input type="text" class="form-control" th:value="${animaleSelezionato.nome}" readonly />
                     </div>
 
                     <button type="submit" class="btn-primary">Aggiungi Adozione</button>
