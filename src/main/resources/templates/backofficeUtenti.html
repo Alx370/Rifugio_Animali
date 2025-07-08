@@ -22,7 +22,7 @@
     </header>
     
 <section class="animals-section">
-    <div class="section-title">I NOSTRI DOTTORI</div>
+    <div class="section-title">I NOSTRI UTENTI</div>
 
                 
 <div class="animals-table-container">
@@ -32,36 +32,31 @@
         <th class="header-btn">Nome</th>
         <th class="header-btn">Cognome</th>
         <th class="header-btn">Email</th>
+        <th class="header-btn">Password</th>
         <th class="header-btn">Telefono</th>
         <th class="header-btn">Sesso</th>
+        <th class="header-btn">Data di nascita</th>
       </tr>
     </thead>
     <tbody >
-      <tr class="table-row" onclick="selectRow(this)" th:each="dottore : ${dottori}">
+      <tr class="table-row" onclick="selectRow(this)" th:each="utente : ${utenti}">
 
-        <td th:text="${dottore.nome}"></td>
-        <td th:text="${dottore.cognome}"></td>
-        <td th:text="${dottore.email}"></td>
-        <td th:text="${dottore.telefono}"></td>
-        <td th:text="${dottore.sesso}"></td>
-        <td>
-          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/dottori/delete/' + ${dottore.Id_dottore}}">Elimina</a>
-      </td>
-          <td>
-              <a id="updateBtn" class="update-animal-btn" th:href="@{'/dottore/edit/' + ${dottore.id_dottore}}">Modifica</a>
-          </td>
+        <td th:text="${utente.nome}"></td>
+        <td th:text="${utente.cognome}"></td>
+        <td th:text="${utente.email}"></td>
+        <td th:text="${utente.password}"></td>
+        <td th:text="${utente.telefono}"></td>
+        <td th:text="${utente.sesso}"></td>
+        <td th:text="${utente.data_nascita}"></td>
+        
       </tr>
     </tbody>
   </table>
 </div>
-            <div class="control-buttons">
-                <a href="/backoffice/dottori/add" class="add-animal-btn" onclick="addAnimal()">
-                    ➕ Aggiungi Dottore
-                </a>
 
 
 
-            </div>
+
 </section>
 
 <!-- Footer Section -->
