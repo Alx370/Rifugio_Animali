@@ -69,7 +69,7 @@ public class RifugioAdozioniMVC {
         adozione.setData_adozione(new Date());
         animale.setData_adozione(new Date());
         srvAdozione.addAdozione(adozione);
-        return "redirect:/backoffice/adozione";
+        return "visualizzaAnimaliAdozione";
     }
 
     @GetMapping("/adozioni/visualizza")
