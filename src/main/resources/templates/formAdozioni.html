@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">>
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +35,7 @@
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     </th:block>
                     <div class="form-group" >
-                        <label for="Id_utente">Utente</label>
+                        <label for="Id_utente">Utente<br><br></label>
                 <th:block th:if="${utenteLoggato != null}">
                     <input type="hidden" name="idUtente" th:value="${utenteLoggato.id_utente}" />
                     <span class="form-control" th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
