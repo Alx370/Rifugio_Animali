@@ -30,7 +30,7 @@
         <div class="main-content">
             <div class="form-container">
                 <h2>Adotta</h2>
-                <form id="animalForm" method="post" th:action="@{/adozioni/add}">
+                <form id="animalForm" method="post" th:action="@{/backoffice/adozioni/add}">
                     <th:block th:if="${_csrf != null}">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     </th:block>

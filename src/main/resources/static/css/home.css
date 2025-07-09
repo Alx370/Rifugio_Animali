@@ -71,6 +71,11 @@ border-radius: 50px;
 .nav-links a:hover {
     color: white;
 }
+
+.services-grid a {
+    text-decoration: none;
+    color: #4a6b42;
+}
 .logout-button {
     background: none;
     border: none;
