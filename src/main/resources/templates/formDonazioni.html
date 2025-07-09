@@ -46,15 +46,15 @@
                 </th:block>
                 
                 <div class="form-group">
-                    <label for="Id_utente">Utente</label>
+                    <label for="Id_utente"><b>Utente: </b></label>
                     <th:block th:if="${utenteLoggato != null}">
-                        <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
+                        <span class="form-control" th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
                     </th:block>
                     
                     <th:block th:if="${utenteLoggato == null}">
                         <span>Utente non loggato</span>
                     </th:block>
-                    <p style="color:#666;">Scegli l'importo che preferisci:</p>
+                    <p style="color:#666;"><br>Scegli l'importo che preferisci:</p>
 </div>
 
 
