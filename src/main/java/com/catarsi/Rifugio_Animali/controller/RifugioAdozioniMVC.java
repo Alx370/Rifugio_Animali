@@ -103,6 +103,6 @@ public class RifugioAdozioniMVC {
         esistente.setData_adozione(aggiornata.getData_adozione());
         esistente.setAnimale(aggiornata.getAnimale());
         srvAdozione.addAdozione(esistente);
-        return "redirect:/backoffice/adozione";
+        return "redirect:/backoffice/adozioni";
     }
 }
