@@ -36,15 +36,14 @@
 
     <main class="main-content">
         <div class="welcome-section">
-            <h2 class="welcome-title">Bentornato Admin</h1>
+            <h2 class="welcome-title">Bentornato Admin! </h1>
             <p class="welcome-subtitle">Gestisci le attività del rifugio dal tuo pannello di controllo</p>
         </div>
 
         <div class="dashboard-grid">
             <div class="card">
-                <div class="notification-badge">5</div>
                 <div class="card-icon animals">🐕</div>
-                <h3 class="card-title">Gestione Animali</h3>
+                <h3 class="card-title"><a href="/backoffice/animali">Gestione Animali</a></h3>
                 <p class="card-description">Aggiungi, modifica e monitora tutti gli animali del rifugio</p>
                 <div class="card-stats">
                     <div>
@@ -56,9 +55,8 @@
             </div>
 
             <div class="card">
-                <div class="notification-badge">3</div>
                 <div class="card-icon adoptions">💝</div>
-                <h3 class="card-title">Gestione Adozioni</h3>
+                <h3 class="card-title"><a href="/backoffice/adozioni">Gestione Adozioni</a></h3>
                 <p class="card-description">Monitora richieste di adozione e abbinamenti</p>
                 <div class="card-stats">
                     <div>
@@ -71,7 +69,7 @@
 
             <div class="card">
                 <div class="card-icon donations">💰</div>
-                <h3 class="card-title">Gestione Donazioni</h3>
+                <h3 class="card-title"><a href="/backoffice/donazioni">Gestione Donazioni</a></h3>
                 <p class="card-description">Traccia donazioni e gestisci i sostenitori</p>
                 <div class="card-stats">
                     <div>
@@ -84,7 +82,7 @@
 
             <div class="card">
                 <div class="card-icon visits">🏥</div>
-                <h3 class="card-title">Gestione Visite</h3>
+                <h3 class="card-title"><a href="/backoffice/visite">Gestione Visite</a></h3>
                 <p class="card-description">Programma e monitora visite veterinarie</p>
                 <div class="card-stats">
                     <div>
@@ -97,7 +95,7 @@
 
             <div class="card">
                 <div class="card-icon doctors">👨‍⚕️</div>
-                <h3 class="card-title">Gestione Dottori</h3>
+                <h3 class="card-title"><a href="/backoffice/dottori">Gestione Dottori</a></h3>
                 <p class="card-description">Amministra il team veterinario</p>
                 <div class="card-stats">
                     <div>
@@ -109,8 +107,8 @@
 
             <div class="card">
                 <div class="card-icon users">👥</div>
-                <h3 class="card-title">Gestione Utenti</h3>
-                <p class="card-description">Amministra utenti e permessi</p>
+                <h3 class="card-title"><a href="/backoffice/utenti">Gestione Utenti</a></h3>
+                <p class="card-description">Amministra utenti</p>
                 <div class="card-stats">
                     <div>
                         <div class="stat-number">234</div>
@@ -121,7 +119,7 @@
 
             <div class="card">
                 <div class="card-icon entities">🏢</div>
-                <h3 class="card-title">Gestione Enti</h3>
+                <h3 class="card-title"><a href="/backoffice/enti">Gestione Enti</a></h3>
                 <p class="card-description">Coordina con enti e partner</p>
                 <div class="card-stats">
                     <div>
@@ -135,74 +133,6 @@
         </div>
     </main>
 
-    <script>
-        // Aggiungi interattività alle cards
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                const title = this.querySelector('.card-title').textContent;
-                alert(`Accesso a: ${title}`);
-            });
-        });
-
-        // Aggiungi effetto alle quick actions
-        document.querySelectorAll('.quick-action').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                }, 100);
-            });
-        });
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Services Section -->
-    <!-- <section class="services">
-        <h2>Bentornato Admin</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="card-header"><a href="/backoffice/animali">GESTIONE ANIMALI</a></div>
-            </div>
-            <div class="service-card">
-                <div class="card-header"><a href="/backoffice/adozioni">GESTIONE ADOZIONI</a></div>
-            </div>
-            <div class="service-card">
-                <div class="card-header"><a href="/backoffice/donazioni">GESTIONE DONAZIONI</a></div>
-            </div>
-            <div class="service-card">
-                <div class="card-header"><a href="/backoffice/visite">GESTIONE VISITE</a></div>
-            </div>
-            <div class="service-card">
-                <div class="card-header"><a href="/backoffice/dottori">GESTIONE DOTTORI</a></div>
-            </div>
-            <div class="service-card">
-                <div class="card-header"><a href="/backoffice/utenti">GESTIONE UTENTI</a></div>
-            </div>
-            <div class="service-card">
-                <div class="card-header"><a href="/backoffice/enti">GESTIONE UTENTI</a></div>
-            </div>
-            
-        </div>
-    </section>
-
-
-
-
- -->
 
 
 
