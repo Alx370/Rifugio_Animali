@@ -54,15 +54,15 @@ public class RifugioDiarioMVC {
     }
 
     @GetMapping("/diario/update/{id}")
-    public String mostraFormUpdate(@PathVariable("id") int id, Model model) {
-        Diario diario = srvDiario.getDiarioById(id);
+    public String mostraFormUpdateDaAnimale(@PathVariable("id") int idAnimale, Model model) {
+        Diario diario = srvDiario.getDiarioByAnimaleId(idAnimale);
         model.addAttribute("diario", diario);
         model.addAttribute("animali", srvAnimali.getAnimali());
         return "backofficeUpdateDiario";
     }
 
-    @PostMapping("/diario/update/{id}")
-    public String updateDiario(@PathVariable("id") int id, @ModelAttribute("diario") Diario aggiornato) {
+    @PostMapping("/diario/update")
+    public String updateDiario(@RequestParam("id") int id, @ModelAttribute("diario") Diario aggiornato) {
         Diario esistente = srvDiario.getDiarioById(id);
         esistente.setStoria_animale(aggiornato.getStoria_animale());
         esistente.setStato_salute(aggiornato.getStato_salute());
