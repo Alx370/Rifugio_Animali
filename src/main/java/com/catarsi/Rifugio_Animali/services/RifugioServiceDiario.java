@@ -13,4 +13,5 @@ public interface RifugioServiceDiario {
 
     List<Diario> getDiariByAnimaleId(int animaleId);
 
+    Diario getDiarioByAnimaleId(int idAnimale);
 }
