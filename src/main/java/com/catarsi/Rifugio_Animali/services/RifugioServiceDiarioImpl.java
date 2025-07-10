@@ -36,9 +36,15 @@ public class RifugioServiceDiarioImpl implements RifugioServiceDiario{
                 .toList();
     }
 
+    @Override
     public Diario getDiarioById(int id){
         return repo_diario.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diario non trovato con ID: " + id));
+    }
+
+    @Override
+    public Diario getDiarioByAnimaleId(int idAnimale) {
+        return repo_diario.findByAnimaleId(idAnimale);
     }
 
 
