@@ -33,6 +33,10 @@ public class RifugioServiceDonazioneImpl implements RifugioServiceDonazione{
     public void delete(int id) {
         repo_donazione.deleteById(id); // Elimina la donazione per ID
     }
+
+    public double sommaDonazioni () {
+        return repo_donazione.sumDonazioni();
+    }
 }
 
 

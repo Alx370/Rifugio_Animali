@@ -12,4 +12,7 @@ public interface RifugioServiceDonazione {
     Donazione getDonazioneById(int id);  // Metodo per ottenere una donazione per id
 
     void delete(int id);  // Metodo per cancellare una donazione per id
+
+    double sommaDonazioni();
+        
 }

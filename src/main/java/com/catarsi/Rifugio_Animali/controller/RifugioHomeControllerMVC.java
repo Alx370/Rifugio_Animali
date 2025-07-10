@@ -11,8 +11,8 @@ public class RifugioHomeControllerMVC {
         return "home"; // cerca templates/index.html e lo renderizza con Thymeleaf
     }
 
-    @GetMapping("/gest")
-    public String homeGest() {
-        return "homeGest"; 
-    }
+    // @GetMapping("/gest")
+    // public String homeGest() {
+    //     return "homeGest"; 
+    // }
 }
