@@ -9,10 +9,7 @@ import com.catarsi.Rifugio_Animali.services.RifugioServiceDiario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -107,4 +104,51 @@ public class RifugioAnimaliMVC {
         srvAnimale.addAnimale(esistente);
         return "redirect:/backoffice/animali";
     }
+
+    @GetMapping("/animali/filtra")
+    public String filtraAnimali(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String sesso,
+            @RequestParam(required = false) String specie,
+            @RequestParam(required = false) String razza,
+            @RequestParam(required = false) Double peso,
+            @RequestParam(required = false) Integer eta,
+            Model model
+    ) {
+        List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
+        model.addAttribute("animali", animaliFiltrati);
+        return "Animali"; // la pagina che mostra la lista filtrata
+    }
+
+    @GetMapping("admin/animali/filtra")
+    public String filtraBackofficeAnimali(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String sesso,
+            @RequestParam(required = false) String specie,
+            @RequestParam(required = false) String razza,
+            @RequestParam(required = false) Double peso,
+            @RequestParam(required = false) Integer eta,
+            Model model
+    ) {
+        List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
+        model.addAttribute("animali", animaliFiltrati);
+        return "backofficeVistaAnimali";
+    }
+
+    @GetMapping("/animali/adozioni/filtra")
+    public String filtraAdozioniAnimali(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String sesso,
+            @RequestParam(required = false) String specie,
+            @RequestParam(required = false) String razza,
+            @RequestParam(required = false) Double peso,
+            @RequestParam(required = false) Integer eta,
+            Model model
+    ) {
+        List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
+        model.addAttribute("animali", animaliFiltrati);
+        return "visualizzaAnimaliAdozione";
+    }
+
+
 }
