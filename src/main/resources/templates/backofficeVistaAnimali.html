@@ -25,70 +25,120 @@
 <section class="animals-section">
     <div class="section-title">I NOSTRI ANIMALI</div>
 
-                
-<div class="animals-table-container">
-  <table style="width: 100%;">
-    <thead>
-      <tr>
-        <th class="header-btn">Nome</th>
-        <th class="header-btn">Sesso</th>
-        <th class="header-btn">Specie</th>
-        <th class="header-btn">Razza</th>
-        <th class="header-btn">Peso</th>
-        <th class="header-btn">Età</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
-        <td>
-            <a th:href="@{/backoffice/animali/dettaglio/{id}(id=${animale.id_animale})}" th:text="${animale.nome}"></a>
-        </td>
-        <td th:text="${animale.sesso}"></td>
-        <td th:text="${animale.specie}"></td>
-        <td th:text="${animale.razza}"></td>
-        <td th:text="|${animale.peso} kg|"></td>
-        <td th:text="|${animale.eta} anni|"></td>
-        <td>
-          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
-      </td>
-          <td>
-              <a id="updateBtn" class="update-animal-btn" th:href="@{'/animali/edit/' + ${animale.id_animale}}">Modifica</a>
-          </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-        <!-- Bottoni di controllo -->
-            <div class="control-buttons" style="margin-top: 60px;">
-                <a href="/backoffice/animali/add" class="add-animal-btn"  onclick="addAnimal()">
-                  Aggiungi Animale
-                </a>
+    <form class="filter-container" th:action="@{/admin/animali/filtra}" method="get">
+        <div class="filter-title">FILTRA I NOSTRI ANIMALI</div>
 
-                <a href="/backoffice/diario/add" class="add-diario-btn" onclick="addAnimal()">
-                    Aggiungi Diario
-                </a>
-
+        <div class="filter-grid">
+            <div class="filter-group">
+                <label class="filter-label">Nome</label>
+                <input type="text" name="nome" class="filter-input" placeholder="Cerca per nome...">
             </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Sesso</label>
+                <select name="sesso" class="filter-select">
+                    <option value="">Tutti</option>
+                    <option value="M">Maschio</option>
+                    <option value="F">Femmina</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Specie</label>
+                <select name="specie" class="filter-select">
+                    <option value="">Tutte le specie</option>
+                    <option value="Cane">Cane</option>
+                    <option value="Gatto">Gatto</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Razza</label>
+                <input type="text" name="razza" class="filter-input" placeholder="Cerca per razza...">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Peso (kg)</label>
+                <input type="number" name="peso" class="filter-input" placeholder="Peso massimo" min="0" step="0.1">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Età (anni)</label>
+                <input type="number" name="eta" class="filter-input" placeholder="Età massima" min="0">
+            </div>
+        </div>
+
+        <div class="filter-buttons">
+            <button type="submit" class="filter-btn">Applica Filtri</button>
+            <a href="/backofficeVistaAnimali" class="filter-btn clear-btn">Cancella Filtri</a>
+        </div>
+    </form>
+                
+    <div class="animals-table-container">
+      <table style="width: 100%;">
+        <thead>
+          <tr>
+            <th class="header-btn">Nome</th>
+            <th class="header-btn">Sesso</th>
+            <th class="header-btn">Specie</th>
+            <th class="header-btn">Razza</th>
+            <th class="header-btn">Peso</th>
+            <th class="header-btn">Età</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
+              <td data-label="Nome">
+                  <a th:href="@{/animali/dettaglio/{id}(id=${animale.Id_animale})}" th:text="${#strings.isEmpty(animale.nome) ? 'N/A' : animale.nome}"></a>
+              </td>
+              <td data-label="Sesso" th:text="${#strings.isEmpty(animale.sesso) ? 'N/A' : animale.sesso}"></td>
+              <td data-label="Specie" th:text="${#strings.isEmpty(animale.specie) ? 'N/A' : animale.specie}"></td>
+              <td data-label="Razza" th:text="${#strings.isEmpty(animale.razza) ? 'N/A' : animale.razza}"></td>
+              <td data-label="Peso" th:text="${animale.peso != null ? animale.peso + ' kg' : 'N/A'}"></td>
+              <td data-label="Età"
+                  th:text="${animale.eta != null ? (animale.eta == 1 ? animale.eta + ' anno' : animale.eta + ' anni') : 'N/A'}">
+              </td>
+            <td>
+              <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/animali/delete/' + ${animale.Id_animale}}">Elimina</a>
+          </td>
+              <td>
+                  <a id="updateBtn" class="update-animal-btn" th:href="@{'/animali/edit/' + ${animale.id_animale}}">Modifica</a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Bottoni di controllo -->
+        <div class="control-buttons" style="margin-top: 60px;">
+            <a href="/backoffice/animali/add" class="add-animal-btn"  onclick="addAnimal()">
+              Aggiungi Animale
+            </a>
+
+            <a href="/backoffice/diario/add" class="add-diario-btn" onclick="addAnimal()">
+                Aggiungi Diario
+            </a>
+
+        </div>
 </section>
 
 <!-- Footer Section -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="/image/logo.png" alt="Logo Catarsi">
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-logo">
+            <img src="/image/logo.png" alt="Logo Catarsi">
+        </div>
+        <div class="footer-right">
+            <div class="social-icons">
+                <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg"></a>
+                <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg"></a>
+                <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg"></a>
             </div>
-            <div class="footer-right">
-                <div class="social-icons">
-                    <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg"></a>
-                    <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg"></a>
-                    <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg"></a>
-                </div>
-                <div class="footer-credits">
-                    <p>Crediti alla Fondazione Catarsi</p>
-                </div>
+            <div class="footer-credits">
+                <p>Crediti alla Fondazione Catarsi</p>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 </body>
 </html>
 
