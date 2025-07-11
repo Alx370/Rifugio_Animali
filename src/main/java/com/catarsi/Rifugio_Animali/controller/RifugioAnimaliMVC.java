@@ -132,6 +132,23 @@ public class RifugioAnimaliMVC {
     ) {
         List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
         model.addAttribute("animali", animaliFiltrati);
-        return "backofficeVistaAnimali"; // la pagina che mostra la lista filtrata
+        return "backofficeVistaAnimali";
     }
+
+    @GetMapping("/animali/adozioni/filtra")
+    public String filtraAdozioniAnimali(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String sesso,
+            @RequestParam(required = false) String specie,
+            @RequestParam(required = false) String razza,
+            @RequestParam(required = false) Double peso,
+            @RequestParam(required = false) Integer eta,
+            Model model
+    ) {
+        List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
+        model.addAttribute("animali", animaliFiltrati);
+        return "visualizzaAnimaliAdozione";
+    }
+
+
 }
