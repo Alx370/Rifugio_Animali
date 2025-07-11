@@ -56,7 +56,7 @@ public class RifugioHomeGestMVC {
         // m.addAttribute("visiteOggi", srvVisita.countVisiteOggi());
         m.addAttribute("dottoriCount", srvDottore.getDottori().size());
         m.addAttribute("utentiCount", srvUtente.getUtenti().size());
-        m.addAttribute("entiCount", srvEnte.getAll().size());
+        m.addAttribute("entiCount", srvEnte.getAllEnti().size());
         return "homeGest"; 
     }
 }
