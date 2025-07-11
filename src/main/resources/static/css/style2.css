@@ -157,6 +157,8 @@
         cursor: pointer;
         transition: all 0.3s ease;
         box-shadow: 0 2px 8px rgba(77, 124, 15, 0.2);
+        text-decoration: none;  /* per link */
+        display: inline-block;  /* per link */
     }
 
     .filter-btn:hover {
