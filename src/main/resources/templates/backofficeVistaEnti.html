@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Enti</title> <!-- Titolo corretto -->
+  <link rel="icon" type="image/x-icon" href="/image/favicon.png">
+  <link rel="stylesheet" href="/css/backofficeAnimali.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">
+      <img src="/image/logo.png" alt="Logo Catarsi Group">
+      CATARSI GROUP
+    </div>
+    <div class="house-icon">
+      <a href="/"><img src="/image/house.svg" alt="casa"></a>
+    </div>
+  </nav>
+</header>
+
+<section class="animals-section">
+  <div class="section-title">I NOSTRI ENTI</div>
+
+  <div class="animals-table-container">
+    <table style="width: 100%;">
+      <thead>
+      <tr>
+        <th class="header-btn">Nome</th>
+        <th class="header-btn">Email</th>
+        <th class="header-btn">Telefono</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="table-row" th:each="ente : ${enti}">
+        <td th:text="${ente.nome}"></td>
+        <td th:text="${ente.email}"></td>
+        <td th:text="${ente.telefono}"></td>
+        <td>
+          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/backoffice/enti/elimina/' + ${ente.id_ente}}">Elimina</a>
+        </td>
+        <td>
+          <a id="updateBtn" class="update-animal-btn" th:href="@{'/backoffice/enti/modifica/' + ${ente.id_ente}}">Modifica</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="control-buttons" style="margin-top: 60px;">
+    <a href="/backoffice/enti/aggiungi" class="add-animal-btn">Aggiungi Ente</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">
+      <img src="/image/logo.png" alt="Logo Catarsi">
+    </div>
+    <div class="footer-right">
+      <div class="social-icons">
+        <a href="https://facebook.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/facebook-icon.svg" alt="Facebook" class="social-svg"></a>
+        <a href="https://instagram.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/instagram-icon.svg" alt="Instagram" class="social-svg"></a>
+        <a href="https://tiktok.com/catarsigroup" target="_blank" class="social-icon"><img src="/image/tiktok-icon.svg" alt="TikTok" class="social-svg"></a>
+      </div>
+      <div class="footer-credits">
+        <p>Crediti alla Fondazione Catarsi</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
