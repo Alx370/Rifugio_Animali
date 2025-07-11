@@ -14,7 +14,7 @@
       CATARSI GROUP
     </div>
     <div class="house-icon">
-      <a href="/">
+      <a href="/gest">
         <img src="/image/house.svg" alt="casa" />
       </a>
     </div>
@@ -24,7 +24,7 @@
 <div class="container">
   <div class="main-content">
     <div class="form-container">
-      <h2>Aggiungi Nuovo Ente</h2>
+      <h2>Modifica Ente</h2>
       <form id="enteForm" method="post" th:action="@{/backoffice/enti/aggiungi}" th:object="${ente}">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
@@ -45,7 +45,7 @@
           <input type="text" class="form-control" th:field="*{telefono}" id="telefono" />
         </div>
 
-        <button type="submit" class="btn-primary">Salva Ente</button>
+        <button type="submit" class="edit-button">Salva Ente</button>
       </form>
     </div>
   </div>

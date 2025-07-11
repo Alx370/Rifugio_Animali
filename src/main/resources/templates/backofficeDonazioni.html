@@ -23,19 +23,21 @@
     
 
 <section class="animals-section">
-    <div class="section-title">LE DONAZIONOI EFFETTUATE</div>
+    <div class="section-title">LE DONAZIONI EFFETTUATE</div>
 
                 
 <div class="animals-table-container">
   <table style="width: 100%;">
     <thead>
       <tr>
+        <th class="header-btn">Email Utente</th>
         <th class="header-btn">Data</th>
         <th class="header-btn">Somma</th>
       </tr>
     </thead>
-    <tbody >
-      <tr class="table-row" onclick="selectRow(this)" th:each="donazione : ${donazioni}">
+    <tbody id="utenteTableBody">
+        <tr th:each="donazione : ${donazioni}">
+        <td th:text="${donazione.utente.email}"></td>
         <td th:text="${donazione.data}"></td>
         <td th:text="${donazione.somma}"></td>
       </tr>
@@ -44,12 +46,12 @@
     </tbody>
   </table>
 </div>
-<!-- Bottoni di controllo -->
+<!-- Bottoni di controllo
             <div class="control-buttons">
-                <a href="/backoffice/animali/add" class="add-animal-btn" onclick="addAnimal()">
+                <a href="/backoffice/adozioni/add" class="add-animal-btn" onclick="addAdozione()">
                     Aggiungi Donazione
                 </a>
-            </div>
+            </div> -->
 </section>
 
 <!-- Footer Section -->
