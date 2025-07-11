@@ -28,14 +28,14 @@
             <form id="diarioForm" method="post" th:action="@{/backoffice/diario/add}" th:object="${diario}">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-                <label for="animale">Animale</label>
-                <select th:field="*{animale}" required>
+                <label for="animale"><b>Animale</b></label>
+                <select class="form-control" th:field="*{animale}" required>
                     <option value="" disabled selected>-- Seleziona un animale --</option>
                     <option th:each="animale : ${animali}"
                             th:value="${animale.id_animale}"
                             th:text="${animale.nome}">
                     </option>
-                </select>
+                </select><br><br>
 
                 <div class="form-group">
                     <label for="storia_animale">Storia dell'animale</label>
