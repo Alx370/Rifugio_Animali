@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Aggiungi Visita</title>
-    <link rel="stylesheet" href="/css/aggiungiVisita.css">
+    <link rel="stylesheet" href="/css/backofficeAggiungi.css">
 </head>
 
 <body>
@@ -14,57 +14,62 @@
             CATARSI GROUP
         </div>
         <div class="house-icon">
-            <a href="/"><img src="/image/house.svg" alt="casa"></a>
+            <a href="/gest"><img src="/image/house.svg" alt="casa"></a>
         </div>
     </nav>
 </header>
 
-<main class="container">
-    <h2>Nuova Visita Veterinaria</h2>
+<div class="container">
+    <div class="main-content">
 
-    <form method="post" th:action="@{/visite-veterinarie/nuova-visita}" th:object="${visita}">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="form-container">
+        <h2>Aggiungi Nuova Visita Veterinaria</h2>
 
-        <!-- Data visita -->
-        <div class="form-group">
-            <label for="data_visita">Data visita</label>
-            <input type="date" th:field="*{data_visita}" id="data_visita" required />
-        </div>
+        <form method="post" th:action="@{/visite-veterinarie/nuova-visita}" th:object="${visita}">
+            <input type="hidden" class="form-control" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-        <!-- Animale -->
-        <div class="form-group">
-            <label for="animale">Animale</label>
-            <select th:field="*{animale}" id="animale" required>
-                <option value="" disabled selected>-- Seleziona un animale --</option>
-                <option th:each="animale : ${animali}"
-                        th:value="${animale.id_animale}"
-                        th:text="${animale.nome}">
-                </option>
-            </select>
-        </div>
+            <!-- Data visita -->
+            <div class="form-group">
+                <label for="data_visita">Data visita</label>
+                <input type="date" class="form-control"th:field="*{data_visita}" id="data_visita" required />
+            </div>
 
-        <!-- Dottore -->
-        <div class="form-group">
-            <label for="dottore">Dottore</label>
-            <select th:field="*{dottore}" id="dottore" required>
-                <option value="" disabled selected>-- Seleziona un dottore --</option>
-                <option th:each="dottore : ${dottori}"
-                        th:value="${dottore.id_dottore}"
-                        th:text="${dottore.nome + ' ' + dottore.cognome}">
-                </option>
-            </select>
-        </div>
+            <!-- Animale -->
+            <div class="form-group">
+                <label for="animale">Animale</label>
+                <select class="form-control" th:field="*{animale}" id="animale" required>
+                    <option value="" disabled selected>-- Seleziona un animale --</option>
+                    <option th:each="animale : ${animali}"
+                            th:value="${animale.id_animale}"
+                            th:text="${animale.nome}">
+                    </option>
+                </select>
+            </div>
 
-        <!-- Descrizione -->
-        <div class="form-group">
-            <label for="descrizione">Descrizione</label>
-            <textarea th:field="*{descrizione}" id="descrizione" rows="4" placeholder="Inserisci la descrizione..."></textarea>
-        </div>
+            <!-- Dottore -->
+            <div class="form-group">
+                <label for="dottore">Dottore</label>
+                <select class="form-control" th:field="*{dottore}" id="dottore" required>
+                    <option value="" disabled selected>-- Seleziona un dottore --</option>
+                    <option th:each="dottore : ${dottori}"
+                            th:value="${dottore.id_dottore}"
+                            th:text="${dottore.nome + ' ' + dottore.cognome}">
+                    </option>
+                </select>
+                
+            </div>
 
-        <button type="submit" class="btn-primary">Salva La Visita</button>
-    </form>
-</main>
-
+            <!-- Descrizione -->
+            <div class="form-group">
+                <label for="descrizione">Descrizione</label>
+                <textarea class="form-control" th:field="*{descrizione}" id="descrizione" rows="4" placeholder="Inserisci la descrizione..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary">Aggiungi Visita</button>
+        </form>
+    </div>
+    </div>
+    </div>
 <footer class="footer">
     <div class="footer-content">
         <div class="footer-logo">
