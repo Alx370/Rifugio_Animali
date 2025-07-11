@@ -1,47 +1,62 @@
 package com.catarsi.Rifugio_Animali.controller;
 
+import com.catarsi.Rifugio_Animali.model.Ente;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceEnte;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/backoffice/enti")
 public class RifugioEnteMVC {
 
-    @Autowired
-    private RifugioServiceEnte service;
+    private final RifugioServiceEnte service;
 
-    @GetMapping("/vista")
-    public String viewEnti() {
-        return "backoffice_enti_vista";
+    public RifugioEnteMVC(RifugioServiceEnte service) {
+        this.service = service;
+    }
+
+    @GetMapping
+    public String listaEnti(Model model) {
+        List<Ente> enti = service.getAllEnti();
+        model.addAttribute("enti", enti);
+        return "backofficeVistaEnti";
     }
 
     @GetMapping("/aggiungi")
-    public String addEnti() {
-        return "backoffice_enti_aggiungi";
+    public String formAggiunta(Model model) {
+        model.addAttribute("ente", new Ente());
+        return "backofficeAggiungiEnte";
     }
 
-    @GetMapping("/update")
-    public String updateEnti() {
-        return "backoffice_enti_update";
+    @PostMapping("/aggiungi")
+    public String processaAggiunta(@ModelAttribute Ente ente) {
+        service.addEnte(ente);
+        return "redirect:/backoffice/enti";
     }
 
-    @GetMapping("/delete")
-    public String deleteEnti() {
-        return "backoffice_enti_delete";
+    @GetMapping("/modifica/{id}")
+    public String formModifica(@PathVariable("id") int id, Model model) {
+        Ente ente = service.getEnteById(id);
+        model.addAttribute("ente", ente);
+        return "backofficeUpdateEnti";
     }
 
-    // POST per eliminazione ente via form HTML
-    @PostMapping("/delete")
-    public String deleteEntita(@RequestParam("id") Integer id, Model model) {
-        try {
-            service.delete(id);
-            model.addAttribute("msg", "Ente con ID " + id + " eliminato correttamente.");
-        } catch (Exception e) {
-            model.addAttribute("msg", "Errore durante l'eliminazione: " + e.getMessage());
-        }
-        return "backoffice_enti_delete";
+    @PostMapping("/modifica/{id}")
+    public String processaModifica(@PathVariable("id") int id, @ModelAttribute Ente aggiornato) {
+        Ente esistente = service.getEnteById(id);
+        esistente.setNome(aggiornato.getNome());
+        esistente.setEmail(aggiornato.getEmail());
+        esistente.setTelefono(aggiornato.getTelefono());
+        service.addEnte(esistente);
+        return "redirect:/backoffice/enti";
+    }
+
+    @GetMapping("/elimina/{id}")
+    public String eliminaEnte(@PathVariable("id") int id) {
+        service.delete(id);
+        return "redirect:/backoffice/enti";
     }
 }

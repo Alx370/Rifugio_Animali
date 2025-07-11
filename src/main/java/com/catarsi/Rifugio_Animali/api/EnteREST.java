@@ -16,22 +16,22 @@ public class EnteREST {
 
     @GetMapping
     public List<Ente> getAll() {
-        return service.getAll();
+        return service.getAllEnti();
     }
 
     @GetMapping("/{id}")
     public Ente getById(@PathVariable Integer id) {
-        return service.getById(id);
+        return service.getEnteById(id);
     }
 
     @PostMapping
     public Ente create(@RequestBody Ente ente) {
-        return service.save(ente);
+        return service.addEnte(ente);
     }
 
     @PutMapping("/{id}")
     public Ente update(@PathVariable Integer id, @RequestBody Ente aggiornato) {
-        Ente esistente = service.getById(id);
+        Ente esistente = service.getEnteById(id);
 
         // aggiorna manualmente i campi dell'ente
         esistente.setNome(aggiornato.getNome());
@@ -40,7 +40,7 @@ public class EnteREST {
         esistente.setTelefono(aggiornato.getTelefono());
         // aggiungi altri campi se ci sono
 
-        return service.save(esistente);
+        return service.addEnte(esistente);
     }
 
     @DeleteMapping("/{id}")
