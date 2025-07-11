@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class RegistrazioneUtente {
 
     public static void registraUtente(String nome, String cognome, String email, String password, String telefono, String sesso,
@@ -21,20 +23,22 @@ public class RegistrazioneUtente {
         try (Connection conn = DriverManager.getConnection(url, user, pass);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+            // Hash della password prima di salvarla
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
             // Imposto i valori ricevuti nel PreparedStatement
             stmt.setString(1, nome);
             stmt.setString(2, cognome);
             stmt.setString(3, email);
-            stmt.setString(4, password);
+            stmt.setString(4, hashedPassword); //  password hashata
             stmt.setString(5, telefono);
             stmt.setString(6, sesso);
-            stmt.setDate(7, java.sql.Date.valueOf(dataNascita)); // formato: yyyy-MM-dd
+            stmt.setDate(7, java.sql.Date.valueOf(dataNascita)); 
 
-            // Eseguo l'inserimento
             int righeInserite = stmt.executeUpdate();
 
             if (righeInserite > 0) {
-                System.out.println("Utente registrato con successo!" );
+                System.out.println("Utente registrato con successo!");
             } else {
                 System.out.println("Errore durante la registrazione.");
             }
@@ -44,9 +48,5 @@ public class RegistrazioneUtente {
         }
     }
 
-    // Per test locale
-    //public static void main(String[] args) {
-    //    registraUtente("Mario", "Rossi", "m@gmail.com", "password123", "3457367689", "m", "1990-05-20");
-    //}
-}
 
+}
