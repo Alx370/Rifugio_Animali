@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**", "/gest").permitAll()
-                        .requestMatchers("/signin", "/animali", "/animali/", "/image/**", "/adozioni/visualizza", "/animali/dettaglio/{id}").permitAll()
+                        .requestMatchers("/signin", "/animali", "/animali/", "/image/**", "/adozioni/visualizza", "/animali/dettaglio/{id}", "/adozioni/form", "/donazioni/form").permitAll()
                         .anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
                 )
                 .formLogin(form -> form
