@@ -23,7 +23,7 @@ public class SecurityConfig {
         //noinspection removal
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/", "/home", "/css/", "/js/", "/images/").permitAll()
+                        .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/signin", "/animali", "/animali/", "/image/**").permitAll()
                         .anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
                 )

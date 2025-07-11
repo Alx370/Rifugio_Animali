@@ -34,11 +34,11 @@
                     <th:block th:if="${_csrf != null}">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                     </th:block>
-                    <div class="form-group">
-                        <label for="Id_utente">Utente</label>
+                    <div class="form-group" >
+                        <label for="Id_utente">Utente<br><br></label>
                 <th:block th:if="${utenteLoggato != null}">
                     <input type="hidden" name="idUtente" th:value="${utenteLoggato.id_utente}" />
-                    <span th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
+                    <span class="form-control" th:text="${utenteLoggato.nome + ' ' + utenteLoggato.cognome + ' (' + utenteLoggato.email + ')'}"></span>
                 </th:block>
 
                 <th:block th:if="${utenteLoggato == null}">
