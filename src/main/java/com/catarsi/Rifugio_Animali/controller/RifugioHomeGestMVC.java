@@ -35,8 +35,8 @@ public class RifugioHomeGestMVC {
     @Autowired
     private RifugioServiceDonazioneImpl srvDonazione;
 
-    // @Autowired
-    // private RifugioServicesVisitaImpl srvVisita;
+    @Autowired
+    private RifugioServicesVisitaImpl srvVisita;
 
     @Autowired
     private RifugioServiceDottoreImpl srvDottore;
@@ -53,7 +53,7 @@ public class RifugioHomeGestMVC {
         m.addAttribute("animaliCount", srvAnimale.getAnimali().size());
         m.addAttribute("adozioniCount", srvAdozione.getAdozioni().size());
         m.addAttribute("donazioniTotali", srvDonazione.sommaDonazioni());
-        // m.addAttribute("visiteOggi", srvVisita.countByData_visita(LocalDate.now()));
+        // m.addAttribute("visiteOggi", srvVisita.countVisiteOggi());
         m.addAttribute("dottoriCount", srvDottore.getDottori().size());
         m.addAttribute("utentiCount", srvUtente.getUtenti().size());
         m.addAttribute("entiCount", srvEnte.getAll().size());

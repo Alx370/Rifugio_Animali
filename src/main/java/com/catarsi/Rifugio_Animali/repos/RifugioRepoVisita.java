@@ -4,6 +4,7 @@ import com.catarsi.Rifugio_Animali.model.Visita;
 import jakarta.transaction.Transactional;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
