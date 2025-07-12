@@ -39,6 +39,8 @@ public class Utente {
     @Column(name = "sesso", nullable = false)
     private String sesso;
 
+    @Column(name = "ruolo", nullable = false)
+    private String ruolo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "data_nascita", nullable = false)
@@ -110,6 +112,11 @@ public class Utente {
         this.data_nascita = data_nascita;
     }
 
-    
+    public String getRuolo() {
+        return ruolo;
+    }
 
+    public void setRuolo(String ruolo) {
+        this.ruolo = ruolo;
+    }
 }

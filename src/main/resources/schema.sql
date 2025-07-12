@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS Utente (
   password      VARCHAR(255) NOT NULL,
   telefono      VARCHAR(20),
   sesso         CHAR(1),
-  data_nascita  DATE
+  data_nascita  DATE,
+  ruolo         VARCHAR(20) NOT NULL DEFAULT 'USER'
 );
 
 CREATE TABLE IF NOT EXISTS Ente (

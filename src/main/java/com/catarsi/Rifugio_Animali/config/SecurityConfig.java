@@ -1,34 +1,65 @@
 package com.catarsi.Rifugio_Animali.config;
 
-import org.springframework.boot.CommandLineRunner;
+import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
 
+    @Autowired
+    private RifugioRepoUtente utenteRepository;
 
+    // UserDetailsService per caricare utente da DB
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return username -> {
+            System.out.println("Login tentativo con: " + username);
+            Utente utente = utenteRepository.findByEmail(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato con email: " + username));
+            System.out.println("Utente trovato: " + utente.getEmail());
+            return User.builder()
+                    .username(utente.getEmail())
+                    .password(utente.getPassword())  // password già hashata nel DB
+                    .roles(utente.getRuolo())       // es. "ADMIN" o "USER"
+                    .build();
+        };
+    }
+
+    // Password encoder BCrypt
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    // Configurazione sicurezza HTTP
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        //noinspection removal
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**", "/gest").permitAll()
-                        .requestMatchers("/signin", "/animali", "/animali/", "/image/**", "/adozioni/visualizza", "/animali/dettaglio/{id}", "/adozioni/form", "/donazioni/form").permitAll()
-                        .anyRequest().authenticated() //quando la richiesta matcha /, /home permetti all'utente di navigare, le altre richieste autenticamele
+                        .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**", "/signin", "/animali/**", "/adozioni/**", "/donazioni/**", "/image/**").permitAll()
+                        .requestMatchers("/backoffice/adozioni/add").hasRole("USER")
+                        .requestMatchers("/gest", "/backoffice/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login").defaultSuccessUrl("/", true).permitAll()
+                        .loginPage("/login")
+                        .successHandler(customSuccessHandler())
+                        .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
@@ -37,41 +68,57 @@ public class SecurityConfig {
                         .deleteCookies("JSESSIONID")
                         .permitAll()
                 );
-
         return http.build();
     }
 
-    // OMAR---------------
-// @Bean
-// public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//     http
-//         .csrf(csrf -> csrf.disable()) // ❗Disabilita CSRF per consentire PUT, POST, DELETE
-//         .authorizeHttpRequests(auth -> auth
-//             .anyRequest().permitAll() // ❗Permette tutte le richieste senza autenticazione
-//         );
-//     return http.build();
-// }
-
-//------------------
-
-    // @Bean
-    // public UserDetailsService userDetailsService(){
-    //     UserDetails user=User.withDefaultPasswordEncoder()
-    //                         .username("user")
-    //                         .password("password")
-    //                         .roles("USER")
-    //                         .build();
-    //     return new InMemoryUserDetailsManager(user);
-
-    // }
+    // Redirect in base al ruolo dopo login
+    @Bean
+    public AuthenticationSuccessHandler customSuccessHandler() {
+        return (request, response, authentication) -> {
+            boolean isAdmin = authentication.getAuthorities().stream()
+                    .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+            if (isAdmin) {
+                response.sendRedirect("/gest");
+            } else {
+                response.sendRedirect("/");
+            }
+        };
+    }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        var authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
+
+        authBuilder.userDetailsService(username -> {
+            System.out.println("Tentativo di login con email: " + username);
+
+            return utenteRepository.findByEmail(username)
+                    .map(utente -> {
+                        System.out.println("Trovato utente: " + utente.getEmail() + " con ruolo: " + utente.getRuolo());
+                        return User.builder()
+                                .username(utente.getEmail())
+                                .password(utente.getPassword())
+                                .roles(utente.getRuolo()) // "ADMIN" o "USER", senza "ROLE_"
+                                .build();
+                    })
+                    .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato: " + username));
+        }).passwordEncoder(passwordEncoder());
+
+        return authBuilder.build();
     }
 
 
-
+    // OMAR
+    // @Bean
+    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    //     http
+    //         .csrf(csrf -> csrf.disable()) // ❗Disabilita CSRF per consentire PUT, POST, DELETE
+    //         .authorizeHttpRequests(auth -> auth
+    //             .anyRequest().permitAll() // ❗Permette tutte le richieste senza autenticazione
+    //         );
+    //     return http.build();
+    // }
 }
+
 
 

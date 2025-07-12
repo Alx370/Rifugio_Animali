@@ -70,7 +70,7 @@
 
         <div class="filter-buttons">
             <button type="submit" class="filter-btn">Applica Filtri</button>
-            <a href="/backofficeVistaAnimali" class="filter-btn clear-btn">Cancella Filtri</a>
+            <a href="/backoffice/animali" class="filter-btn clear-btn">Cancella Filtri</a>
         </div>
     </form>
                 
@@ -89,7 +89,7 @@
         <tbody >
           <tr class="table-row" onclick="selectRow(this)" th:each="animale : ${animali}">
               <td data-label="Nome">
-                  <a th:href="@{/animali/dettaglio/{id}(id=${animale.Id_animale})}" th:text="${#strings.isEmpty(animale.nome) ? 'N/A' : animale.nome}"></a>
+                  <a th:href="@{/backoffice/animali/dettaglio/{id}(id=${animale.Id_animale})}" th:text="${#strings.isEmpty(animale.nome) ? 'N/A' : animale.nome}"></a>
               </td>
               <td data-label="Sesso" th:text="${#strings.isEmpty(animale.sesso) ? 'N/A' : animale.sesso}"></td>
               <td data-label="Specie" th:text="${#strings.isEmpty(animale.specie) ? 'N/A' : animale.specie}"></td>

@@ -5,29 +5,14 @@ import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RifugioServiceUtenteImpl implements RifugioServiceUtente, UserDetailsService {
+public class RifugioServiceUtenteImpl implements RifugioServiceUtente {
 
     @Autowired
     private RifugioRepoUtente utente_repo;
-
-    // Metodo per autenticazione (Spring Security)
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Utente user = utente_repo.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato con email: " + email));
-        
-        return org.springframework.security.core.userdetails.User
-                .withUsername(user.getEmail())
-                .password(user.getPassword())
-                .roles("USER") // puoi cambiare in base al ruolo reale
-                .build();
-    }
 
     // Salva o aggiorna un utente
     @Override
