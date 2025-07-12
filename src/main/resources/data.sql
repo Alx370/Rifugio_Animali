@@ -1,12 +1,12 @@
 -- popolamento delle tabelle
 
 INSERT INTO Utente (nome, cognome, email, password, telefono, sesso, data_nascita, ruolo) VALUES
-('Luca',  'Rossi',   'luca.rossi@email.com',   '$2a$10$ZsQogG/R0s4YQwFbiHkZEOcp8nHVdWtnyyKZcRKW7sfxCtQ/2k3IW', '3331112222', 'M', '1990-05-15', 'ADMIN'), -- luca
-('Anna',  'Bianchi', 'anna.bianchi@email.com', '$2a$10$FUXwM6UJjmx2m5vNK3DW7uF6NoUQccYjj3hJPiG2l99Wz5E7sW4Dq', '3333334444', 'F', '1985-08-22', 'USER'), -- anna
-('Marco', 'Verdi',   'marco.verdi@email.com',  '$2a$10$NUUIdVRN76z48PIdR1HcU.xuXsmA2tvbbwiEN4yAnMI7Zc.NFyLYi', NULL,          'M', '2000-01-10', 'USER'), -- marco
-('Sara',  'Neri',    'sara.neri@email.com',    '$2a$10$Ecs0l2K/.xEVY7IsIbOroedluJoi0bTxvRYEm3eUmpYxS0U/2X3yO', '3205551234', 'F', '1995-07-12', 'USER'),-- sara
-('Paolo', 'Gallo',   'paolo.gallo@email.com',  '$2a$10$KnYkknHkVmBQvoozkWrfEu.7l1zOQJh3xUTW9FPbIzz/X9.Ay8m9K', '3396667777', 'M', '1988-11-30', 'USER'), -- paolo
-('Elisa', 'Fontana', 'elisa.fontana@email.com','$2a$10$M0dCEB5NVppvUOb1YZa43e4nyBqULPtqOmvq1myl9hEqSp67znOYm', NULL,          'F', '1992-03-03', 'USER'); -- elisa
+('Luca',  'Rossi',   'luca.rossi@email.com',   '$2a$10$21QqnrmtgJYp4MqxD62AyuqdY2CulFKKM3tNH.xWrMnLaoOWJIT1K', '3331112222', 'M', '1990-05-15', 'ADMIN'),     -- luca
+('Anna',  'Bianchi', 'anna.bianchi@email.com', '$2a$10$DYBbLRzdBogU4MWO0IHiwu0m8UxX3qAnE.xRDd4hH4EsA4/Dx8YI6', '3333334444', 'F', '1985-08-22', 'USER'),      -- anna
+('Marco', 'Verdi',   'marco.verdi@email.com',  '$2a$10$jo56at4LsykHIuNBeUzdaOrnmIZPuDqRmHyS14d.RtT03GEO7PZaG', NULL,          'M', '2000-01-10', 'USER'),     -- marco
+('Sara',  'Neri',    'sara.neri@email.com',    '$2a$10$VQJZJFmPBt2KjviunU8ZZOiMehdndxUMeGmal/njc.aP2JpijiIMu', '3205551234', 'F', '1995-07-12', 'USER'),     -- sara
+('Paolo', 'Gallo',   'paolo.gallo@email.com',  '$2a$10$Yani46jP5TJTsQZVmaZv1eBaEROWimojLiAuhYJmxx6Y2tU4x2sI2', '3396667777', 'M', '1988-11-30', 'USER'),     -- paolo
+('Elisa', 'Fontana', 'elisa.fontana@email.com','$2a$10$cRj2waC/H1F7m6/qiJppbOP7yi7xDmx3d//LWKneih.2RfrWQ4Cs6', NULL,          'F', '1992-03-03', 'USER');     -- elisa
 
 
 INSERT INTO Ente (NOME, EMAIL, TELEFONO) VALUES
