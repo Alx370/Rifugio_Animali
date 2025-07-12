@@ -53,17 +53,24 @@ public class RifugioDonazioniMVC {
         m.addAttribute("donazioni", srvDonazione.getDonazioni());
         return "donazioni"; 
     }
-
-    @GetMapping("/donazioni/form")
-    public String mostraFormDonazione(Model model, Principal principal) {
-        if (principal != null) {
-            Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
-            if (utente != null) {
-                model.addAttribute("utenteLoggato", utente);
-            }
-        }
-        return "formDonazioni";
+    
+  @GetMapping("/donazioni/form")
+public String mostraFormDonazione(Model model, Principal principal) {
+    if (principal == null) {
+        return "errore_richiesta_login"; // utente non loggato, reindirizza alla pagina errore
     }
+
+
+    Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+    if (utente == null) {
+        return "errore_richiesta_login";
+    }
+
+
+    model.addAttribute("utenteLoggato", utente);
+    model.addAttribute("donazione", new Donazione()); // prepara anche l’oggetto donazione
+    return "formDonazioni";
+}
 
 
 
