@@ -8,5 +8,4 @@ import com.catarsi.Rifugio_Animali.model.Utente;
 
 public interface RifugioRepoUtente extends JpaRepository<Utente, Integer> {
     Optional<Utente> findByEmail(String email);
-    
 }
