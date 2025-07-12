@@ -79,15 +79,27 @@ public class RifugioAdozioniMVC {
     }
 
     @GetMapping("/adozioni/form")
-    public String mostraFormAdozione(Model model, Principal principal, @RequestParam Integer idAnimale) {
-        if (principal != null) {
-            Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
-            model.addAttribute("utenteLoggato", utente);
-        }
-        Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
-        model.addAttribute("animaleSelezionato", animale);
-        return "formAdozioni";
+public String mostraFormAdozione(Model model, Principal principal, @RequestParam Integer idAnimale) {
+    if (principal == null) {
+        return "errore_richiesta_login"; // utente non loggato
     }
+
+
+    Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
+    if (utente == null) {
+        return "errore_richiesta_login"; // utente non trovato (caso raro)
+    }
+
+
+    Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
+    model.addAttribute("utenteLoggato", utente);
+    model.addAttribute("animaleSelezionato", animale);
+    model.addAttribute("adozione", new Adozione());
+
+
+    return "formAdozioni";
+}
+
 
     @GetMapping("/backoffice/adozioni/edit/{id}")
     public String modificaAdozione(@PathVariable("id") int id, Model m) {
