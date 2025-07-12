@@ -75,7 +75,7 @@ public class RifugioAnimaliMVC {
     }
 
     @GetMapping("backoffice/animali/dettaglio/{id}")
-    public String BackofficedettaglioAnimale(@PathVariable int id, Model model) {
+    public String BackofficeDettaglioAnimale(@PathVariable int id, Model model) {
         Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
         List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
         model.addAttribute("animale", animale);
