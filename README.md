@@ -59,7 +59,7 @@ src/
 
 2. **Configura il database**
     - Modifica `application.properties` con i tuoi parametri di connessione
-    - e copiati i file `schema.sql` e `data.sql` nella cartella `src/main/resources` in MySQL
+    - e copia i file `schema.sql` e `data.sql` nella cartella `src/main/resources` in MySQL
 
 3. **Compila il progetto**
    ```bash
