@@ -76,7 +76,7 @@ src/
 
 ## Funzionalità Principali
 
-### Gestione Animali
+### Gestione del Rifugio
 - Registrazione nuovi animali
 - Storico medico e Diario comportamentale
 - Stato di adozione
