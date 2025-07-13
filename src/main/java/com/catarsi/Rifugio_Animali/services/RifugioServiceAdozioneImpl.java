@@ -10,12 +10,16 @@ import com.catarsi.Rifugio_Animali.model.Adozione;
 import com.catarsi.Rifugio_Animali.model.Animale;
 import com.catarsi.Rifugio_Animali.model.Utente;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAdozione;
+import com.catarsi.Rifugio_Animali.repos.RifugioRepoAnimale;
 
 @Service
 public class RifugioServiceAdozioneImpl implements RifugioServiceAdozione {
     
     @Autowired
     private RifugioRepoAdozione repo_adozione;
+
+    @Autowired
+    private RifugioRepoAnimale repo_animale;
 
 
     @Override
@@ -53,4 +57,19 @@ public class RifugioServiceAdozioneImpl implements RifugioServiceAdozione {
     public void delete(int id) {
         repo_adozione.deleteById(id);
     }
+
+
+    @Override
+    public Animale aggiungiDataAdozione(Adozione a) {
+    // Salva l'adozione
+    repo_adozione.save(a);
+
+    // Aggiorna l'animale con la data
+    Animale animale = a.getAnimale();
+    animale.setData_adozione(a.getData_adozione());
+
+    // Salva l'animale aggiornato
+    return repo_animale.save(animale);
+    }
+
 }

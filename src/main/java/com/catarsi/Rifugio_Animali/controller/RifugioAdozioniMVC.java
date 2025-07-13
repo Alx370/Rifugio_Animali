@@ -51,6 +51,22 @@ public class RifugioAdozioniMVC {
         return "backofficeVistaAdottati";
     }
 
+    @GetMapping("/backoffice/form/aggiungiAdozione")
+    public String addAdozione( Model model) {
+        model.addAttribute("adozione", new Adozione());
+        model.addAttribute("animali", srvAnimale.getAnimali());
+        model.addAttribute("utenti", srvUtente.getUtenti());
+        return "backofficeAggiungiAdozione";
+    }
+
+
+    @PostMapping("/backoffice/aggiungiAdozione")
+    public String formAdozione(@ModelAttribute Adozione adozione) {
+        srvAdozione.aggiungiDataAdozione(adozione);
+        return "redirect:/backoffice/adozioni";
+    }
+
+
 
     @GetMapping("/backoffice/adozioni/add")
     public String showForm(@RequestParam int idAnimale, Model model) {

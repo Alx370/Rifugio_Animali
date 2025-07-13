@@ -25,7 +25,7 @@
     <div class="main-content">
         <div class="form-container">
             <h2>Aggiungi Nuova Adozione</h2>
-            <form id="adozioneForm" method="post" th:action="@{/backoffice/adozioni/add}" th:object="${adozione}">
+            <form id="adozioneForm" method="post" th:action="@{/backoffice/aggiungiAdozione}" th:object="${adozione}">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label for="utente">Utente</label>
@@ -35,15 +35,15 @@
                             th:value="${utente.id_utente}"
                             th:text="${utente.nome}">
                     </option>
-                </select>
+                </select><br><br>
 
                 <label for="animale">Animale</label>
                 <select th:field="*{animale}" required>
-                    <option value="" disabled selected>-- Seleziona un animale --</option>
                     <option th:each="animale : ${animali}"
-                            th:value="${animale.id_animale}"
-                            th:text="${animale.nome}">
-                    </option>
+                    th:if="${animale.data_adozione == null}"
+                    th:value="${animale.id_animale}"
+                    th:text="${animale.nome}">
+                </option>
                 </select>
 
                 <div class="form-group">
