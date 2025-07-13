@@ -29,7 +29,7 @@
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label for="utente">Utente</label>
-                <select th:field="*{utente}" required>
+                <select class = "form-control" th:field="*{utente}" required>
                     <option value="" disabled selected>-- Seleziona un utente --</option>
                     <option th:each="utente : ${utenti}"
                             th:value="${utente.id_utente}"
@@ -38,13 +38,13 @@
                 </select><br><br>
 
                 <label for="animale">Animale</label>
-                <select th:field="*{animale}" required>
+                <select class = "form-control" th:field="*{animale}" required>
                     <option th:each="animale : ${animali}"
                     th:if="${animale.data_adozione == null}"
                     th:value="${animale.id_animale}"
                     th:text="${animale.nome}">
                 </option>
-                </select>
+                </select><br><br>
 
                 <div class="form-group">
                     <label for="data_adozione">Data adozione</label>
