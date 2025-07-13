@@ -52,7 +52,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/", "/home", "/css/**", "/js/**", "/images/**", "/signin", "/animali/**", "/adozioni/**", "/donazioni/**", "/image/**").permitAll()
-                        .requestMatchers("/backoffice/adozioni/add").hasRole("USER")
+                        .requestMatchers("/backoffice/adozioni/add").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/gest", "/backoffice/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
