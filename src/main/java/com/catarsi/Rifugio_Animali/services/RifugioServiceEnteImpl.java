@@ -1,6 +1,6 @@
 package com.catarsi.Rifugio_Animali.services;
 
-import com.catarsi.Rifugio_Animali.model.Ente;
+import com.catarsi.Rifugio_Animali.model.Organization;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoEnte;
 import org.springframework.stereotype.Service;
 
@@ -17,19 +17,19 @@ public class RifugioServiceEnteImpl implements RifugioServiceEnte {
     }
 
     @Override
-    public List<Ente> getAllEnti() {
+    public List<Organization> getAllEnti() {
         return repo.findAll();
     }
 
     @Override
-    public Ente getEnteById(int id) {
-        Optional<Ente> ente = repo.findById(id);
+    public Organization getEnteById(int id) {
+        Optional<Organization> ente = repo.findById(id);
         return ente.orElse(null);
     }
 
     @Override
-    public Ente addEnte(Ente ente) {
-       return repo.save(ente);
+    public Organization addEnte(Organization organization) {
+       return repo.save(organization);
     }
 
     @Override

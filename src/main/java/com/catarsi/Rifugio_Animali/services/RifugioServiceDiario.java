@@ -2,16 +2,16 @@ package com.catarsi.Rifugio_Animali.services;
 
 import java.util.List;
 
-import com.catarsi.Rifugio_Animali.model.Diario;
+import com.catarsi.Rifugio_Animali.model.Diary;
 
 public interface RifugioServiceDiario {
     
-    Diario addDiario(Diario d);
+    Diary addDiario(Diary d);
     void deleteDiario(int id);
-    List<Diario> getDiari();
-    Diario getDiarioById(int id);
+    List<Diary> getDiari();
+    Diary getDiarioById(int id);
 
-    List<Diario> getDiariByAnimaleId(int animaleId);
+    List<Diary> getDiariByAnimaleId(int animaleId);
 
-    Diario getDiarioByAnimaleId(int idAnimale);
+    Diary getDiarioByAnimaleId(int idAnimale);
 }

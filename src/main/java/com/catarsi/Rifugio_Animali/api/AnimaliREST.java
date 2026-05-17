@@ -1,6 +1,7 @@
 package com.catarsi.Rifugio_Animali.api;
 
-import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Animal;
+import com.catarsi.Rifugio_Animali.model.Animal;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAnimali;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,18 +16,18 @@ public class AnimaliREST {
     private RifugioServiceAnimali srv;
 
     @GetMapping
-    public List<Animale> getAllAnimali() {
+    public List<Animal> getAllAnimali() {
         return srv.getAnimali();
     }
 
     @GetMapping("/{id}")
-    public Animale getAnimaleById(@PathVariable int id) {
+    public Animal getAnimaleById(@PathVariable int id) {
         return srv.getAnimaleByIdAnimale(id);
     }
 
     @PostMapping
-    public Animale createAnimale(@RequestBody Animale animale) {
-        return srv.addAnimale(animale);
+    public Animal createAnimale(@RequestBody Animal animal) {
+        return srv.addAnimale(animal);
     }
 
     @DeleteMapping("/{id}")
@@ -35,8 +36,8 @@ public class AnimaliREST {
     }
 
     @PutMapping("/{id}")
-    public Animale updateAnimale(@PathVariable int id, @RequestBody Animale aggiornato) {
-        Animale esistente = srv.getAnimaleByIdAnimale(id);
+    public Animal updateAnimale(@PathVariable int id, @RequestBody Animal aggiornato) {
+        Animal esistente = srv.getAnimaleByIdAnimale(id);
         esistente.setSpecie(aggiornato.getSpecie());
         esistente.setRazza(aggiornato.getRazza());
         esistente.setPeso(aggiornato.getPeso());

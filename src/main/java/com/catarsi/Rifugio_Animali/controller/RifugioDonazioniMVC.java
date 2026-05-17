@@ -3,15 +3,13 @@ package com.catarsi.Rifugio_Animali.controller;
 
 import java.security.Principal;
 
+import com.catarsi.Rifugio_Animali.model.Donation;
+import com.catarsi.Rifugio_Animali.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import com.catarsi.Rifugio_Animali.model.Adozione;
-import com.catarsi.Rifugio_Animali.model.Animale;
-import com.catarsi.Rifugio_Animali.model.Diario;
-import com.catarsi.Rifugio_Animali.model.Donazione;
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.User;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDonazione;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceDonazioneImpl;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceUtente;
@@ -19,16 +17,6 @@ import com.catarsi.Rifugio_Animali.services.RifugioServiceUtente;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.catarsi.Rifugio_Animali.model.Donazione;
-import com.catarsi.Rifugio_Animali.repos.RifugioRepoDonazione;
-import com.catarsi.Rifugio_Animali.services.RifugioServiceDonazioneImpl;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -61,35 +49,35 @@ public String mostraFormDonazione(Model model, Principal principal) {
     }
 
 
-    Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
-    if (utente == null) {
+    User user = rifugioServiceUtente.findByEmail(principal.getName());
+    if (user == null) {
         return "errore_richiesta_login";
     }
 
 
-    model.addAttribute("utenteLoggato", utente);
-    model.addAttribute("donazione", new Donazione()); // prepara anche l’oggetto donazione
+    model.addAttribute("utenteLoggato", user);
+    model.addAttribute("donazione", new Donation()); // prepara anche l’oggetto donazione
     return "formDonazioni";
 }
 
 
 
     @PostMapping("/donazioni/add")
-public String processForm(@ModelAttribute Donazione donazione, Principal principal) {
+public String processForm(@ModelAttribute Donation donation, Principal principal) {
 
     if (principal != null) {
-        Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
-        donazione.setUtente(utente); 
+        User user = rifugioServiceUtente.findByEmail(principal.getName());
+        donation.setUtente(user);
     }
 
-    srvDonazione.addDonazione(donazione); 
+    srvDonazione.addDonazione(donation);
     return "redirect:/";
 }
 
 
         @GetMapping("/donazioni/add")
     public String showForm(Model model) {
-        model.addAttribute("donazione", new Donazione());
+        model.addAttribute("donazione", new Donation());
         return "formDonazioni"; 
     }
 

@@ -1,6 +1,7 @@
 package com.catarsi.Rifugio_Animali.services;
 
-import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Animal;
+import com.catarsi.Rifugio_Animali.model.Animal;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAnimale;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDiario;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoVisita;
@@ -24,7 +25,7 @@ public class RifugioServiceAnimaliImpl implements RifugioServiceAnimali {
     private RifugioRepoVisita visitaRepo;
 
     @Override
-    public Animale addAnimale(Animale a) {
+    public Animal addAnimale(Animal a) {
         return animali_repo.save(a);
     }
 
@@ -36,54 +37,54 @@ public class RifugioServiceAnimaliImpl implements RifugioServiceAnimali {
     }
 
     @Override
-    public List<Animale> getAnimali() {
+    public List<Animal> getAnimali() {
         return animali_repo.findAll();
     }
 
     @Override
-    public Animale getAnimaleByIdAnimale(int id) {
+    public Animal getAnimaleByIdAnimale(int id) {
         return animali_repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Animale non trovato con ID: " + id));
     }
 
     @Override
-    public Specification<Animale> nomeContains(String nome) {
+    public Specification<Animal> nomeContains(String nome) {
         return (root, query, cb) ->
                 nome == null || nome.isEmpty() ? null : cb.like(cb.lower(root.get("nome")), "%" + nome.toLowerCase() + "%");
     }
 
     @Override
-    public Specification<Animale> sessoEquals(String sesso) {
+    public Specification<Animal> sessoEquals(String sesso) {
         return (root, query, cb) ->
                 sesso == null || sesso.isEmpty() ? null : cb.equal(root.get("sesso"), sesso);
     }
 
     @Override
-    public Specification<Animale> specieEquals(String specie) {
+    public Specification<Animal> specieEquals(String specie) {
         return (root, query, cb) ->
                 specie == null || specie.isEmpty() ? null : cb.equal(root.get("specie"), specie);
     }
 
     @Override
-    public Specification<Animale> razzaContains(String razza) {
+    public Specification<Animal> razzaContains(String razza) {
         return (root, query, cb) ->
                 razza == null || razza.isEmpty() ? null : cb.like(cb.lower(root.get("razza")), "%" + razza.toLowerCase() + "%");
     }
 
     @Override
-    public Specification<Animale> pesoLessOrEqual(Double peso) {
+    public Specification<Animal> pesoLessOrEqual(Double peso) {
         return (root, query, cb) ->
                 peso == null ? null : cb.lessThanOrEqualTo(root.get("peso"), peso);
     }
 
     @Override
-    public Specification<Animale> etaLessOrEqual(Integer eta) {
+    public Specification<Animal> etaLessOrEqual(Integer eta) {
         return (root, query, cb) ->
                 eta == null ? null : cb.lessThanOrEqualTo(root.get("eta"), eta);
     }
 
-    public List<Animale> filtraAnimali(String nome, String sesso, String specie, String razza, Double peso, Integer eta) {
-        Specification<Animale> spec = null;
+    public List<Animal> filtraAnimali(String nome, String sesso, String specie, String razza, Double peso, Integer eta) {
+        Specification<Animal> spec = null;
 
         if (nome != null && !nome.isEmpty()) {
             spec = (spec == null) ? this.nomeContains(nome) : spec.and(this.nomeContains(nome));

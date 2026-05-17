@@ -1,6 +1,6 @@
 package com.catarsi.Rifugio_Animali.config;
 
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.User;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,13 +28,13 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService() {
         return username -> {
             System.out.println("Login tentativo con: " + username);
-            Utente utente = utenteRepository.findByEmail(username)
+            User user = utenteRepository.findByEmail(username)
                     .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato con email: " + username));
-            System.out.println("Utente trovato: " + utente.getEmail());
-            return User.builder()
-                    .username(utente.getEmail())
-                    .password(utente.getPassword())  // password già hashata nel DB
-                    .roles(utente.getRuolo())       // es. "ADMIN" o "USER"
+            System.out.println("Utente trovato: " + user.getEmail());
+            return org.springframework.security.core.userdetails.User.builder()
+                    .username(user.getEmail())
+                    .password(user.getPassword())  // password già hashata nel DB
+                    .roles(user.getRuolo())       // es. "ADMIN" o "USER"
                     .build();
         };
     }
@@ -95,7 +94,7 @@ public class SecurityConfig {
             return utenteRepository.findByEmail(username)
                     .map(utente -> {
                         System.out.println("Trovato utente: " + utente.getEmail() + " con ruolo: " + utente.getRuolo());
-                        return User.builder()
+                        return org.springframework.security.core.userdetails.User.builder()
                                 .username(utente.getEmail())
                                 .password(utente.getPassword())
                                 .roles(utente.getRuolo()) // "ADMIN" o "USER", senza "ROLE_"

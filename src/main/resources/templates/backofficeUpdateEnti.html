@@ -25,7 +25,7 @@
   <div class="main-content">
     <div class="form-container">
       <h2>Modifica Ente</h2>
-      <form id="enteForm" method="post" th:action="@{/backoffice/enti/aggiungi}" th:object="${ente}">
+      <form id="enteForm" method="post" th:action="@{/backoffice/enti/aggiungi}" th:object="${organization}">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
         <input type="hidden" th:field="*{id_ente}" />

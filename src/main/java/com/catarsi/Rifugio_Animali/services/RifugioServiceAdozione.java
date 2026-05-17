@@ -1,22 +1,24 @@
 package com.catarsi.Rifugio_Animali.services;
 
 import java.util.List;
-import com.catarsi.Rifugio_Animali.model.Adozione;
-import com.catarsi.Rifugio_Animali.model.Animale;
+
+import com.catarsi.Rifugio_Animali.model.Adoption;
+import com.catarsi.Rifugio_Animali.model.Animal;
+import com.catarsi.Rifugio_Animali.model.Animal;
 
 public interface RifugioServiceAdozione {
 
-    Adozione addAdozione(Adozione a);
+    Adoption addAdozione(Adoption a);
 
-	Adozione save(Adozione a);
+	Adoption save(Adoption a);
 
-    List<Adozione> getAdozioni();
+    List<Adoption> getAdozioni();
 
-    Adozione getById(int id);
+    Adoption getById(int id);
 
     void delete(int id);
 
-    Adozione getAdozioneById(int id);
+    Adoption getAdozioneById(int id);
 
-    Animale aggiungiDataAdozione(Adozione a);
+    Animal aggiungiDataAdozione(Adoption a);
 }

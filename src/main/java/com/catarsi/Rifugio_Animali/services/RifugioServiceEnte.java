@@ -1,16 +1,16 @@
 package com.catarsi.Rifugio_Animali.services;
 
-import com.catarsi.Rifugio_Animali.model.Ente;
+import com.catarsi.Rifugio_Animali.model.Organization;
 
 import java.util.List;
 
 public interface RifugioServiceEnte {
 
-    List<Ente> getAllEnti();
+    List<Organization> getAllEnti();
 
-    Ente getEnteById(int id);
+    Organization getEnteById(int id);
 
-    Ente addEnte(Ente ente);
+    Organization addEnte(Organization organization);
 
     void delete(int id);
 }

@@ -1,14 +1,12 @@
 package com.catarsi.Rifugio_Animali.services;
 
-import java.security.Principal;
 import java.util.List;
+
+import com.catarsi.Rifugio_Animali.model.Adoption;
+import com.catarsi.Rifugio_Animali.model.Animal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import com.catarsi.Rifugio_Animali.model.Adozione;
-import com.catarsi.Rifugio_Animali.model.Animale;
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.Animal;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAdozione;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAnimale;
 
@@ -23,17 +21,17 @@ public class RifugioServiceAdozioneImpl implements RifugioServiceAdozione {
 
 
     @Override
-    public Adozione addAdozione(Adozione a) {
+    public Adoption addAdozione(Adoption a) {
         return repo_adozione.save(a);
     }
 
     @Override
-    public Adozione save(Adozione a) {
+    public Adoption save(Adoption a) {
         return repo_adozione.save(a); // stesso comportamento di addAdozione
     }
 
     @Override
-    public List<Adozione> getAdozioni() {
+    public List<Adoption> getAdozioni() {
         return repo_adozione.findAll();
     }
 
@@ -44,12 +42,12 @@ public class RifugioServiceAdozioneImpl implements RifugioServiceAdozione {
     // }
 
     @Override
-    public Adozione getAdozioneById(int id) {
+    public Adoption getAdozioneById(int id) {
         return repo_adozione.findById(id).orElse(null);
     }
 
     @Override
-    public Adozione getById(int id) {
+    public Adoption getById(int id) {
         return repo_adozione.findById(id).orElse(null);
     }
 
@@ -60,16 +58,16 @@ public class RifugioServiceAdozioneImpl implements RifugioServiceAdozione {
 
 
     @Override
-    public Animale aggiungiDataAdozione(Adozione a) {
+    public Animal aggiungiDataAdozione(Adoption a) {
     // Salva l'adozione
     repo_adozione.save(a);
 
     // Aggiorna l'animale con la data
-    Animale animale = a.getAnimale();
-    animale.setData_adozione(a.getData_adozione());
+    Animal animal = a.getAnimale();
+    animal.setData_adozione(a.getData_adozione());
 
     // Salva l'animale aggiornato
-    return repo_animale.save(animale);
+    return repo_animale.save(animal);
     }
 
 }

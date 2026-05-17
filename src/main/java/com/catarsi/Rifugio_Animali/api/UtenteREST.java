@@ -1,6 +1,7 @@
 package com.catarsi.Rifugio_Animali.api;
 
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.User;
+import com.catarsi.Rifugio_Animali.model.User;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceUtente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +16,23 @@ public class UtenteREST {
     private RifugioServiceUtente service;
 
     @GetMapping
-    public List<Utente> getAll() {
+    public List<User> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public Utente getById(@PathVariable Integer id) {
+    public User getById(@PathVariable Integer id) {
         return service.getById(id);
     }
 
     @PostMapping
-    public Utente create(@RequestBody Utente utente) {
-        return service.save(utente);
+    public User create(@RequestBody User user) {
+        return service.save(user);
     }
 
     @PutMapping("/{id}")
-    public Utente update(@PathVariable Integer id, @RequestBody Utente aggiornato) {
-        Utente esistente = service.getById(id);
+    public User update(@PathVariable Integer id, @RequestBody User aggiornato) {
+        User esistente = service.getById(id);
 
         // aggiorna manualmente i campi
         esistente.setNome(aggiornato.getNome());

@@ -43,12 +43,12 @@
             </tr>
             </thead>
             <tbody id="animalTableBody">
-            <tr th:each="adozione : ${adozioni}">
-                <td th:text="${adozione.animale.nome}"></td>
-                <td th:text="${adozione.utente.nome}"></td>
-                <td th:text="${adozione.data_adozione}"></td>
+            <tr th:each="adoption : ${adozioni}">
+                <td th:text="${adoption.animale.nome}"></td>
+                <td th:text="${adoption.utente.nome}"></td>
+                <td th:text="${adoption.data_adozione}"></td>
                 <td>
-                    <a class="update-animal-btn" th:href="@{'/backoffice/adozioni/edit/' + ${adozione.id_adozione}}">Modifica</a>
+                    <a class="update-animal-btn" th:href="@{'/backoffice/adozioni/edit/' + ${adoption.id_adozione}}">Modifica</a>
                 </td>
             </tr>
             </tbody>

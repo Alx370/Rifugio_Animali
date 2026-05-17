@@ -1,6 +1,7 @@
 package com.catarsi.Rifugio_Animali.api;
 
-import com.catarsi.Rifugio_Animali.model.Dottore;
+import com.catarsi.Rifugio_Animali.model.Veterinarian;
+import com.catarsi.Rifugio_Animali.model.Veterinarian;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceDottore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,20 +17,20 @@ public class DottoreREST {
 
     // GET /api/dottori
     @GetMapping
-    public List<Dottore> getAllDottori() {
+    public List<Veterinarian> getAllDottori() {
         return service.getDottori();
     }
 
     // GET /api/dottori/{id}
     @GetMapping("/{id}")
-    public Dottore getDottoreById(@PathVariable int id) {
+    public Veterinarian getDottoreById(@PathVariable int id) {
         return service.getDottoreById(id);
     }
 
     // POST /api/dottori
     @PostMapping
-    public Dottore createDottore(@RequestBody Dottore dottore) {
-        return service.addDottore(dottore);
+    public Veterinarian createDottore(@RequestBody Veterinarian veterinarian) {
+        return service.addDottore(veterinarian);
     }
 
     // DELETE /api/dottori/{id}
@@ -40,8 +41,8 @@ public class DottoreREST {
 
     // PUT /api/dottori/{id}
     @PutMapping("/{id}")
-    public Dottore updateDottore(@PathVariable int id, @RequestBody Dottore aggiornato) {
-        Dottore esistente = service.getDottoreById(id);
+    public Veterinarian updateDottore(@PathVariable int id, @RequestBody Veterinarian aggiornato) {
+        Veterinarian esistente = service.getDottoreById(id);
         esistente.setNome(aggiornato.getNome());
         esistente.setCognome(aggiornato.getCognome());
         esistente.setEmail(aggiornato.getEmail());

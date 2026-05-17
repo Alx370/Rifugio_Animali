@@ -1,10 +1,6 @@
 package com.catarsi.Rifugio_Animali.controller;
 
-import com.catarsi.Rifugio_Animali.model.Adozione;
-import com.catarsi.Rifugio_Animali.model.Animale;
-import com.catarsi.Rifugio_Animali.model.Diario;
-import com.catarsi.Rifugio_Animali.model.Donazione;
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.*;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAdozione;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAdozione;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAnimali;
@@ -53,7 +49,7 @@ public class RifugioAdozioniMVC {
 
     @GetMapping("/backoffice/form/aggiungiAdozione")
     public String addAdozione( Model model) {
-        model.addAttribute("adozione", new Adozione());
+        model.addAttribute("adozione", new Adoption());
         model.addAttribute("animali", srvAnimale.getAnimali());
         model.addAttribute("utenti", srvUtente.getUtenti());
         return "backofficeAggiungiAdozione";
@@ -61,8 +57,8 @@ public class RifugioAdozioniMVC {
 
 
     @PostMapping("/backoffice/aggiungiAdozione")
-    public String formAdozione(@ModelAttribute Adozione adozione) {
-        srvAdozione.aggiungiDataAdozione(adozione);
+    public String formAdozione(@ModelAttribute Adoption adoption) {
+        srvAdozione.aggiungiDataAdozione(adoption);
         return "redirect:/backoffice/adozioni";
     }
 
@@ -70,21 +66,21 @@ public class RifugioAdozioniMVC {
 
     @GetMapping("/backoffice/adozioni/add")
     public String showForm(@RequestParam int idAnimale, Model model) {
-        Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
-        model.addAttribute("adozione", new Adozione());
-        model.addAttribute("animaleSelezionato", animale);
+        Animal animal = srvAnimale.getAnimaleByIdAnimale(idAnimale);
+        model.addAttribute("adozione", new Adoption());
+        model.addAttribute("animaleSelezionato", animal);
         return "formAdozioni";
     }
 
     @PostMapping("/backoffice/adozioni/add")
-    public String processForm(@ModelAttribute Adozione adozione, @RequestParam int idAnimale, @RequestParam int idUtente) {
-        Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
-        Utente utente = srvUtente.getById(idUtente);
-        adozione.setAnimale(animale);
-        adozione.setUtente(utente);
-        adozione.setData_adozione(new Date());
-        animale.setData_adozione(new Date());
-        srvAdozione.addAdozione(adozione);
+    public String processForm(@ModelAttribute Adoption adoption, @RequestParam int idAnimale, @RequestParam int idUtente) {
+        Animal animal = srvAnimale.getAnimaleByIdAnimale(idAnimale);
+        User user = srvUtente.getById(idUtente);
+        adoption.setAnimale(animal);
+        adoption.setUtente(user);
+        adoption.setData_adozione(new Date());
+        animal.setData_adozione(new Date());
+        srvAdozione.addAdozione(adoption);
         return "redirect:/adozioni/visualizza";
     }
 
@@ -101,16 +97,16 @@ public String mostraFormAdozione(Model model, Principal principal, @RequestParam
     }
 
 
-    Utente utente = rifugioServiceUtente.findByEmail(principal.getName());
-    if (utente == null) {
+    User user = rifugioServiceUtente.findByEmail(principal.getName());
+    if (user == null) {
         return "errore_richiesta_login"; // utente non trovato (caso raro)
     }
 
 
-    Animale animale = srvAnimale.getAnimaleByIdAnimale(idAnimale);
-    model.addAttribute("utenteLoggato", utente);
-    model.addAttribute("animaleSelezionato", animale);
-    model.addAttribute("adozione", new Adozione());
+    Animal animal = srvAnimale.getAnimaleByIdAnimale(idAnimale);
+    model.addAttribute("utenteLoggato", user);
+    model.addAttribute("animaleSelezionato", animal);
+    model.addAttribute("adozione", new Adoption());
 
 
     return "formAdozioni";
@@ -119,15 +115,15 @@ public String mostraFormAdozione(Model model, Principal principal, @RequestParam
 
     @GetMapping("/backoffice/adozioni/edit/{id}")
     public String modificaAdozione(@PathVariable("id") int id, Model m) {
-        Adozione adozione = srvAdozione.getAdozioneById(id);
-        m.addAttribute("adozione", adozione);
+        Adoption adoption = srvAdozione.getAdozioneById(id);
+        m.addAttribute("adozione", adoption);
         m.addAttribute("animali", srvAnimale.getAnimali());
         return "formUpdateAdozioni";
     }
 
     @PostMapping("/backoffice/adozioni/update/{id}")
-    public String updateAdozione(@PathVariable("id") int id, @ModelAttribute("adozione") Adozione aggiornata) {
-        Adozione esistente = srvAdozione.getAdozioneById(id);
+    public String updateAdozione(@PathVariable("id") int id, @ModelAttribute("adozione") Adoption aggiornata) {
+        Adoption esistente = srvAdozione.getAdozioneById(id);
         esistente.setData_adozione(aggiornata.getData_adozione());
         esistente.setAnimale(aggiornata.getAnimale());
         srvAdozione.addAdozione(esistente);

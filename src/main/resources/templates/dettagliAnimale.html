@@ -34,7 +34,7 @@
         <li><strong>Taglia:</strong> <span th:text="${animale.taglia}"></span></li>
         <li><strong>Colore:</strong> <span th:text="${animale.colore}"></span></li>
         <li><strong>Data di arrivo:</strong> <span th:text="${animale.data_arrivo}"></span></li>
-        <li><strong>Data di adozione:</strong> <span th:text="${animale.data_adozione}"></span></li>
+        <li><strong>Data di adoption:</strong> <span th:text="${animale.data_adozione}"></span></li>
     </ul>
 
 
@@ -42,12 +42,12 @@
     <h1 th:text="'Diario di ' + ${animale.nome}">Diario</h1>
 
 <ul>
-    <li th:each="diario : ${diari}">
-        <strong>Storia dell'animale:</strong> <span th:text="${diario.storia_animale}"></span><br/>
-        <strong>Stato di salute:</strong> <span th:text="${diario.stato_salute}"></span><br/>
-        <strong>Stato comportamentale:</strong> <span th:text="${diario.stato_comportamentale}"></span><br/>
-        <strong>Vaccinazioni:</strong> <span th:text="${diario.vaccinazioni}"></span><br/>
-        <strong>Operazioni effettuate:</strong> <span th:text="${diario.operazioni_effettuate}"></span>
+    <li th:each="diary : ${diari}">
+        <strong>Storia dell'animale:</strong> <span th:text="${diary.storia_animale}"></span><br/>
+        <strong>Stato di salute:</strong> <span th:text="${diary.stato_salute}"></span><br/>
+        <strong>Stato comportamentale:</strong> <span th:text="${diary.stato_comportamentale}"></span><br/>
+        <strong>Vaccinazioni:</strong> <span th:text="${diary.vaccinazioni}"></span><br/>
+        <strong>Operazioni effettuate:</strong> <span th:text="${diary.operazioni_effettuate}"></span>
     </li>
 </ul>
 

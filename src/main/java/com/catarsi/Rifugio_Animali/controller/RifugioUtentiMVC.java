@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.User;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceUtenteImpl;
 import com.catarsi.Rifugio_Animali.sign_in.RegistrazioneUtente;

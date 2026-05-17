@@ -1,6 +1,6 @@
 package com.catarsi.Rifugio_Animali.controller;
 
-import com.catarsi.Rifugio_Animali.model.Ente;
+import com.catarsi.Rifugio_Animali.model.Organization;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceEnte;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,33 +20,33 @@ public class RifugioEnteMVC {
 
     @GetMapping
     public String listaEnti(Model model) {
-        List<Ente> enti = service.getAllEnti();
+        List<Organization> enti = service.getAllEnti();
         model.addAttribute("enti", enti);
         return "backofficeVistaEnti";
     }
 
     @GetMapping("/aggiungi")
     public String formAggiunta(Model model) {
-        model.addAttribute("ente", new Ente());
+        model.addAttribute("ente", new Organization());
         return "backofficeAggiungiEnte";
     }
 
     @PostMapping("/aggiungi")
-    public String processaAggiunta(@ModelAttribute Ente ente) {
-        service.addEnte(ente);
+    public String processaAggiunta(@ModelAttribute Organization organization) {
+        service.addEnte(organization);
         return "redirect:/backoffice/enti";
     }
 
     @GetMapping("/modifica/{id}")
     public String formModifica(@PathVariable("id") int id, Model model) {
-        Ente ente = service.getEnteById(id);
-        model.addAttribute("ente", ente);
+        Organization organization = service.getEnteById(id);
+        model.addAttribute("ente", organization);
         return "backofficeUpdateEnti";
     }
 
     @PostMapping("/modifica/{id}")
-    public String processaModifica(@PathVariable("id") int id, @ModelAttribute Ente aggiornato) {
-        Ente esistente = service.getEnteById(id);
+    public String processaModifica(@PathVariable("id") int id, @ModelAttribute Organization aggiornato) {
+        Organization esistente = service.getEnteById(id);
         esistente.setNome(aggiornato.getNome());
         esistente.setEmail(aggiornato.getEmail());
         esistente.setTelefono(aggiornato.getTelefono());

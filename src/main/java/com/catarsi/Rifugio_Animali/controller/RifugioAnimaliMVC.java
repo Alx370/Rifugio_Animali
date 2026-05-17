@@ -1,7 +1,7 @@
 package com.catarsi.Rifugio_Animali.controller;
 
-import com.catarsi.Rifugio_Animali.model.Animale;
-import com.catarsi.Rifugio_Animali.model.Diario;
+import com.catarsi.Rifugio_Animali.model.Animal;
+import com.catarsi.Rifugio_Animali.model.Diary;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoAnimale;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDiario;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAnimali;
@@ -42,9 +42,9 @@ public class RifugioAnimaliMVC {
 
     @GetMapping("/animali/dettaglio/{id}")
     public String dettaglioAnimale(@PathVariable int id, Model model) {
-        Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
-        List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
-        model.addAttribute("animale", animale);
+        Animal animal = srvAnimale.getAnimaleByIdAnimale(id);
+        List<Diary> diari = srvDiario.getDiariByAnimaleId(animal.getId_animale());
+        model.addAttribute("animale", animal);
         model.addAttribute("diari", diari);
         return "dettagliAnimale";
     }
@@ -64,35 +64,35 @@ public class RifugioAnimaliMVC {
 
     @GetMapping("/backoffice/animali/add")
     public String showForm(Model model) {
-        model.addAttribute("animale", new Animale());
+        model.addAttribute("animale", new Animal());
         return "backofficeAddAnimali";
     }
 
     @PostMapping("/backoffice/animali/add")
-    public String processForm(@ModelAttribute Animale animale) {
-        srvAnimale.addAnimale(animale);
+    public String processForm(@ModelAttribute Animal animal) {
+        srvAnimale.addAnimale(animal);
         return "redirect:/backoffice/animali";
     }
 
     @GetMapping("backoffice/animali/dettaglio/{id}")
     public String BackofficeDettaglioAnimale(@PathVariable int id, Model model) {
-        Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
-        List<Diario> diari = srvDiario.getDiariByAnimaleId(animale.getId_animale());
-        model.addAttribute("animale", animale);
+        Animal animal = srvAnimale.getAnimaleByIdAnimale(id);
+        List<Diary> diari = srvDiario.getDiariByAnimaleId(animal.getId_animale());
+        model.addAttribute("animale", animal);
         model.addAttribute("diari", diari);
         return "backofficeDettagliAnimali";
     }
 
     @GetMapping("/animali/edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model) {
-        Animale animale = srvAnimale.getAnimaleByIdAnimale(id);
-        model.addAttribute("animale", animale);
+        Animal animal = srvAnimale.getAnimaleByIdAnimale(id);
+        model.addAttribute("animale", animal);
         return "AnimaliEdit";
     }
 
     @PostMapping("/animali/update/{id}")
-    public String updateAnimale(@PathVariable("id") int id, @ModelAttribute("animale") Animale aggiornato) {
-        Animale esistente = srvAnimale.getAnimaleByIdAnimale(id);
+    public String updateAnimale(@PathVariable("id") int id, @ModelAttribute("animale") Animal aggiornato) {
+        Animal esistente = srvAnimale.getAnimaleByIdAnimale(id);
         esistente.setNome(aggiornato.getNome());
         esistente.setSpecie(aggiornato.getSpecie());
         esistente.setRazza(aggiornato.getRazza());
@@ -115,7 +115,7 @@ public class RifugioAnimaliMVC {
             @RequestParam(required = false) Integer eta,
             Model model
     ) {
-        List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
+        List<Animal> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
         model.addAttribute("animali", animaliFiltrati);
         return "Animali"; // la pagina che mostra la lista filtrata
     }
@@ -130,7 +130,7 @@ public class RifugioAnimaliMVC {
             @RequestParam(required = false) Integer eta,
             Model model
     ) {
-        List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
+        List<Animal> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
         model.addAttribute("animali", animaliFiltrati);
         return "backofficeVistaAnimali";
     }
@@ -145,7 +145,7 @@ public class RifugioAnimaliMVC {
             @RequestParam(required = false) Integer eta,
             Model model
     ) {
-        List<Animale> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
+        List<Animal> animaliFiltrati = srvAnimale.filtraAnimali(nome, sesso, specie, razza, peso, eta);
         model.addAttribute("animali", animaliFiltrati);
         return "visualizzaAnimaliAdozione";
     }

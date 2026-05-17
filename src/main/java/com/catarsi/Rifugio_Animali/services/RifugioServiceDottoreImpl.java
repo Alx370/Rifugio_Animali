@@ -2,10 +2,11 @@ package com.catarsi.Rifugio_Animali.services;
 
 import java.util.List;
 
+import com.catarsi.Rifugio_Animali.model.Veterinarian;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.catarsi.Rifugio_Animali.model.Dottore;
+import com.catarsi.Rifugio_Animali.model.Veterinarian;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDottore;
 
 @Service
@@ -15,17 +16,17 @@ public class RifugioServiceDottoreImpl implements RifugioServiceDottore{
     private RifugioRepoDottore repo_dottore;
 
     @Override
-    public List<Dottore> getDottori(){
+    public List<Veterinarian> getDottori(){
         return repo_dottore.findAll();
     }
 
     @Override 
-    public Dottore addDottore(Dottore d){
+    public Veterinarian addDottore(Veterinarian d){
         return repo_dottore.save(d);
     }
 
     @Override
-    public Dottore getDottoreById(int id) {
+    public Veterinarian getDottoreById(int id) {
         return repo_dottore.findById(id).orElse(null); 
     }
 

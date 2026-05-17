@@ -1,6 +1,6 @@
 package com.catarsi.Rifugio_Animali.services;
 
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.User;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
 
 import java.util.List;
@@ -16,19 +16,19 @@ public class RifugioServiceUtenteImpl implements RifugioServiceUtente {
 
     // Salva o aggiorna un utente
     @Override
-    public Utente save(Utente u) {
+    public User save(User u) {
         return utente_repo.save(u);
     }
 
     // Recupera tutti gli utenti
     @Override
-    public List<Utente> getAll() {
+    public List<User> getAll() {
         return utente_repo.findAll();
     }
 
     // Recupera un utente per ID
     @Override
-    public Utente getById(Integer id) {
+    public User getById(Integer id) {
         return utente_repo.findById(id).orElse(null);
     }
 
@@ -39,13 +39,13 @@ public class RifugioServiceUtenteImpl implements RifugioServiceUtente {
     }
 
     @Override
-    public Utente findByEmail(String email) {
+    public User findByEmail(String email) {
         return utente_repo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato con email: " + email));
     }
 
     @Override
-    public List <Utente> getUtenti() {
+    public List <User> getUtenti() {
         return utente_repo.findAll();
     }
 

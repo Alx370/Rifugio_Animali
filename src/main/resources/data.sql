@@ -1,12 +1,12 @@
 -- popolamento delle tabelle
 
-INSERT INTO Utente (nome, cognome, email, password, telefono, sesso, data_nascita, ruolo) VALUES
-('Luca',  'Rossi',   'luca.rossi@email.com',   '$2a$10$21QqnrmtgJYp4MqxD62AyuqdY2CulFKKM3tNH.xWrMnLaoOWJIT1K', '3331112222', 'M', '1990-05-15', 'ADMIN'),     -- luca
-('Anna',  'Bianchi', 'anna.bianchi@email.com', '$2a$10$DYBbLRzdBogU4MWO0IHiwu0m8UxX3qAnE.xRDd4hH4EsA4/Dx8YI6', '3333334444', 'F', '1985-08-22', 'USER'),      -- anna
-('Marco', 'Verdi',   'marco.verdi@email.com',  '$2a$10$jo56at4LsykHIuNBeUzdaOrnmIZPuDqRmHyS14d.RtT03GEO7PZaG', NULL,          'M', '2000-01-10', 'USER'),     -- marco
-('Sara',  'Neri',    'sara.neri@email.com',    '$2a$10$VQJZJFmPBt2KjviunU8ZZOiMehdndxUMeGmal/njc.aP2JpijiIMu', '3205551234', 'F', '1995-07-12', 'USER'),     -- sara
-('Paolo', 'Gallo',   'paolo.gallo@email.com',  '$2a$10$Yani46jP5TJTsQZVmaZv1eBaEROWimojLiAuhYJmxx6Y2tU4x2sI2', '3396667777', 'M', '1988-11-30', 'USER'),     -- paolo
-('Elisa', 'Fontana', 'elisa.fontana@email.com','$2a$10$cRj2waC/H1F7m6/qiJppbOP7yi7xDmx3d//LWKneih.2RfrWQ4Cs6', NULL,          'F', '1992-03-03', 'USER');     -- elisa
+INSERT INTO Utente (uuid, nome, cognome, email, password_hash, telefono, sesso, data_nascita, ruolo) VALUES
+('utente-luca-rossi-000000000001', 'Luca',  'Rossi',   'luca.rossi@email.com',   '$2a$10$21QqnrmtgJYp4MqxD62AyuqdY2CulFKKM3tNH.xWrMnLaoOWJIT1K', '3331112222', 'M', '1990-05-15', 'ADMIN'),     -- luca
+('utente-anna-bianchi-0000000002', 'Anna',  'Bianchi', 'anna.bianchi@email.com', '$2a$10$DYBbLRzdBogU4MWO0IHiwu0m8UxX3qAnE.xRDd4hH4EsA4/Dx8YI6', '3333334444', 'F', '1985-08-22', 'USER'),      -- anna
+('utente-marco-verdi-00000000003', 'Marco', 'Verdi',   'marco.verdi@email.com',  '$2a$10$jo56at4LsykHIuNBeUzdaOrnmIZPuDqRmHyS14d.RtT03GEO7PZaG', NULL,          'M', '2000-01-10', 'USER'),     -- marco
+('utente-sara-neri-000000000004',  'Sara',  'Neri',    'sara.neri@email.com',    '$2a$10$VQJZJFmPBt2KjviunU8ZZOiMehdndxUMeGmal/njc.aP2JpijiIMu', '3205551234', 'F', '1995-07-12', 'USER'),     -- sara
+('utente-paolo-gallo-0000000005',  'Paolo', 'Gallo',   'paolo.gallo@email.com',  '$2a$10$Yani46jP5TJTsQZVmaZv1eBaEROWimojLiAuhYJmxx6Y2tU4x2sI2', '3396667777', 'M', '1988-11-30', 'USER'),     -- paolo
+('utente-elisa-fontana-000000006', 'Elisa', 'Fontana', 'elisa.fontana@email.com','$2a$10$cRj2waC/H1F7m6/qiJppbOP7yi7xDmx3d//LWKneih.2RfrWQ4Cs6', NULL,          'F', '1992-03-03', 'USER');     -- elisa
 
 
 INSERT INTO Ente (NOME, EMAIL, TELEFONO) VALUES
@@ -35,18 +35,18 @@ INSERT INTO Dottore (NOME, COGNOME, EMAIL, TELEFONO, SESSO) VALUES
 ('Antonio', 'Morelli', 'antonio.morelli@vet.it', '3483344556', 'M');
 
 
-INSERT INTO Animale (SPECIE, NOME, DATA_ARRIVO, DATA_ADOZIONE, RAZZA, SESSO, PESO, ETA, TAGLIA, COLORE, SEGNI_PARTICOLARI) VALUES
-('Cane', 'Javier', '2024-01-10', '2024-03-05', 'Labrador', 'M', 25.50, 3, 'Grande', 'Marrone', 'Cicatrice sulla zampa posteriore'),
-('Gatto', 'Zorro', '2024-02-14', NULL, 'Europeo', 'F', 4.30, 2, 'Piccola', 'Tigrato', 'Coda storta'),
-('Cane', 'Luffy', '2024-03-01', '2024-04-10', 'Bulldog', 'F', 18.20, 5, 'Media', 'Bianco', ''),
-('Gatto', 'Bob', '2024-03-20', NULL, 'Siamese', 'M', 3.90, 1, 'Piccola', 'Crema', 'Occhi azzurri'),
-('Coniglio', 'Vera', '2024-04-01', NULL, 'Nano', 'F', 1.10, 2, 'Piccola', 'Bianco e nero', ''),
-('Cane', 'Rex', '2024-05-10', NULL, 'Pastore Tedesco', 'M', 30.0, 4, 'Grande', 'Nero e marrone', ''),
-('Gatto', 'Mia', '2024-06-01', NULL, 'Persiano', 'F', 4.5, 3, 'Piccola', 'Grigia', 'Occhi verdi'),
-('Cane', 'Bruno', '2024-05-15', NULL, 'Golden Retriever', 'M', 28.0, 5, 'Grande', 'Dorato', ''),
-('Gatto', 'Luna', '2024-05-20', '2024-06-20', 'Siberiano', 'F', 5.0, 2, 'Media', 'Bianco e nero', ''),
-('Coniglio', 'Pippo', '2024-04-22', NULL, 'Nano', 'M', 1.2, 1, 'Piccola', 'Bianco', ''),
-('Cane', 'Max', '2024-04-15', '2024-06-01', 'Meticcio', 'M', 20.00, 4, 'Media', 'Nero', 'Zampa anteriore più corta');
+INSERT INTO Animale (SPECIE, NOME, DATA_ARRIVO, DATA_NASCITA, DATA_ADOZIONE, RAZZA, SESSO, PESO, TAGLIA, COLORE, SEGNI_PARTICOLARI) VALUES
+('Cane', 'Javier', '2024-01-10', '2021-01-10', '2024-03-05', 'Labrador', 'M', 25.50, 'Grande', 'Marrone', 'Cicatrice sulla zampa posteriore'),
+('Gatto', 'Zorro', '2024-02-14', '2022-02-14', NULL, 'Europeo', 'F', 4.30, 'Piccola', 'Tigrato', 'Coda storta'),
+('Cane', 'Luffy', '2024-03-01', '2019-03-01', '2024-04-10', 'Bulldog', 'F', 18.20, 'Media', 'Bianco', ''),
+('Gatto', 'Bob', '2024-03-20', '2023-03-20', NULL, 'Siamese', 'M', 3.90, 'Piccola', 'Crema', 'Occhi azzurri'),
+('Coniglio', 'Vera', '2024-04-01', '2022-04-01', NULL, 'Nano', 'F', 1.10, 'Piccola', 'Bianco e nero', ''),
+('Cane', 'Rex', '2024-05-10', '2020-05-10', NULL, 'Pastore Tedesco', 'M', 30.0, 'Grande', 'Nero e marrone', ''),
+('Gatto', 'Mia', '2024-06-01', '2021-06-01', NULL, 'Persiano', 'F', 4.5, 'Piccola', 'Grigia', 'Occhi verdi'),
+('Cane', 'Bruno', '2024-05-15', '2019-05-15', NULL, 'Golden Retriever', 'M', 28.0, 'Grande', 'Dorato', ''),
+('Gatto', 'Luna', '2024-05-20', '2022-05-20', '2024-06-20', 'Siberiano', 'F', 5.0, 'Media', 'Bianco e nero', ''),
+('Coniglio', 'Pippo', '2024-04-22', '2023-04-22', NULL, 'Nano', 'M', 1.2, 'Piccola', 'Bianco', ''),
+('Cane', 'Max', '2024-04-15', '2020-04-15', '2024-06-01', 'Meticcio', 'M', 20.00, 'Media', 'Nero', 'Zampa anteriore piu corta');
 
 
 INSERT INTO Adozione (ID_ANIMALE, ID_UTENTE, DATA_ADOZIONE) VALUES
@@ -73,7 +73,7 @@ INSERT INTO Donazione (ID_UTENTE, ID_ENTE, DATA, SOMMA) VALUES
 (6, 3, '2024-06-12', 60.00);
 
 
-INSERT INTO diario (Id_animale, storia_animale, stato_salute, stato_comportamentale, vaccinazioni, operazioni_effettuate) VALUES
+INSERT INTO diary (Id_animale, storia_animale, stato_salute, stato_comportamentale, vaccinazioni, operazioni_effettuate) VALUES
 (1, 'Recuperato da un canile abusivo, inizialmente molto diffidente. Adottato dopo un percorso di socializzazione.', 'Buona, vaccinato e in forma.', 'Tranquillo e socievole.', 'Vaccino trivalente, antirabbica', 'Sterilizzazione'),
 (2, 'Trovata abbandonata vicino a un cassonetto. Ha ricevuto cure veterinarie e sta recuperando peso.', 'In recupero, sotto osservazione per anemia.', 'Tende a nascondersi, ma non aggressiva.', 'Vaccino trivalente', NULL),
 (3, 'Consegnato da una famiglia che non poteva più tenerlo. Problemi respiratori al primo controllo.', 'Stabile, sotto controllo con terapia.', 'Affettuosa ma pigra.', 'Vaccino trivalente', 'Terapia respiratoria'),

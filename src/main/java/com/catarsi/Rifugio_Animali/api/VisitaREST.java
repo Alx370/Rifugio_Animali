@@ -1,6 +1,6 @@
 package com.catarsi.Rifugio_Animali.api;
 
-import com.catarsi.Rifugio_Animali.model.Visita;
+import com.catarsi.Rifugio_Animali.model.Visit;
 import com.catarsi.Rifugio_Animali.services.RifugioServicesVisita;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +15,23 @@ public class VisitaREST {
     private RifugioServicesVisita service;
 
     @GetMapping
-    public List<Visita> getAll() {
+    public List<Visit> getAll() {
         return service.getAll();
     }
 
     @GetMapping("/{id}")
-    public Visita getById(@PathVariable Integer id) {
+    public Visit getById(@PathVariable Integer id) {
         return service.getById(id);
     }
 
     @PostMapping
-    public Visita create(@RequestBody Visita visita) {
-        return service.save(visita);
+    public Visit create(@RequestBody Visit visit) {
+        return service.save(visit);
     }
 
     @PutMapping("/{id}")
-    public Visita update(@PathVariable Integer id, @RequestBody Visita aggiornato) {
-        Visita esistente = service.getById(id);
+    public Visit update(@PathVariable Integer id, @RequestBody Visit aggiornato) {
+        Visit esistente = service.getById(id);
 
         // Aggiorna manualmente i campi di Visita
         esistente.setData_visita (aggiornato.getData_visita());

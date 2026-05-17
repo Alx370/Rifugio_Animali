@@ -1,6 +1,6 @@
 package com.catarsi.Rifugio_Animali.api;
 
-import com.catarsi.Rifugio_Animali.model.Adozione;
+import com.catarsi.Rifugio_Animali.model.Adoption;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAdozione;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +15,23 @@ public class AdozioneREST {
     private RifugioServiceAdozione service;
 
     @GetMapping
-    public List<Adozione> getAll() {
+    public List<Adoption> getAll() {
         return service.getAdozioni();
     }
 
     @PostMapping
-    public Adozione create(@RequestBody Adozione a) {
+    public Adoption create(@RequestBody Adoption a) {
         return service.addAdozione(a);
     }
 
     @GetMapping("/{id}")
-    public Adozione getById(@PathVariable int id) {
+    public Adoption getById(@PathVariable int id) {
         return service.getById(id);
     }
 
     @PutMapping("/{id}")
-    public Adozione update(@PathVariable int id, @RequestBody Adozione aggiornato) {
-        Adozione esistente = service.getById(id);
+    public Adoption update(@PathVariable int id, @RequestBody Adoption aggiornato) {
+        Adoption esistente = service.getById(id);
 
         // aggiorna manualmente i campi
         esistente.setUtente(aggiornato.getUtente());

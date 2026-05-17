@@ -1,6 +1,6 @@
 package com.catarsi.Rifugio_Animali.api;
 
-import com.catarsi.Rifugio_Animali.model.Ente;
+import com.catarsi.Rifugio_Animali.model.Organization;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceEnte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +15,23 @@ public class EnteREST {
     private RifugioServiceEnte service;
 
     @GetMapping
-    public List<Ente> getAll() {
+    public List<Organization> getAll() {
         return service.getAllEnti();
     }
 
     @GetMapping("/{id}")
-    public Ente getById(@PathVariable Integer id) {
+    public Organization getById(@PathVariable Integer id) {
         return service.getEnteById(id);
     }
 
     @PostMapping
-    public Ente create(@RequestBody Ente ente) {
-        return service.addEnte(ente);
+    public Organization create(@RequestBody Organization organization) {
+        return service.addEnte(organization);
     }
 
     @PutMapping("/{id}")
-    public Ente update(@PathVariable Integer id, @RequestBody Ente aggiornato) {
-        Ente esistente = service.getEnteById(id);
+    public Organization update(@PathVariable Integer id, @RequestBody Organization aggiornato) {
+        Organization esistente = service.getEnteById(id);
 
         // aggiorna manualmente i campi dell'ente
         esistente.setNome(aggiornato.getNome());

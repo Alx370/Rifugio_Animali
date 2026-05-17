@@ -25,7 +25,7 @@
     <div class="main-content">
         <div class="form-container">
             <h2>Aggiungi Nuovo Diario</h2>
-            <form id="diarioForm" method="post" th:action="@{/backoffice/diario/add}" th:object="${diario}">
+            <form id="diarioForm" method="post" th:action="@{/backoffice/diary/add}" th:object="${diary}">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
                 <label for="animale"><b>Animale</b></label>

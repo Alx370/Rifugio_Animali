@@ -1,93 +1,156 @@
--- popolamento delle tabelle
-create database rifugio_animali;
-use rifugio_animali;
--- creazione delle tabelle
+CREATE OR REPLACE FUNCTION update_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
 
-CREATE TABLE IF NOT EXISTS Utente (
-  Id_utente     INT PRIMARY KEY AUTO_INCREMENT,
-  nome          VARCHAR(30) NOT NULL,
-  cognome       VARCHAR(30) NOT NULL,
-  email         VARCHAR(100) NOT NULL UNIQUE,
-  password      VARCHAR(255) NOT NULL,
-  telefono      VARCHAR(20),
-  sesso         CHAR(1),
-  data_nascita  DATE,
-  ruolo         VARCHAR(20) NOT NULL DEFAULT 'USER'
-);
+CREATE TABLE IF NOT EXISTS utente (
+                                      id                SERIAL PRIMARY KEY,
+                                      uuid              VARCHAR(30) NOT NULL UNIQUE,
+    nome              VARCHAR(30) NOT NULL,
+    cognome           VARCHAR(30) NOT NULL,
+    email             VARCHAR(100) NOT NULL UNIQUE,
+    password_hash     VARCHAR(255) NOT NULL,
+    telefono          VARCHAR(20),
+    sesso             CHAR(1) CHECK (sesso IN ('M', 'F', 'A')),
+    data_nascita      DATE,
+    ruolo             VARCHAR(20) NOT NULL DEFAULT 'USER',
+    attivo            BOOLEAN DEFAULT TRUE,
+    created_at        TIMESTAMP DEFAULT NOW(),
+    updated_at        TIMESTAMP DEFAULT NOW()
+    );
 
-CREATE TABLE IF NOT EXISTS Ente (
-  Id_ente     INT PRIMARY KEY AUTO_INCREMENT,
-  nome        VARCHAR(100) NOT NULL,
-  email       VARCHAR(100),
-  telefono    VARCHAR(20)
-);
+CREATE TRIGGER trg_utente_updated
+    BEFORE UPDATE ON utente
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
 
-CREATE TABLE IF NOT EXISTS Donazione (
-  Id_donazione     INT PRIMARY KEY AUTO_INCREMENT,
-  Id_utente        INT,
-  Id_ente          INT,
-  data             DATE NOT NULL,
-  somma            DECIMAL(10,2) NOT NULL,
-  CONSTRAINT fk_don_utente FOREIGN KEY (id_utente) REFERENCES Utente(id_utente),
-  CONSTRAINT fk_don_ente FOREIGN KEY (id_ente) REFERENCES Ente(id_ente)
-);
+CREATE INDEX idx_utente_email ON utente(email);
 
-CREATE TABLE IF NOT EXISTS Dottore (
-  Id_dottore   INT PRIMARY KEY AUTO_INCREMENT,
-  nome         VARCHAR(30) NOT NULL,
-  cognome      VARCHAR(30) NOT NULL,
-  email        VARCHAR(100) NOT NULL UNIQUE,
-  telefono     VARCHAR(20),
-  sesso        CHAR(1)
-);
+CREATE TABLE IF NOT EXISTS organization (
+                                    id          SERIAL PRIMARY KEY,
+                                    nome        VARCHAR(100) NOT NULL,
+    email       VARCHAR(100),
+    telefono    VARCHAR(20),
+    created_at  TIMESTAMP DEFAULT NOW(),
+    updated_at  TIMESTAMP DEFAULT NOW()
+    );
 
-CREATE TABLE IF NOT EXISTS Animale (
-  Id_animale          INT PRIMARY KEY AUTO_INCREMENT,
-  specie              VARCHAR(20) NOT NULL,
-  nome                VARCHAR(20) NULL,
-  data_arrivo         DATE NOT NULL,
-  data_adozione       DATE,
-  razza               VARCHAR(20),
-  sesso               CHAR(1) NOT NULL,
-  peso                DECIMAL(5,2) NOT NULL,
-  eta                 INT,
-  taglia              VARCHAR(20) NOT NULL,
-  colore              VARCHAR(30) NOT NULL,
-  segni_particolari   TEXT
-);
+CREATE TRIGGER trg_ente_updated
+    BEFORE UPDATE ON organization
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
 
-CREATE TABLE IF NOT EXISTS Adozione (
-  Id_adozione     INT PRIMARY KEY AUTO_INCREMENT,
-  Id_animale      INT NOT NULL UNIQUE,
-  Id_utente       INT NOT NULL,
-  data_adozione   DATE NOT NULL,
-  CONSTRAINT fk_adozione_animale FOREIGN KEY (id_animale) REFERENCES Animale(id_animale),
-  CONSTRAINT fk_adozione_utente FOREIGN KEY (id_utente) REFERENCES Utente(id_utente)
-);
+CREATE TABLE IF NOT EXISTS donation (
+                                         id          SERIAL PRIMARY KEY,
+                                         id_utente   INT NOT NULL,
+                                         id_ente     INT NOT NULL,
+                                         data        DATE NOT NULL,
+                                         somma       DECIMAL(10,2) NOT NULL,
+    created_at  TIMESTAMP DEFAULT NOW(),
+    updated_at  TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT fk_don_utente FOREIGN KEY (id_utente) REFERENCES utente(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_don_ente   FOREIGN KEY (id_ente)   REFERENCES organization(id)   ON DELETE RESTRICT ON UPDATE CASCADE
+    );
 
-CREATE TABLE IF NOT EXISTS Visita (
-  Id_visita      INT PRIMARY KEY AUTO_INCREMENT,
-  Id_animale     INT NOT NULL,
-  Id_dottore     INT NOT NULL,
-  data_visita    DATE NOT NULL,
-  descrizione    TEXT,
-  CONSTRAINT fk_visita_animale FOREIGN KEY (id_animale) REFERENCES Animale(id_animale),
-  CONSTRAINT fk_visita_dottore FOREIGN KEY (id_dottore) REFERENCES Dottore(id_dottore)
-);
+CREATE TRIGGER trg_donazione_updated
+    BEFORE UPDATE ON donation
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
 
-CREATE TABLE IF NOT EXISTS Admin_app (
-  Id_admin    INT PRIMARY KEY AUTO_INCREMENT,
-  email       VARCHAR(100) NOT NULL UNIQUE,
-  password    VARCHAR(255) NOT NULL
-);
+CREATE INDEX idx_donazione_utente ON donation(id_utente);
 
-CREATE TABLE IF NOT EXISTS diario (
-  Id_diario    INT PRIMARY KEY AUTO_INCREMENT,
-  Id_animale   INT ,
-  storia_animale TEXT,
-  stato_salute    TEXT NOT NULL,
-  stato_comportamentale TEXT NOT NULL,
-  vaccinazioni TEXT,
-  operazioni_effettuate TEXT,
-  CONSTRAINT FK_id_animale FOREIGN KEY (Id_animale) REFERENCES Animale(Id_animale)
-);
+CREATE TABLE IF NOT EXISTS dottore (
+                                       id            SERIAL PRIMARY KEY,
+                                       nome          VARCHAR(30) NOT NULL,
+    cognome       VARCHAR(30) NOT NULL,
+    email         VARCHAR(100) NOT NULL UNIQUE,
+    telefono      VARCHAR(20),
+    sesso         CHAR(1) CHECK (sesso IN ('M', 'F', 'A')),
+    created_at    TIMESTAMP DEFAULT NOW(),
+    updated_at    TIMESTAMP DEFAULT NOW()
+    );
+
+CREATE TRIGGER trg_dottore_updated
+    BEFORE UPDATE ON dottore
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
+CREATE TABLE IF NOT EXISTS animale (
+                                       id                  SERIAL PRIMARY KEY,
+                                       specie              VARCHAR(20) NOT NULL,
+    nome                VARCHAR(20),
+    microchip           VARCHAR(20) UNIQUE,
+    data_arrivo         DATE NOT NULL,
+    data_nascita        DATE,
+    data_adozione       DATE,
+    razza               VARCHAR(20),
+    sesso               CHAR(1) NOT NULL CHECK (sesso IN ('M', 'F', 'A')),
+    peso                DECIMAL(5,2) NOT NULL,
+    taglia              VARCHAR(20) NOT NULL,
+    colore              VARCHAR(30) NOT NULL,
+    segni_particolari   TEXT,
+    sterilizzato        BOOLEAN DEFAULT FALSE,
+    disponibile_adozione BOOLEAN DEFAULT TRUE,
+    created_at          TIMESTAMP DEFAULT NOW(),
+    updated_at          TIMESTAMP DEFAULT NOW()
+    );
+
+CREATE TRIGGER trg_animale_updated
+    BEFORE UPDATE ON animale
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
+CREATE INDEX idx_animale_specie       ON animale(specie);
+CREATE INDEX idx_animale_disponibile  ON animale(disponibile_adozione);
+
+CREATE TABLE IF NOT EXISTS adoption (
+                                        id            SERIAL PRIMARY KEY,
+                                        id_animale    INT NOT NULL UNIQUE,
+                                        id_utente     INT NOT NULL,
+                                        data_adozione DATE NOT NULL,
+                                        note          TEXT,
+                                        created_at    TIMESTAMP DEFAULT NOW(),
+    updated_at    TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT fk_adozione_animale FOREIGN KEY (id_animale) REFERENCES animale(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_adozione_utente  FOREIGN KEY (id_utente)  REFERENCES utente(id)  ON DELETE RESTRICT ON UPDATE CASCADE
+    );
+
+CREATE TRIGGER trg_adozione_updated
+    BEFORE UPDATE ON adoption
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
+CREATE TABLE IF NOT EXISTS visit (
+                                      id            SERIAL PRIMARY KEY,
+                                      id_animale    INT NOT NULL,
+                                      id_dottore    INT NOT NULL,
+                                      data_visita   DATE NOT NULL,
+                                      tipo_visita   VARCHAR(50),
+    descrizione   TEXT,
+    costo         DECIMAL(8,2),
+    created_at    TIMESTAMP DEFAULT NOW(),
+    updated_at    TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT fk_visita_animale FOREIGN KEY (id_animale) REFERENCES animale(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_visita_dottore FOREIGN KEY (id_dottore) REFERENCES dottore(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    );
+
+CREATE TRIGGER trg_visita_updated
+    BEFORE UPDATE ON visit
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
+
+CREATE INDEX idx_visita_animale ON visit(id_animale);
+
+CREATE TABLE IF NOT EXISTS diary (
+                                      id                      SERIAL PRIMARY KEY,
+                                      id_animale              INT,
+                                      storia_animale          TEXT,
+                                      stato_salute            TEXT NOT NULL,
+                                      stato_comportamentale   TEXT NOT NULL,
+                                      vaccinazioni            TEXT,
+                                      operazioni_effettuate   TEXT,
+                                      data_aggiornamento      TIMESTAMP DEFAULT NOW(),
+    created_at              TIMESTAMP DEFAULT NOW(),
+    updated_at              TIMESTAMP DEFAULT NOW(),
+    CONSTRAINT fk_id_animale FOREIGN KEY (id_animale) REFERENCES animale(id) ON DELETE RESTRICT ON UPDATE CASCADE
+    );
+
+CREATE TRIGGER trg_diario_updated
+    BEFORE UPDATE ON diary
+    FOR EACH ROW EXECUTE FUNCTION update_timestamp();

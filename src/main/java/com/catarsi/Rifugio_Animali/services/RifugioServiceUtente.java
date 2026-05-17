@@ -1,23 +1,23 @@
 package com.catarsi.Rifugio_Animali.services;
 
-import com.catarsi.Rifugio_Animali.model.Utente;
+import com.catarsi.Rifugio_Animali.model.User;
 import java.util.List;
 
 public interface RifugioServiceUtente {
 
     // salva (aggiunge o aggiorna) un utente
-    Utente save(Utente u);
+    User save(User u);
 
     // restituisce tutti gli utenti
-    List<Utente> getAll();
+    List<User> getAll();
 
     // recupera un utente per id
-    Utente getById(Integer id);
+    User getById(Integer id);
 
     // elimina un utente per id
     void delete(Integer id);
 
-    Utente findByEmail(String name);
+    User findByEmail(String name);
 
-    List <Utente> getUtenti();
+    List <User> getUtenti();
 }

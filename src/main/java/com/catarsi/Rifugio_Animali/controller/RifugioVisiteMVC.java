@@ -5,8 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.catarsi.Rifugio_Animali.model.Visita;
-import com.catarsi.Rifugio_Animali.services.RifugioServiceAnimali;
+import com.catarsi.Rifugio_Animali.model.Visit;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceAnimaliImpl;
 import com.catarsi.Rifugio_Animali.services.RifugioServiceDottoreImpl;
 import com.catarsi.Rifugio_Animali.services.RifugioServicesVisitaImpl;
@@ -32,13 +31,13 @@ public class RifugioVisiteMVC {
     public String showFormVisita(Model model) {
         model.addAttribute("animali", srvAnimali.getAnimali());
         model.addAttribute("dottori", srvDottori.getDottori());
-        model.addAttribute("visita", new Visita());
+        model.addAttribute("visita", new Visit());
         return "backofficeAggiungiVisita";
     }
 
     @PostMapping("/nuova-visita")
-    public String salvaVisita(Visita visita) {
-        srvVisite.salvaVisita(visita); // Assicurati che esista questo metodo
+    public String salvaVisita(Visit visit) {
+        srvVisite.salvaVisita(visit); // Assicurati che esista questo metodo
         return "redirect:/visite-veterinarie/";
     }
 
@@ -51,7 +50,7 @@ public class RifugioVisiteMVC {
     // modifica in due parti prima vai nella pagina di modifica
     @GetMapping("/{id}/modifica")
     public String showModificaForm(@PathVariable int id, Model m){
-        Visita v=srvVisite.getById(id);
+        Visit v=srvVisite.getById(id);
         m.addAttribute("animali", srvAnimali.getAnimali());
         m.addAttribute("dottori", srvDottori.getDottori());
         m.addAttribute("visita",v); //passo due argomenti il primo nome dell'attributo e il secondo il valore associato all'attributo
@@ -59,15 +58,15 @@ public class RifugioVisiteMVC {
     }
 
     @PutMapping("/{id}")
-    public String modificaVisita(@PathVariable int id, @ModelAttribute("visita") Visita visitaAggiornata) {
-        Visita visitaEsistente = srvVisite.getById(id);
+    public String modificaVisita(@PathVariable int id, @ModelAttribute("visita") Visit visitAggiornata) {
+        Visit visitEsistente = srvVisite.getById(id);
 
-        visitaEsistente.setData_visita(visitaAggiornata.getData_visita());
-        visitaEsistente.setDescrizione(visitaAggiornata.getDescrizione());
-        visitaEsistente.setAnimale(visitaAggiornata.getAnimale());
-        visitaEsistente.setDottore(visitaAggiornata.getDottore());
+        visitEsistente.setData_visita(visitAggiornata.getData_visita());
+        visitEsistente.setDescrizione(visitAggiornata.getDescrizione());
+        visitEsistente.setAnimale(visitAggiornata.getAnimale());
+        visitEsistente.setDottore(visitAggiornata.getDottore());
 
-        srvVisite.save(visitaEsistente);
+        srvVisite.save(visitEsistente);
         return "redirect:/visite-veterinarie";
     }
 

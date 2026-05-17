@@ -36,10 +36,10 @@
       </tr>
     </thead>
     <tbody id="utenteTableBody">
-        <tr th:each="donazione : ${donazioni}">
-        <td th:text="${donazione.utente.email}"></td>
-        <td th:text="${donazione.data}"></td>
-        <td th:text="${donazione.somma}"></td>
+        <tr th:each="donation : ${donazioni}">
+        <td th:text="${donation.utente.email}"></td>
+        <td th:text="${donation.data}"></td>
+        <td th:text="${donation.somma}"></td>
       </tr>
         
 

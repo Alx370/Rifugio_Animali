@@ -25,14 +25,14 @@
   <div class="main-content">
     <div class="form-container">
       <h2>Modifica Visita Veterinaria</h2>
-      <form id="visitaForm" method="post" th:action="@{'/visite-veterinarie/' + ${visita.id_visita}}" th:object="${visita}">
+      <form id="visitaForm" method="post" th:action="@{'/visite-veterinarie/' + ${visit.id_visita}}" th:object="${visit}">
         <input type="hidden" name="_method" value="put" />
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
         <input type="hidden" th:field="*{id_visita}" />
 
         <div class="form-group">
-          <label for="data_visita">Data visita</label>
+          <label for="data_visita">Data visit</label>
           <input type="date" class="form-control" th:field="*{data_visita}" id="data_visita" required />
         </div>
 

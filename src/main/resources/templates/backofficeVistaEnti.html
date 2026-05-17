@@ -33,15 +33,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="table-row" th:each="ente : ${enti}">
-        <td th:text="${ente.nome}"></td>
-        <td th:text="${ente.email}"></td>
-        <td th:text="${ente.telefono}"></td>
+      <tr class="table-row" th:each="organization : ${enti}">
+        <td th:text="${organization.nome}"></td>
+        <td th:text="${organization.email}"></td>
+        <td th:text="${organization.telefono}"></td>
         <td>
-          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/backoffice/enti/elimina/' + ${ente.id_ente}}">Elimina</a>
+          <a class="delete-animal-btn" id="deleteBtn" th:href="@{'/backoffice/enti/elimina/' + ${organization.id_ente}}">Elimina</a>
         </td>
         <td>
-          <a id="updateBtn" class="update-animal-btn" th:href="@{'/backoffice/enti/modifica/' + ${ente.id_ente}}">Modifica</a>
+          <a id="updateBtn" class="update-animal-btn" th:href="@{'/backoffice/enti/modifica/' + ${organization.id_ente}}">Modifica</a>
         </td>
       </tr>
       </tbody>

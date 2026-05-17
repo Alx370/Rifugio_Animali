@@ -27,10 +27,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="donazione : ${donazioni}">
-                    <td th:text="${donazione.utente != null ? donazione.utente.id_utente : 'N/D'}"></td>
-                    <td th:text="${#dates.format(donazione.data, 'dd/MM/yyyy')}"></td>
-                    <td th:text="${donazione.somma + ' €'}"></td>
+                <tr th:each="donation : ${donazioni}">
+                    <td th:text="${donation.utente != null ? donation.utente.id_utente : 'N/D'}"></td>
+                    <td th:text="${#dates.format(donation.data, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${donation.somma + ' €'}"></td>
                 </tr>
             </tbody>
         </table>

@@ -1,26 +1,27 @@
 package com.catarsi.Rifugio_Animali.services;
 
-import com.catarsi.Rifugio_Animali.model.Animale;
+import com.catarsi.Rifugio_Animali.model.Animal;
+import com.catarsi.Rifugio_Animali.model.Animal;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
 public interface RifugioServiceAnimali {
 
-    Animale addAnimale(Animale a);
+    Animal addAnimale(Animal a);
     void deleteAnimale(int id);
-    List<Animale> getAnimali();
+    List<Animal> getAnimali();
 
-    Animale getAnimaleByIdAnimale(int id);
+    Animal getAnimaleByIdAnimale(int id);
 
-    Specification<Animale> nomeContains(String nome);
-    Specification<Animale> sessoEquals(String sesso);
-    Specification<Animale> specieEquals(String specie);
-    Specification<Animale> razzaContains(String razza);
-    Specification<Animale> pesoLessOrEqual(Double peso);
-    Specification<Animale> etaLessOrEqual(Integer eta);
+    Specification<Animal> nomeContains(String nome);
+    Specification<Animal> sessoEquals(String sesso);
+    Specification<Animal> specieEquals(String specie);
+    Specification<Animal> razzaContains(String razza);
+    Specification<Animal> pesoLessOrEqual(Double peso);
+    Specification<Animal> etaLessOrEqual(Integer eta);
 
-    List<Animale> filtraAnimali(String nome, String sesso, String specie, String razza, Double peso, Integer eta);
+    List<Animal> filtraAnimali(String nome, String sesso, String specie, String razza, Double peso, Integer eta);
 }
 
 

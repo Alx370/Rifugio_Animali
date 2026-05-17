@@ -2,10 +2,10 @@ package com.catarsi.Rifugio_Animali.services;
 
 import java.util.List;
 
+import com.catarsi.Rifugio_Animali.model.Diary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.catarsi.Rifugio_Animali.model.Diario;
 import com.catarsi.Rifugio_Animali.repos.RifugioRepoDiario;
 
 @Service
@@ -15,7 +15,7 @@ public class RifugioServiceDiarioImpl implements RifugioServiceDiario{
     private RifugioRepoDiario repo_diario;
 
     @Override
-    public List<Diario> getDiari(){
+    public List<Diary> getDiari(){
         return repo_diario.findAll();
     }
 
@@ -25,25 +25,25 @@ public class RifugioServiceDiarioImpl implements RifugioServiceDiario{
     }
 
     @Override
-    public Diario addDiario(Diario d){
+    public Diary addDiario(Diary d){
         return repo_diario.save(d);
     }
 
     @Override
-    public List<Diario> getDiariByAnimaleId(int animaleId){
+    public List<Diary> getDiariByAnimaleId(int animaleId){
         return repo_diario.findAll().stream()
-                .filter(diario -> diario.getAnimale().getId_animale() == animaleId)
+                .filter(diario -> diario.getAnimal().getId_animale() == animaleId)
                 .toList();
     }
 
     @Override
-    public Diario getDiarioById(int id){
+    public Diary getDiarioById(int id){
         return repo_diario.findById(id)
                 .orElseThrow(() -> new RuntimeException("Diario non trovato con ID: " + id));
     }
 
     @Override
-    public Diario getDiarioByAnimaleId(int idAnimale) {
+    public Diary getDiarioByAnimaleId(int idAnimale) {
         return repo_diario.findByAnimaleId(idAnimale);
     }
 

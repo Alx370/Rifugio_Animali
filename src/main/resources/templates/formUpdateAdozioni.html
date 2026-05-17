@@ -30,15 +30,15 @@
   <div class="main-content">
     <div class="form-container">
       <h2>Modifica Adozione</h2>
-      <form id="animalForm" method="post" th:action="@{/backoffice/adozioni/update/{id}(id=${adozione.id_adozione})}" th:object="${adozione}">
+      <form id="animalForm" method="post" th:action="@{/backoffice/adozioni/update/{id}(id=${adoption.id_adozione})}" th:object="${adoption}">
         <div class="form-group">
           <label for="Id_utente">Utente</label>
-          <th:block th:if="${adozione.utente != null}">
-            <input type="hidden" id="Id_utente" name="utente.email" th:value="${adozione.utente.email}" />
-            <span th:text="${adozione.utente.nome + ' ' + adozione.utente.cognome + ' (' + adozione.utente.email + ')'}"></span>
+          <th:block th:if="${adoption.utente != null}">
+            <input type="hidden" id="Id_utente" name="utente.email" th:value="${adoption.utente.email}" />
+            <span th:text="${adoption.utente.nome + ' ' + adoption.utente.cognome + ' (' + adoption.utente.email + ')'}"></span>
           </th:block>
 
-          <th:block th:if="${adozione.utente == null}">
+          <th:block th:if="${adoption.utente == null}">
             <span>Utente non disponibile</span>
           </th:block>
         </div>
@@ -55,9 +55,9 @@
         </div>
 
         <div class="form-group">
-          <label for="dataAdozione">Data di adozione</label>
+          <label for="dataAdozione">Data di adoption</label>
           <input type="date" class="form-control" id="dataAdozione" name="data_adozione"
-                 th:field="*{data_adozione}" th:value="${#dates.format(adozione.data_adozione, 'yyyy-MM-dd')}" required>
+                 th:field="*{data_adozione}" th:value="${#dates.format(adoption.data_adozione, 'yyyy-MM-dd')}" required>
         </div>
 
         <button type="submit" class="edit-button">Salva Modifiche</button>

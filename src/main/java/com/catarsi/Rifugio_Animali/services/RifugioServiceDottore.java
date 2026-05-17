@@ -1,15 +1,16 @@
 package com.catarsi.Rifugio_Animali.services;
 
 import java.util.List;
-import com.catarsi.Rifugio_Animali.model.Dottore;
+import com.catarsi.Rifugio_Animali.model.Veterinarian;
+import com.catarsi.Rifugio_Animali.model.Veterinarian;
 
 public interface RifugioServiceDottore {
 
-    Dottore addDottore(Dottore d);
+    Veterinarian addDottore(Veterinarian d);
 
-    List<Dottore> getDottori();
+    List<Veterinarian> getDottori();
 
-    Dottore getDottoreById(int id);
+    Veterinarian getDottoreById(int id);
 
     void deleteDottore(int id);
 }
