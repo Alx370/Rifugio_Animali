@@ -1,7 +1,7 @@
 package com.catarsi.Rifugio_Animali.config;
 
-import com.catarsi.Rifugio_Animali.model.User;
-import com.catarsi.Rifugio_Animali.repos.RifugioRepoUtente;
+import com.catarsi.Rifugio_Animali.business.model.User;
+import com.catarsi.Rifugio_Animali.business.repos.RifugioRepoUtente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
