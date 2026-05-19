@@ -36,25 +36,29 @@
                         <th class="header-btn">Data</th>
                         <th class="header-btn">Animale</th>
                         <th class="header-btn">Dottore</th>
+                        <th class="header-btn">Tipo</th>
                         <th class="header-btn">Descrizione</th>
+                        <th class="header-btn">Costo</th>
                         <th></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="table-row" th:each="visit : ${visite}" th:if="${visite != null}">
-                        <td th:text="${visit.data_visita}"></td>
-                        <td th:text="${visit.animale.nome}"></td>
-                        <td th:text="${visit.dottore.nome + ' ' + visit.dottore.cognome}"></td>
-                        <td th:text="${visit.descrizione}"></td>
+                        <td th:text="${visit.visitDate}"></td>
+                        <td th:text="${visit.animal != null ? visit.animal.name : ''}"></td>
+                        <td th:text="${visit.veterinarian != null ? visit.veterinarian.firstName + ' ' + visit.veterinarian.lastName : ''}"></td>
+                        <td th:text="${visit.visitType}"></td>
+                        <td th:text="${visit.description}"></td>
+                        <td th:text="${visit.cost}"></td>
                         <td>
-                            <form th:action="@{/visite-veterinarie/{id}(id=${visit.id_visita})}" method="post">
+                            <form th:action="@{/visite-veterinarie/{id}(id=${visit.id})}" method="post">
                                 <input type="hidden" name="_method" value="delete" />
                                 <button class="delete-animal-btn" type="submit">Elimina</button>
                             </form>
                         </td>
                         <td>
-                            <form th:action="@{'/visite-veterinarie/' + ${visit.id_visita} + '/modifica'}" method="get">
+                            <form th:action="@{'/visite-veterinarie/' + ${visit.id} + '/modifica'}" method="get">
                                 <button class="update-animal-btn" type="submit">Modifica</button>
                             </form>
                         </td>
@@ -64,7 +68,7 @@
             </div>
 
             <div class="control-buttons" style="margin-top: 60px;">
-                <a href="/visite-veterinarie/nuova-visit" class="add-animal-btn">Aggiungi Visita</a>
+                <a href="/visite-veterinarie/nuova-visita" class="add-animal-btn">Aggiungi Visita</a>
             </div>
         </div>
     </div>

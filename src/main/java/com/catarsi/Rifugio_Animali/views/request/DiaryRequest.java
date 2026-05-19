@@ -9,9 +9,9 @@ import java.util.Optional;
 @Getter
 public class DiaryRequest {
     private Optional<Integer> animal;
-    private Optional<String> animal_story;
-    private Optional<String> wealth_status;
-    private Optional<String> beahvioral_status;
+    private Optional<String> animalStory;
+    private Optional<String> healthStatus;
+    private Optional<String> behavioralStatus;
     private Optional<String> vaccinations;
-    private Optional<String> ointments_made;
+    private Optional<String> performedOperations;
 }

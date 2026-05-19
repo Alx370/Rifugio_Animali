@@ -46,17 +46,17 @@ public class DiaryServiceImpl implements DiaryService {
 
         if (dr.getAnimal() != null && dr.getAnimal().isPresent()) {
             Integer AnimalCode = dr.getAnimal().get();
-            if (animalRepository.existsById(AnimalCode)) {
+            if (!animalRepository.existsById(AnimalCode)) {
                 throw new EntityNotFoundException("Animal not found with id: " + AnimalCode);
             }
             diary.setAnimal(animalRepository.getReferenceById(AnimalCode));
         }
 
         dr.getVaccinations().ifPresentOrElse(diary::setVaccinations, () -> diary.setVaccinations(null));
-        dr.getAnimal_story().ifPresentOrElse(diary::setAnimal_story, () -> diary.setAnimal_story(null));
-        dr.getWealth_status().ifPresentOrElse(diary::setWealth_status, () -> diary.setWealth_status(null));
-        dr.getBeahvioral_status().ifPresentOrElse(diary::setBeahvioral_status, () -> diary.setBeahvioral_status(null));
-        dr.getOintments_made().ifPresentOrElse(diary::setOintments_made, () -> diary.setOintments_made(null));
+        dr.getAnimalStory().ifPresentOrElse(diary::setAnimalStory, () -> diary.setAnimalStory(null));
+        dr.getHealthStatus().ifPresentOrElse(diary::setHealthStatus, () -> diary.setHealthStatus(null));
+        dr.getBehavioralStatus().ifPresentOrElse(diary::setBehavioralStatus, () -> diary.setBehavioralStatus(null));
+        dr.getPerformedOperations().ifPresentOrElse(diary::setPerformedOperations, () -> diary.setPerformedOperations(null));
 
         Diary saved = repository.save(diary);
         return saved.getId();
@@ -68,17 +68,17 @@ public class DiaryServiceImpl implements DiaryService {
 
         if (dr.getAnimal() != null && dr.getAnimal().isPresent()) {
             Integer AnimalCode = dr.getAnimal().get();
-            if (animalRepository.existsById(AnimalCode)) {
+            if (!animalRepository.existsById(AnimalCode)) {
                 throw new EntityNotFoundException("Animal not found with id: " + AnimalCode);
             }
             diary.setAnimal(animalRepository.getReferenceById(AnimalCode));
         }
 
         dr.getVaccinations().ifPresentOrElse(diary::setVaccinations, () -> diary.setVaccinations(null));
-        dr.getAnimal_story().ifPresentOrElse(diary::setAnimal_story, () -> diary.setAnimal_story(null));
-        dr.getWealth_status().ifPresentOrElse(diary::setWealth_status, () -> diary.setWealth_status(null));
-        dr.getBeahvioral_status().ifPresentOrElse(diary::setBeahvioral_status, () -> diary.setBeahvioral_status(null));
-        dr.getOintments_made().ifPresentOrElse(diary::setOintments_made, () -> diary.setOintments_made(null));
+        dr.getAnimalStory().ifPresentOrElse(diary::setAnimalStory, () -> diary.setAnimalStory(null));
+        dr.getHealthStatus().ifPresentOrElse(diary::setHealthStatus, () -> diary.setHealthStatus(null));
+        dr.getBehavioralStatus().ifPresentOrElse(diary::setBehavioralStatus, () -> diary.setBehavioralStatus(null));
+        dr.getPerformedOperations().ifPresentOrElse(diary::setPerformedOperations, () -> diary.setPerformedOperations(null));
     }
 
     @Override
@@ -88,14 +88,6 @@ public class DiaryServiceImpl implements DiaryService {
         }
         repository.deleteById(id);
     }
-
-    // ------------------------------------------------------------
-
-    @Override
-    public Diary getDiarioByAnimaleId(int idAnimale) {
-        return repo_diario.findByAnimaleId(idAnimale);
-    }
-
 
 }
 

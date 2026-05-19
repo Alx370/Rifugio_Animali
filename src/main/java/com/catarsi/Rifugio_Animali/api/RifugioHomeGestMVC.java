@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.catarsi.Rifugio_Animali.business.services.impl.AdoptionServiceImpl;
 import com.catarsi.Rifugio_Animali.business.services.impl.AnimalServiceImpl;
-import com.catarsi.Rifugio_Animali.business.services.impl.RifugioServiceDonazioneImpl;
-import com.catarsi.Rifugio_Animali.business.services.impl.RifugioServiceDottoreImpl;
-import com.catarsi.Rifugio_Animali.business.services.impl.RifugioServiceEnteImpl;
-import com.catarsi.Rifugio_Animali.business.services.impl.RifugioServiceUtenteImpl;
-import com.catarsi.Rifugio_Animali.business.services.impl.RifugioServicesVisitaImpl;
+import com.catarsi.Rifugio_Animali.business.services.impl.DonationServiceImpl;
+import com.catarsi.Rifugio_Animali.business.services.impl.VeterinarianServiceImpl;
+import com.catarsi.Rifugio_Animali.business.services.impl.OrganizationServiceImpl;
+import com.catarsi.Rifugio_Animali.business.services.impl.UserServiceImpl;
+import com.catarsi.Rifugio_Animali.business.services.impl.VisitServiceImpl;
 
 @Controller
 public class RifugioHomeGestMVC {
@@ -24,30 +24,30 @@ public class RifugioHomeGestMVC {
     private AdoptionServiceImpl srvAdozione;
 
     @Autowired
-    private RifugioServiceDonazioneImpl srvDonazione;
+    private DonationServiceImpl srvDonazione;
 
     @Autowired
-    private RifugioServicesVisitaImpl srvVisita;
+    private VisitServiceImpl srvVisita;
 
     @Autowired
-    private RifugioServiceDottoreImpl srvDottore;
+    private VeterinarianServiceImpl srvDottore;
 
     @Autowired
-    private RifugioServiceUtenteImpl srvUtente;
+    private UserServiceImpl srvUtente;
 
     @Autowired
-    private RifugioServiceEnteImpl srvEnte;
+    private OrganizationServiceImpl srvEnte;
 
 
     @GetMapping("/gest")
     public String mostraGest(Model m) {
         m.addAttribute("animaliCount", srvAnimale.getAnimali().size());
         m.addAttribute("adozioniCount", srvAdozione.getAdozioni().size());
-        m.addAttribute("donazioniTotali", srvDonazione.sommaDonazioni());
+        m.addAttribute("donazioniTotali", srvDonazione.totalDonations());
         // m.addAttribute("visiteOggi", srvVisita.countVisiteOggi());
-        m.addAttribute("dottoriCount", srvDottore.getDottori().size());
-        m.addAttribute("utentiCount", srvUtente.getUtenti().size());
-        m.addAttribute("entiCount", srvEnte.getAllEnti().size());
+        m.addAttribute("dottoriCount", srvDottore.findAllVeterinarians().size());
+        m.addAttribute("utentiCount", srvUtente.findAllUsers().size());
+        m.addAttribute("entiCount", srvEnte.findAllOrganizations().size());
         return "homeGest"; 
     }
 }

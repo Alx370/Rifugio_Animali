@@ -38,24 +38,24 @@ public class Adoption {
     
     @Column(name = "data_adozione", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate date_adoption;
+    private LocalDate adoptionDate;
 
     @Column(name = "note")
     private String note;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     public java.util.Date getData_adozione() {
-        return date_adoption == null ? null : java.sql.Date.valueOf(date_adoption);
+        return adoptionDate == null ? null : java.sql.Date.valueOf(adoptionDate);
     }
 
-    public void setData_adozione(java.util.Date date_adoption) {
-        this.date_adoption = date_adoption== null
+    public void setData_adozione(java.util.Date adoptionDate) {
+        this.adoptionDate = adoptionDate == null
                 ? null
-                : new java.sql.Date(date_adoption.getTime()).toLocalDate();
+                : new java.sql.Date(adoptionDate.getTime()).toLocalDate();
     }
 }

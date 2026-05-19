@@ -6,10 +6,11 @@ import org.springframework.stereotype.Repository;
 
 import com.catarsi.Rifugio_Animali.business.model.Donation;
 
+import java.math.BigDecimal;
+
 @Repository
 public interface DonationRepository extends JpaRepository<Donation, Integer> {
-
-    @Query("SELECT SUM(d.somma) FROM Donation d")
-    Double sumDonazioni();
+    @Query("SELECT COALESCE(SUM(d.sum), 0) FROM Donation d")
+    BigDecimal sumDonations();
 }
 

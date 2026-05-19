@@ -12,9 +12,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VisitRepository extends JpaRepository<Visit, Integer> {
 
-
     @Transactional
     @Modifying
-    @Query("DELETE FROM Visit v WHERE v.animale.id = :id")
-    void deleteByAnimaleId(@Param("id") int id);
+    @Query("DELETE FROM Visit v WHERE v.animal.id = :id")
+    void deleteByAnimalId(@Param("id") int id);
 }

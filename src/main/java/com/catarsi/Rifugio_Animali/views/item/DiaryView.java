@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 public class DiaryView {
     private int id;
     private AnimalView animal;
-    private String animal_story;
-    private String wealth_status;
-    private String beahvioral_status;
+    private String animalStory;
+    private String healthStatus;
+    private String behavioralStatus;
     private String vaccinations;
-    private String ointments_made;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    private String performedOperations;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }

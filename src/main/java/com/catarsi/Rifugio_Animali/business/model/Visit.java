@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Getter
 @Setter
 @Entity
-@Table(name = "visita")
+@Table(name = "visit")
 public class Visit {
 
     @Id
@@ -56,10 +56,6 @@ public class Visit {
 
     public Visit() {}
 
-    public java.util.Date getVisitDate() {
-        return visitDate == null ? null : java.sql.Date.valueOf(visitDate);
-    }
-
     public void setVisitDate(LocalDate visitDate) {
         this.visitDate = visitDate;
     }
@@ -72,5 +68,9 @@ public class Visit {
 
     public void setCost(double cost) {
         this.cost = BigDecimal.valueOf(cost);
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
     }
 }

@@ -7,6 +7,7 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,12 +41,14 @@ public class AdoptionsController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @PatchMapping("/{id}")
-    public void update(int id, @RequestBody AdoptionRequest adoptionRequest) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable int id, @RequestBody AdoptionRequest adoptionRequest) {
         adoptionService.update(adoptionRequest, id);
     }
 
     @RolesAllowed({"ADMIN"})
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         adoptionService.delete(id);
     }

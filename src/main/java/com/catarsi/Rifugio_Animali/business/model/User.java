@@ -95,4 +95,64 @@ public class User {
                 ? null
                 : new java.sql.Date(birthDate.getTime()).toLocalDate();
     }
+
+    public Integer getId_utente() {
+        return id;
+    }
+
+    public void setId_utente(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return firstName;
+    }
+
+    public void setNome(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getCognome() {
+        return lastName;
+    }
+
+    public void setCognome(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getTelefono() {
+        return phone;
+    }
+
+    public void setTelefono(String phone) {
+        this.phone = phone;
+    }
+
+    public Character getSesso() {
+        return gender;
+    }
+
+    public void setSesso(Character gender) {
+        this.gender = gender;
+    }
+
+    public void setSesso(String gender) {
+        setGender(gender);
+    }
+
+    public LocalDate getData_nascita() {
+        return birthDate;
+    }
+
+    public void setData_nascita(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getRuolo() {
+        return role;
+    }
+
+    public void setRuolo(String role) {
+        this.role = role;
+    }
 }

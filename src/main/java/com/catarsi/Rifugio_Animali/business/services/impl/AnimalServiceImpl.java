@@ -54,7 +54,7 @@ public class AnimalServiceImpl implements AnimalService {
         ar.getMicrochip().ifPresentOrElse(a::setMicrochip, () -> a.setMicrochip(false));
         ar.getArrivalDate().ifPresentOrElse(a::setArrivalDate, () -> a.setArrivalDate(null));
         ar.getBirthDate().ifPresentOrElse(a::setBirthDate, () -> a.setBirthDate(null));
-        ar.getAdoptionDate().ifPresentOrElse(a::setAdoptionDate, () -> a.setAdoptionDate(null));
+        ar.getAdoptionDate().ifPresentOrElse(a::setAdoptionDate, () -> a.setAdoptionDate((java.time.LocalDate) null));
         ar.getBreed().ifPresentOrElse(a::setBreed, () -> a.setBreed(null));
         ar.getGender().ifPresentOrElse(a::setGender, () -> a.setGender(null));
         ar.getWeight().ifPresentOrElse(a::setWeight, () -> a.setWeight(null));
@@ -98,40 +98,43 @@ public class AnimalServiceImpl implements AnimalService {
         repository.deleteById(id);
     }
 
+    public List<Animal> getAnimali() {
+        return repository.findAll();
+    }
+
     @Override
     public Specification<Animal> nomeContains(String nome) {
         return (root, query, cb) ->
-                nome == null || nome.isEmpty() ? null : cb.like(cb.lower(root.get("nome")), "%" + nome.toLowerCase() + "%");
+                nome == null || nome.isEmpty() ? null : cb.like(cb.lower(root.get("name")), "%" + nome.toLowerCase() + "%");
     }
 
     @Override
     public Specification<Animal> sessoEquals(String sesso) {
         return (root, query, cb) ->
-                sesso == null || sesso.isEmpty() ? null : cb.equal(root.get("sesso"), sesso);
+                sesso == null || sesso.isEmpty() ? null : cb.equal(root.get("gender"), sesso.charAt(0));
     }
 
     @Override
     public Specification<Animal> specieEquals(String specie) {
         return (root, query, cb) ->
-                specie == null || specie.isEmpty() ? null : cb.equal(root.get("specie"), specie);
+                specie == null || specie.isEmpty() ? null : cb.equal(root.get("species"), specie);
     }
 
     @Override
     public Specification<Animal> razzaContains(String razza) {
         return (root, query, cb) ->
-                razza == null || razza.isEmpty() ? null : cb.like(cb.lower(root.get("razza")), "%" + razza.toLowerCase() + "%");
+                razza == null || razza.isEmpty() ? null : cb.like(cb.lower(root.get("breed")), "%" + razza.toLowerCase() + "%");
     }
 
     @Override
     public Specification<Animal> pesoLessOrEqual(Double peso) {
         return (root, query, cb) ->
-                peso == null ? null : cb.lessThanOrEqualTo(root.get("peso"), peso);
+                peso == null ? null : cb.lessThanOrEqualTo(root.get("weight"), peso);
     }
 
     @Override
     public Specification<Animal> etaLessOrEqual(Integer eta) {
-        return (root, query, cb) ->
-                eta == null ? null : cb.lessThanOrEqualTo(root.get("eta"), eta);
+        return (root, query, cb) -> null;
     }
 
     public List<Animal> filtraAnimali(String nome, String sesso, String specie, String razza, Double peso, Integer eta) {

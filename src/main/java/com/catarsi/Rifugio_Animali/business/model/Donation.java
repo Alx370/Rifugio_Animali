@@ -39,26 +39,42 @@ public class Donation {
 
     @Column(name = "data", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate data;
+    private LocalDate date;
 
     @Column(name = "somma", nullable = false)
     private BigDecimal sum;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
-    public double getSomma() {
-        return sum == null ? 0.0 : sum.doubleValue();
+    public User getUtente() {
+        return user;
     }
 
-    public void setSomma(double somma) {
-        this.sum = BigDecimal.valueOf(somma);
+    public void setUtente(User user) {
+        this.user = user;
     }
 
-    public void setSomma(BigDecimal somma) {
-        this.sum = somma;
+    public LocalDate getData() {
+        return date;
+    }
+
+    public void setData(LocalDate date) {
+        this.date = date;
+    }
+
+    public BigDecimal getSomma() {
+        return sum;
+    }
+
+    public void setSomma(BigDecimal sum) {
+        this.sum = sum;
+    }
+
+    public void setSomma(double sum) {
+        this.sum = BigDecimal.valueOf(sum);
     }
 }

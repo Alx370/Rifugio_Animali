@@ -29,24 +29,24 @@ public class Diary {
     private Animal animal;
 
     @Column(name = "storia_animale")
-    private String animal_story;
+    private String animalStory;
 
     @Column(name = "stato_salute", nullable = false)
-    private String wealth_status;
+    private String healthStatus;
 
     @Column(name = "stato_comportamentale", nullable = false)
-    private String beahvioral_status;
+    private String behavioralStatus;
 
     @Column(name = "vaccinazioni")
     private String vaccinations;
 
     @Column(name = "operazioni_effettuate")
-    private String ointments_made;
+    private String performedOperations;
 
     @Column(name = "created_at")
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
 }

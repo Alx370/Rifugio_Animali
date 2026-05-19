@@ -13,6 +13,7 @@ import com.catarsi.Rifugio_Animali.business.repos.AdoptionRepository;
 import com.catarsi.Rifugio_Animali.business.repos.AnimalRepository;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,7 +47,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
         if (a.getAnimal() != null && a.getAnimal().isPresent()) {
             Integer AnimalCode = a.getAnimal().get();
-            if (animalRepository.existsById(AnimalCode)) {
+            if (!animalRepository.existsById(AnimalCode)) {
                 throw new EntityNotFoundException("Animal not found with id: " + AnimalCode);
             }
             adoption.setAnimal(animalRepository.getReferenceById(AnimalCode));
@@ -54,13 +55,13 @@ public class AdoptionServiceImpl implements AdoptionService {
 
         if (a.getUser() != null && a.getUser().isPresent()) {
             Integer UserCode = a.getUser().get();
-            if (userRepository.existsById(UserCode)) {
+            if (!userRepository.existsById(UserCode)) {
                 throw new EntityNotFoundException("User not found with id: " + UserCode);
             }
             adoption.setUser(userRepository.getReferenceById(UserCode));
         }
 
-        a.getDate_adoption().ifPresentOrElse(adoption::setDate_adoption, () -> adoption.setDate_adoption(null));
+        a.getAdoptionDate().ifPresentOrElse(adoption::setAdoptionDate, () -> adoption.setAdoptionDate(null));
         a.getNote().ifPresentOrElse(adoption::setNote, () -> adoption.setNote(null));
 
         Adoption saved = repository.save(adoption);
@@ -73,7 +74,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
         if (a.getAnimal() != null && a.getAnimal().isPresent()) {
             Integer AnimalCode = a.getAnimal().get();
-            if (animalRepository.existsById(AnimalCode)) {
+            if (!animalRepository.existsById(AnimalCode)) {
                 throw new EntityNotFoundException("Animal not found with id: " + AnimalCode);
             }
             adoption.setAnimal(animalRepository.getReferenceById(AnimalCode));
@@ -81,13 +82,13 @@ public class AdoptionServiceImpl implements AdoptionService {
 
         if (a.getUser() != null && a.getUser().isPresent()) {
             Integer UserCode = a.getUser().get();
-            if (userRepository.existsById(UserCode)) {
+            if (!userRepository.existsById(UserCode)) {
                 throw new EntityNotFoundException("User not found with id: " + UserCode);
             }
             adoption.setUser(userRepository.getReferenceById(UserCode));
         }
 
-        a.getDate_adoption().ifPresentOrElse(adoption::setDate_adoption, () -> adoption.setDate_adoption(null));
+        a.getAdoptionDate().ifPresentOrElse(adoption::setAdoptionDate, () -> adoption.setAdoptionDate(null));
         a.getNote().ifPresentOrElse(adoption::setNote, () -> adoption.setNote(null));
         repository.save(adoption);
     }
@@ -98,5 +99,9 @@ public class AdoptionServiceImpl implements AdoptionService {
             throw new EntityNotFoundException("Adoption not found with id: " + id);
         }
         repository.deleteById(id);
+    }
+
+    public List<Adoption> getAdozioni() {
+        return repository.findAll();
     }
 }

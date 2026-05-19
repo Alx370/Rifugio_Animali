@@ -13,6 +13,6 @@ import java.util.Optional;
 public class AdoptionRequest {
     private Optional<Integer> animal;
     private Optional<Integer> user;
-    private Optional<LocalDate> date_adoption;
+    private Optional<LocalDate> adoptionDate;
     private Optional<String> note;
 }

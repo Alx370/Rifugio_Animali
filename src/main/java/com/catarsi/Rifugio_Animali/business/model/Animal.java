@@ -3,6 +3,7 @@ package com.catarsi.Rifugio_Animali.business.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -77,10 +78,6 @@ public class Animal {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public double getWeight() {
-        return weight == null ? 0.0 : weight.doubleValue();
-    }
-
     public void setWeight(double weight) {
         this.weight = BigDecimal.valueOf(weight);
     }
@@ -89,7 +86,7 @@ public class Animal {
         this.weight = weight;
     }
 
-    public void setAdoptionDate(java.util.Date adoptionDate) {
+    public void setAdoptionDate(Date adoptionDate) {
         this.adoptionDate = adoptionDate == null
                 ? null
                 : new java.sql.Date(adoptionDate.getTime()).toLocalDate();

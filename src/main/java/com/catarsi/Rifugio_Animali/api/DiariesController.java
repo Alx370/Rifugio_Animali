@@ -7,6 +7,7 @@ import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/diaries")
-public class DiaryController {
+public class DiariesController {
 
     private final DiaryService srvDiario;
 
-    public DiaryController(DiaryService srvDiario) {
+    public DiariesController(DiaryService srvDiario) {
         this.srvDiario = srvDiario;
     }
 
@@ -43,12 +44,14 @@ public class DiaryController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @PatchMapping("/{id}")
-    public void update(int id, @RequestBody DiaryRequest dr) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable int id, @RequestBody DiaryRequest dr) {
         srvDiario.update(dr, id);
     }
 
     @RolesAllowed("ADMIN")
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         srvDiario.delete(id);
     }
