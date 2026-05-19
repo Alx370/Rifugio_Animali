@@ -12,7 +12,7 @@ import java.util.Optional;
 public class AnimalRequest {
     private Optional<String> name;
     private Optional<String> species;
-    private Optional<Boolean> microchip;
+    private Optional<String> microchip;
     private Optional<LocalDate> arrivalDate;
     private Optional<LocalDate> birthDate;
     private Optional<LocalDate> adoptionDate;

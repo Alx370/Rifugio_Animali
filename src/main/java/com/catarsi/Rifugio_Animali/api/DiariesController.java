@@ -8,12 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-
 import org.springframework.web.bind.annotation.*;
 
-
-@Controller
+@RestController
 @RequestMapping("/diaries")
 public class DiariesController {
 
@@ -38,7 +35,7 @@ public class DiariesController {
 
     @RolesAllowed({"USER", "ADMIN"})
     @PostMapping
-    public int create (DiaryRequest dr) {
+    public int create (@RequestBody DiaryRequest dr) {
         return srvDiario.create(dr);
     }
 
@@ -56,18 +53,4 @@ public class DiariesController {
         srvDiario.delete(id);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

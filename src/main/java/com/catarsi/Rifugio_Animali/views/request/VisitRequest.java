@@ -11,9 +11,11 @@ import java.util.Optional;
 @Setter
 public class VisitRequest {
     private Optional<Integer> animal;
+    private Optional<Integer> user;
     private Optional<Integer> veterinarian;
     private Optional<LocalDate> visitDate;
     private Optional<String> visitType;
     private Optional<String> description;
     private Optional<BigDecimal> cost;
+    private Optional<String> status;
 }

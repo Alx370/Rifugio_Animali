@@ -55,16 +55,16 @@ INSERT INTO Adozione (ID_ANIMALE, ID_UTENTE, DATA_ADOZIONE) VALUES
 (6, 4, '2024-06-01');
 
 
-INSERT INTO Visita (ID_ANIMALE, ID_DOTTORE, DATA_VISITA, DESCRIZIONE) VALUES
-(1, 1, '2024-01-15', 'Controllo iniziale, vaccinato.'),
-(2, 2, '2024-02-20', 'Controllo vaccini.'),
-(3, 1, '2024-03-05', 'Problemi respiratori, terapia prescritta.'),
-(4, 3, '2024-03-25', 'Controllo oculistico.'),
-(5, 4, '2024-04-02', 'Visita generale, in ottima salute.'),
-(6, 2, '2024-04-20', 'Cura zampa anteriore, miglioramento visibile.');
+INSERT INTO Visita (ID_ANIMALE, ID_UTENTE, ID_DOTTORE, DATA_VISITA, DESCRIZIONE, STATO) VALUES
+(1, 1, 1, '2024-01-15', 'Controllo iniziale, vaccinato.', 'COMPLETATA'),
+(2, 2, 2, '2024-02-20', 'Controllo vaccini.', 'COMPLETATA'),
+(3, 2, 1, '2024-03-05', 'Problemi respiratori, terapia prescritta.', 'COMPLETATA'),
+(4, 3, 3, '2024-03-25', 'Controllo oculistico.', 'COMPLETATA'),
+(5, 4, 4, '2024-04-02', 'Visita generale, in ottima salute.', 'COMPLETATA'),
+(6, 5, 2, '2024-04-20', 'Cura zampa anteriore, miglioramento visibile.', 'COMPLETATA');
 
 
-INSERT INTO Donazione (ID_UTENTE, ID_ENTE, DATA, SOMMA) VALUES
+INSERT INTO Donazione (ID_UTENTE, ID_ENTE, DATA_DONAZIONE, SOMMA) VALUES
 (2, 1, '2024-04-10', 100.00),
 (3, 2, '2024-05-15', 50.00),
 (1, 3, '2024-06-01', 75.00),
@@ -73,7 +73,7 @@ INSERT INTO Donazione (ID_UTENTE, ID_ENTE, DATA, SOMMA) VALUES
 (6, 3, '2024-06-12', 60.00);
 
 
-INSERT INTO diary (Id_animale, storia_animale, stato_salute, stato_comportamentale, vaccinazioni, operazioni_effettuate) VALUES
+INSERT INTO Diario (ID_ANIMALE, STORIA_ANIMALE, STATO_SALUTE, STATO_COMPORTAMENTALE, VACCINAZIONI, OPERAZIONI_EFFETTUATE) VALUES
 (1, 'Recuperato da un canile abusivo, inizialmente molto diffidente. Adottato dopo un percorso di socializzazione.', 'Buona, vaccinato e in forma.', 'Tranquillo e socievole.', 'Vaccino trivalente, antirabbica', 'Sterilizzazione'),
 (2, 'Trovata abbandonata vicino a un cassonetto. Ha ricevuto cure veterinarie e sta recuperando peso.', 'In recupero, sotto osservazione per anemia.', 'Tende a nascondersi, ma non aggressiva.', 'Vaccino trivalente', NULL),
 (3, 'Consegnato da una famiglia che non poteva più tenerlo. Problemi respiratori al primo controllo.', 'Stabile, sotto controllo con terapia.', 'Affettuosa ma pigra.', 'Vaccino trivalente', 'Terapia respiratoria'),

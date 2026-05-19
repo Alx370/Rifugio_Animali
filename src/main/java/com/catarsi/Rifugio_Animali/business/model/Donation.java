@@ -37,17 +37,17 @@ public class Donation {
     @JoinColumn(name = "id_ente", nullable = false)
     private Organization organization;
 
-    @Column(name = "data", nullable = false)
+    @Column(name = "data_donazione", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @Column(name = "somma", nullable = false)
     private BigDecimal sum;
 
-    @Column(name = "created_at")
+    @Column(name = "creato_il")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "aggiornato_il")
     private LocalDateTime updatedAt;
 
     public User getUtente() {

@@ -17,6 +17,7 @@ public class AdoptionView {
     private User user;
     private LocalDate adoptionDate;
     private String note;
+    private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

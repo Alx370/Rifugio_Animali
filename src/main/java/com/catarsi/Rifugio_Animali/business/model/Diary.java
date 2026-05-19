@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,8 +24,8 @@ public class Diary {
     @Column(name = "id")
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "id_animale")
+    @ManyToOne
+    @JoinColumn(name = "id_animale", nullable = false)
     private Animal animal;
 
     @Column(name = "storia_animale")
@@ -43,10 +43,10 @@ public class Diary {
     @Column(name = "operazioni_effettuate")
     private String performedOperations;
 
-    @Column(name = "created_at")
+    @Column(name = "creato_il")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "aggiornato_il")
     private LocalDateTime updatedAt;
 
 }

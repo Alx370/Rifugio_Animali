@@ -2,11 +2,10 @@ package com.catarsi.Rifugio_Animali.business.services.impl;
 
 import com.catarsi.Rifugio_Animali.business.model.Animal;
 import com.catarsi.Rifugio_Animali.business.repos.AnimalRepository;
-import com.catarsi.Rifugio_Animali.business.repos.DiaryRepository;
-import com.catarsi.Rifugio_Animali.business.repos.VisitRepository;
 import com.catarsi.Rifugio_Animali.business.services.AnimalService;
 import com.catarsi.Rifugio_Animali.views.item.AnimalView;
 import com.catarsi.Rifugio_Animali.views.request.AnimalRequest;
+import com.catarsi.Rifugio_Animali.views.request.AnimalSearchRequest;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -16,6 +15,8 @@ import org.modelmapper.ModelMapper;
 
 import org.springframework.data.jpa.domain.Specification;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,20 +24,33 @@ import java.util.Optional;
 public class AnimalServiceImpl implements AnimalService {
 
     private final AnimalRepository repository;
-    private final DiaryRepository repositoryDiary;
-    private final VisitRepository repositoryVisit;
     private final ModelMapper mapper;
 
-    public AnimalServiceImpl(AnimalRepository repository, DiaryRepository repositoryDiary, VisitRepository repositoryVisit, ModelMapper mapper) {
+    public AnimalServiceImpl(AnimalRepository repository, ModelMapper mapper) {
         this.repository = repository;
-        this.repositoryDiary = repositoryDiary;
-        this.repositoryVisit = repositoryVisit;
         this.mapper = mapper;
     }
 
     @Override
     public Page<AnimalView> findAll (Pageable pageable) {
         return repository.findAll(pageable)
+                .map(a -> mapper.map(a, AnimalView.class));
+    }
+
+    @Override
+    public Page<AnimalView> search(AnimalSearchRequest request, Pageable pageable) {
+        return repository.findAll(
+                        Specification.allOf(
+                                nomeContains(request.getNome()),
+                                sessoEquals(request.getSesso()),
+                                specieEquals(request.getSpecie()),
+                                razzaContains(request.getRazza()),
+                                pesoLessOrEqual(request.getPesoMax()),
+                                etaLessOrEqual(request.getEtaMax()),
+                                disponibileAdozioneEquals(request.getDisponibileAdozione())
+                        ),
+                        pageable
+                )
                 .map(a -> mapper.map(a, AnimalView.class));
     }
 
@@ -51,7 +65,7 @@ public class AnimalServiceImpl implements AnimalService {
         Animal a = new Animal();
         ar.getSpecies().ifPresentOrElse(a::setSpecies, () -> a.setSpecies(null));
         ar.getName().ifPresentOrElse(a::setName, () -> a.setName(null));
-        ar.getMicrochip().ifPresentOrElse(a::setMicrochip, () -> a.setMicrochip(false));
+        ar.getMicrochip().ifPresentOrElse(a::setMicrochip, () -> a.setMicrochip(null));
         ar.getArrivalDate().ifPresentOrElse(a::setArrivalDate, () -> a.setArrivalDate(null));
         ar.getBirthDate().ifPresentOrElse(a::setBirthDate, () -> a.setBirthDate(null));
         ar.getAdoptionDate().ifPresentOrElse(a::setAdoptionDate, () -> a.setAdoptionDate((java.time.LocalDate) null));
@@ -127,27 +141,26 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public Specification<Animal> pesoLessOrEqual(Double peso) {
+    public Specification<Animal> pesoLessOrEqual(BigDecimal pesoMax) {
         return (root, query, cb) ->
-                peso == null ? null : cb.lessThanOrEqualTo(root.get("weight"), peso);
+                pesoMax == null ? null : cb.lessThanOrEqualTo(root.get("weight"), pesoMax);
     }
 
     @Override
-    public Specification<Animal> etaLessOrEqual(Integer eta) {
-        return (root, query, cb) -> null;
+    public Specification<Animal> etaLessOrEqual(Integer etaMax) {
+        return (root, query, cb) -> {
+            if (etaMax == null) {
+                return null;
+            }
+            LocalDate minBirthDate = LocalDate.now().minusYears(etaMax + 1L).plusDays(1);
+            return cb.greaterThanOrEqualTo(root.get("birthDate"), minBirthDate);
+        };
     }
 
-    public List<Animal> filtraAnimali(String nome, String sesso, String specie, String razza, Double peso, Integer eta) {
-        return repository.findAll(
-                Specification.allOf(
-                        nomeContains(nome),
-                        sessoEquals(sesso),
-                        specieEquals(specie),
-                        razzaContains(razza),
-                        pesoLessOrEqual(peso),
-                        etaLessOrEqual(eta)
-                )
-        );
+    @Override
+    public Specification<Animal> disponibileAdozioneEquals(Boolean disponibileAdozione) {
+        return (root, query, cb) ->
+                disponibileAdozione == null ? null : cb.equal(root.get("availableForAdoption"), disponibileAdozione);
     }
 }
 

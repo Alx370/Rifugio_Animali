@@ -65,7 +65,6 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
-    // Gestione di tutte le altre eccezioni generiche
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGlobalException(Exception ex, WebRequest request) {
         Map<String, Object> body = new LinkedHashMap<>();

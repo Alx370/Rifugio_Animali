@@ -63,6 +63,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
         a.getAdoptionDate().ifPresentOrElse(adoption::setAdoptionDate, () -> adoption.setAdoptionDate(null));
         a.getNote().ifPresentOrElse(adoption::setNote, () -> adoption.setNote(null));
+        a.getStatus().ifPresentOrElse(adoption::setStatus, () -> adoption.setStatus("RICHIESTA"));
 
         Adoption saved = repository.save(adoption);
         return saved.getId();
@@ -90,6 +91,7 @@ public class AdoptionServiceImpl implements AdoptionService {
 
         a.getAdoptionDate().ifPresentOrElse(adoption::setAdoptionDate, () -> adoption.setAdoptionDate(null));
         a.getNote().ifPresentOrElse(adoption::setNote, () -> adoption.setNote(null));
+        a.getStatus().ifPresent(adoption::setStatus);
         repository.save(adoption);
     }
 

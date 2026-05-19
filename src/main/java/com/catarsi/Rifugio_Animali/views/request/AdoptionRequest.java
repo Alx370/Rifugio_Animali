@@ -15,4 +15,5 @@ public class AdoptionRequest {
     private Optional<Integer> user;
     private Optional<LocalDate> adoptionDate;
     private Optional<String> note;
+    private Optional<String> status;
 }

@@ -18,11 +18,6 @@ public interface DiaryRepository extends JpaRepository<Diary, Integer> {
     @Query("DELETE FROM Diary d WHERE d.animal.id = :id")
     void deleteByAnimaleId(@Param("id") int id);
 
-//    @Modifying
-//    @Transactional
-//    @Query(value = "INSERT INTO diario (data, descrizione, animale_id) VALUES (:data, :descrizione, :animaleId)", nativeQuery = true)
-//    void insertDiarioNative(@Param("data") LocalDate data, @Param("descrizione") String descrizione, @Param("animaleId") int animaleId);
-
     @Query("SELECT d FROM Diary d WHERE d.animal.id = :idAnimale")
     Diary findByAnimaleId(@Param("idAnimale") int idAnimale);
 

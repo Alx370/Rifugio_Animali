@@ -2,6 +2,7 @@ package com.catarsi.Rifugio_Animali.business.services.impl;
 
 import com.catarsi.Rifugio_Animali.business.model.Visit;
 import com.catarsi.Rifugio_Animali.business.repos.AnimalRepository;
+import com.catarsi.Rifugio_Animali.business.repos.UserRepository;
 import com.catarsi.Rifugio_Animali.business.repos.VeterinarianRepository;
 import com.catarsi.Rifugio_Animali.business.repos.VisitRepository;
 import com.catarsi.Rifugio_Animali.business.services.VisitService;
@@ -21,12 +22,14 @@ public class VisitServiceImpl implements VisitService {
 
     private final VisitRepository repository;
     private final AnimalRepository animalRepository;
+    private final UserRepository userRepository;
     private final VeterinarianRepository veterinarianRepository;
     private final ModelMapper mapper;
 
-    public VisitServiceImpl(VisitRepository repository, AnimalRepository animalRepository, VeterinarianRepository veterinarianRepository, ModelMapper mapper) {
+    public VisitServiceImpl(VisitRepository repository, AnimalRepository animalRepository, UserRepository userRepository, VeterinarianRepository veterinarianRepository, ModelMapper mapper) {
         this.repository = repository;
         this.animalRepository = animalRepository;
+        this.userRepository = userRepository;
         this.veterinarianRepository = veterinarianRepository;
         this.mapper = mapper;
     }
@@ -55,6 +58,14 @@ public class VisitServiceImpl implements VisitService {
             visit.setAnimal(animalRepository.getReferenceById(animalId));
         }
 
+        if (visitRequest.getUser() != null && visitRequest.getUser().isPresent()) {
+            Integer userId = visitRequest.getUser().get();
+            if (!userRepository.existsById(userId)) {
+                throw new EntityNotFoundException("User not found with id: " + userId);
+            }
+            visit.setUser(userRepository.getReferenceById(userId));
+        }
+
         if (visitRequest.getVeterinarian() != null && visitRequest.getVeterinarian().isPresent()) {
             Integer veterinarianId = visitRequest.getVeterinarian().get();
             if (!veterinarianRepository.existsById(veterinarianId)) {
@@ -67,6 +78,7 @@ public class VisitServiceImpl implements VisitService {
         visitRequest.getVisitType().ifPresentOrElse(visit::setVisitType, () -> visit.setVisitType(null));
         visitRequest.getDescription().ifPresentOrElse(visit::setDescription, () -> visit.setDescription(null));
         visitRequest.getCost().ifPresentOrElse(visit::setCost, () -> visit.setCost(null));
+        visitRequest.getStatus().ifPresentOrElse(visit::setStatus, () -> visit.setStatus("RICHIESTA"));
 
         Visit saved = repository.save(visit);
         return saved.getId();
@@ -84,6 +96,14 @@ public class VisitServiceImpl implements VisitService {
             visit.setAnimal(animalRepository.getReferenceById(animalId));
         }
 
+        if (visitRequest.getUser() != null && visitRequest.getUser().isPresent()) {
+            Integer userId = visitRequest.getUser().get();
+            if (!userRepository.existsById(userId)) {
+                throw new EntityNotFoundException("User not found with id: " + userId);
+            }
+            visit.setUser(userRepository.getReferenceById(userId));
+        }
+
         if (visitRequest.getVeterinarian() != null && visitRequest.getVeterinarian().isPresent()) {
             Integer veterinarianId = visitRequest.getVeterinarian().get();
             if (!veterinarianRepository.existsById(veterinarianId)) {
@@ -96,6 +116,7 @@ public class VisitServiceImpl implements VisitService {
         visitRequest.getVisitType().ifPresent(visit::setVisitType);
         visitRequest.getDescription().ifPresent(visit::setDescription);
         visitRequest.getCost().ifPresent(visit::setCost);
+        visitRequest.getStatus().ifPresent(visit::setStatus);
 
         repository.save(visit);
     }

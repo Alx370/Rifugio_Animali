@@ -43,10 +43,13 @@ public class Adoption {
     @Column(name = "note")
     private String note;
 
-    @Column(name = "created_at")
+    @Column(name = "stato", nullable = false, length = 20)
+    private String status = "RICHIESTA";
+
+    @Column(name = "creato_il")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "aggiornato_il")
     private LocalDateTime updatedAt;
 
     public java.util.Date getData_adozione() {

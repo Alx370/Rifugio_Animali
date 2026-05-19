@@ -31,9 +31,9 @@ public class Organization {
     @Column(name = "telefono", length = 20)
     private String telephone;
 
-    @Column(name = "created_at")
+    @Column(name = "creato_il")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "aggiornato_il")
     private LocalDateTime updatedAt;
 }

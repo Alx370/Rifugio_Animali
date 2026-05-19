@@ -8,10 +8,9 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/adoptions")
 public class AdoptionsController {
 
@@ -52,10 +51,4 @@ public class AdoptionsController {
     public void delete(@PathVariable int id) {
         adoptionService.delete(id);
     }
-
-//        @GetMapping("/adozioni/form")
-//    public String mostraFormAdozione(Model model, Principal principal, @RequestParam Integer idAnimale) {
-//        if (principal == null) {
-//            return "errore_richiesta_login"; // utente non loggato
-//        }
 }

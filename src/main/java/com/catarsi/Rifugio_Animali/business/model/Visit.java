@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Getter
 @Setter
 @Entity
-@Table(name = "visit")
+@Table(name = "visita")
 public class Visit {
 
     @Id
@@ -32,7 +32,11 @@ public class Visit {
     private Animal animal;
 
     @ManyToOne
-    @JoinColumn(name = "id_dottore", nullable = false)
+    @JoinColumn(name = "id_utente", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_dottore")
     private Veterinarian veterinarian;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -48,10 +52,13 @@ public class Visit {
     @Column(name = "costo")
     private BigDecimal cost;
 
-    @Column(name = "created_at")
+    @Column(name = "stato", nullable = false, length = 20)
+    private String status = "RICHIESTA";
+
+    @Column(name = "creato_il")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "aggiornato_il")
     private LocalDateTime updatedAt;
 
     public Visit() {}

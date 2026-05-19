@@ -16,7 +16,7 @@ public class AnimalView {
     private int id;
     private String species;
     private String name;
-    private boolean microchip;
+    private String microchip;
     private LocalDate arrivalDate;
     private LocalDate birthDate;
     private LocalDate adoptionDate;

@@ -34,7 +34,7 @@ public class Animal {
     private String name;
 
     @Column(name = "microchip")
-    private boolean microchip = false;
+    private String microchip;
 
     @Column(name = "data_arrivo", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -72,10 +72,10 @@ public class Animal {
     @Column(name = "disponibile_adozione")
     private boolean availableForAdoption = true;
 
-    @Column(name = "created_at")
+    @Column(name = "creato_il")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(name = "aggiornato_il")
     private LocalDateTime updatedAt;
 
     public void setWeight(double weight) {

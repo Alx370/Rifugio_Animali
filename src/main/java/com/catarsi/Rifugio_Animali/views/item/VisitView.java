@@ -14,11 +14,13 @@ import java.time.LocalDateTime;
 public class VisitView {
     private int id;
     private AnimalView animal;
+    private UserView user;
     private VeterinarianView veterinarian;
     private LocalDate visitDate;
     private String visitType;
     private String description;
     private BigDecimal cost;
+    private String status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
