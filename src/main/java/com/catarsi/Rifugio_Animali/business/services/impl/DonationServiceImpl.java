@@ -38,22 +38,29 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
+    public Page<DonationView> findAll(Pageable pageable, String userEmail, boolean admin) {
+        return (admin ? repository.findAll(pageable) : repository.findByUserEmail(userEmail, pageable))
+                .map(donation -> mapper.map(donation, DonationView.class));
+    }
+
+    @Override
     public Optional<DonationView> findById(int id) {
         return repository.findById(id)
                 .map(donation -> mapper.map(donation, DonationView.class));
     }
 
     @Override
-    public int create(DonationRequest donationRequest) {
+    public Optional<DonationView> findById(int id, String userEmail, boolean admin) {
+        return (admin ? repository.findById(id) : repository.findByIdAndUserEmail(id, userEmail))
+                .map(donation -> mapper.map(donation, DonationView.class));
+    }
+
+    @Override
+    public int create(DonationRequest donationRequest, String userEmail) {
         Donation donation = new Donation();
 
-        if (donationRequest.getUser() != null && donationRequest.getUser().isPresent()) {
-            Integer userId = donationRequest.getUser().get();
-            if (!userRepository.existsById(userId)) {
-                throw new EntityNotFoundException("User not found with id: " + userId);
-            }
-            donation.setUser(userRepository.getReferenceById(userId));
-        }
+        donation.setUser(userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with email: " + userEmail)));
 
         if (donationRequest.getOrganization() != null && donationRequest.getOrganization().isPresent()) {
             Integer organizationId = donationRequest.getOrganization().get();
@@ -73,14 +80,6 @@ public class DonationServiceImpl implements DonationService {
     @Override
     public void update(DonationRequest donationRequest, int id) {
         Donation donation = repository.findById(id).orElseThrow(EntityNotFoundException::new);
-
-        if (donationRequest.getUser() != null && donationRequest.getUser().isPresent()) {
-            Integer userId = donationRequest.getUser().get();
-            if (!userRepository.existsById(userId)) {
-                throw new EntityNotFoundException("User not found with id: " + userId);
-            }
-            donation.setUser(userRepository.getReferenceById(userId));
-        }
 
         if (donationRequest.getOrganization() != null && donationRequest.getOrganization().isPresent()) {
             Integer organizationId = donationRequest.getOrganization().get();

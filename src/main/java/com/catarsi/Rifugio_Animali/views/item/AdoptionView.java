@@ -1,5 +1,6 @@
 package com.catarsi.Rifugio_Animali.views.item;
 
+import com.catarsi.Rifugio_Animali.business.model.enums.RequestStatus;
 import com.catarsi.Rifugio_Animali.business.model.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class AdoptionView {
     private User user;
     private LocalDate adoptionDate;
     private String note;
-    private String status;
+    private RequestStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

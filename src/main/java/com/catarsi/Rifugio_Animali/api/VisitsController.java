@@ -5,6 +5,7 @@ import com.catarsi.Rifugio_Animali.views.item.VisitView;
 import com.catarsi.Rifugio_Animali.views.request.VisitRequest;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -43,14 +44,14 @@ public class VisitsController {
 
     @RolesAllowed({"ADMIN"})
     @PostMapping
-    public int create(@RequestBody VisitRequest visitRequest) {
+    public int create(@Valid @RequestBody VisitRequest visitRequest) {
         return visitService.create(visitRequest);
     }
 
     @RolesAllowed({"ADMIN"})
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable int id, @RequestBody VisitRequest visitRequest) {
+    public void update(@PathVariable int id, @Valid @RequestBody VisitRequest visitRequest) {
         visitService.update(visitRequest, id);
     }
 

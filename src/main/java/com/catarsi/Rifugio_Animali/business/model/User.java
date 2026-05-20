@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.catarsi.Rifugio_Animali.business.model.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,7 +53,8 @@ public class User {
     private LocalDate birthDate;
 
     @Column(name = "ruolo", nullable = false, length = 20)
-    private String role = "USER";
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
 
     @Column(name = "attivo")
     private Boolean active = true;
@@ -148,11 +152,19 @@ public class User {
         this.birthDate = birthDate;
     }
 
+    public void setRole(String role) {
+        this.role = role == null ? null : Role.valueOf(role);
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     public String getRuolo() {
-        return role;
+        return role == null ? null : role.name();
     }
 
     public void setRuolo(String role) {
-        this.role = role;
+        setRole(role);
     }
 }

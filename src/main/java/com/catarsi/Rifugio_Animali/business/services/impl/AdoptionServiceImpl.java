@@ -1,6 +1,7 @@
 package com.catarsi.Rifugio_Animali.business.services.impl;
 
 import com.catarsi.Rifugio_Animali.business.model.Adoption;
+import com.catarsi.Rifugio_Animali.business.model.enums.RequestStatus;
 import com.catarsi.Rifugio_Animali.business.repos.UserRepository;
 import com.catarsi.Rifugio_Animali.business.services.AdoptionService;
 import com.catarsi.Rifugio_Animali.views.item.AdoptionView;
@@ -37,13 +38,28 @@ public class AdoptionServiceImpl implements AdoptionService {
     }
 
     @Override
+    public Page<AdoptionView> findAll(Pageable pageable, String userEmail, boolean admin) {
+        return (admin ? repository.findAll(pageable) : repository.findByUserEmail(userEmail, pageable))
+                .map(adoption -> mapper.map(adoption, AdoptionView.class));
+    }
+
+    @Override
     public Optional<AdoptionView> findById(int id) {
         return repository.findById(id) .map(as -> mapper.map(as, AdoptionView.class));
     }
 
     @Override
-    public int create(AdoptionRequest a) {
+    public Optional<AdoptionView> findById(int id, String userEmail, boolean admin) {
+        return (admin ? repository.findById(id) : repository.findByIdAndUserEmail(id, userEmail))
+                .map(adoption -> mapper.map(adoption, AdoptionView.class));
+    }
+
+    @Override
+    public int create(AdoptionRequest a, String userEmail) {
         Adoption adoption = new Adoption();
+
+        adoption.setUser(userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with email: " + userEmail)));
 
         if (a.getAnimal() != null && a.getAnimal().isPresent()) {
             Integer AnimalCode = a.getAnimal().get();
@@ -53,17 +69,9 @@ public class AdoptionServiceImpl implements AdoptionService {
             adoption.setAnimal(animalRepository.getReferenceById(AnimalCode));
         }
 
-        if (a.getUser() != null && a.getUser().isPresent()) {
-            Integer UserCode = a.getUser().get();
-            if (!userRepository.existsById(UserCode)) {
-                throw new EntityNotFoundException("User not found with id: " + UserCode);
-            }
-            adoption.setUser(userRepository.getReferenceById(UserCode));
-        }
-
         a.getAdoptionDate().ifPresentOrElse(adoption::setAdoptionDate, () -> adoption.setAdoptionDate(null));
         a.getNote().ifPresentOrElse(adoption::setNote, () -> adoption.setNote(null));
-        a.getStatus().ifPresentOrElse(adoption::setStatus, () -> adoption.setStatus("RICHIESTA"));
+        a.getStatus().ifPresentOrElse(adoption::setStatus, () -> adoption.setStatus(RequestStatus.RICHIESTA));
 
         Adoption saved = repository.save(adoption);
         return saved.getId();
@@ -79,14 +87,6 @@ public class AdoptionServiceImpl implements AdoptionService {
                 throw new EntityNotFoundException("Animal not found with id: " + AnimalCode);
             }
             adoption.setAnimal(animalRepository.getReferenceById(AnimalCode));
-        }
-
-        if (a.getUser() != null && a.getUser().isPresent()) {
-            Integer UserCode = a.getUser().get();
-            if (!userRepository.existsById(UserCode)) {
-                throw new EntityNotFoundException("User not found with id: " + UserCode);
-            }
-            adoption.setUser(userRepository.getReferenceById(UserCode));
         }
 
         a.getAdoptionDate().ifPresentOrElse(adoption::setAdoptionDate, () -> adoption.setAdoptionDate(null));

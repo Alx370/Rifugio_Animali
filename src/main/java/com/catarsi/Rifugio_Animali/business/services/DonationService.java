@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 
 public interface DonationService {
     Page<DonationView> findAll(Pageable pageable);
+    Page<DonationView> findAll(Pageable pageable, String userEmail, boolean admin);
     Optional<DonationView> findById(int id);
-    int create(DonationRequest donationRequest);
+    Optional<DonationView> findById(int id, String userEmail, boolean admin);
+    int create(DonationRequest donationRequest, String userEmail);
     void update(DonationRequest donationRequest, int id);
     void delete(int id);
 }

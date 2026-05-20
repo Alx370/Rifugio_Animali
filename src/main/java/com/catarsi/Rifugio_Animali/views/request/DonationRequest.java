@@ -1,5 +1,7 @@
 package com.catarsi.Rifugio_Animali.views.request;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,8 +12,7 @@ import java.util.Optional;
 @Getter
 @Setter
 public class DonationRequest {
-    private Optional<Integer> user;
-    private Optional<Integer> organization;
+    private Optional<@NotNull Integer> organization;
     private Optional<LocalDate> date;
-    private Optional<BigDecimal> sum;
+    private Optional<@Positive BigDecimal> sum;
 }

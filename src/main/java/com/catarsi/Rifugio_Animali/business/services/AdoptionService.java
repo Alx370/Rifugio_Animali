@@ -9,8 +9,10 @@ import org.springframework.data.domain.Pageable;
 
 public interface AdoptionService {
     Page<AdoptionView> findAll (Pageable peagable);
+    Page<AdoptionView> findAll(Pageable pageable, String userEmail, boolean admin);
     Optional<AdoptionView> findById(int id);
-    int create(AdoptionRequest a);
+    Optional<AdoptionView> findById(int id, String userEmail, boolean admin);
+    int create(AdoptionRequest a, String userEmail);
     void update(AdoptionRequest a, int id);
     void delete(int id);
 }

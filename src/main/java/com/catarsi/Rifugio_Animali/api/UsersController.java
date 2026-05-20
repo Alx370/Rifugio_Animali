@@ -2,9 +2,11 @@ package com.catarsi.Rifugio_Animali.api;
 
 import com.catarsi.Rifugio_Animali.business.services.UserService;
 import com.catarsi.Rifugio_Animali.views.item.UserView;
+import com.catarsi.Rifugio_Animali.views.request.UserRegister;
 import com.catarsi.Rifugio_Animali.views.request.UserRequest;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -41,16 +43,21 @@ public class UsersController {
                 .orElseThrow(() -> new EntityNotFoundException("User not found for id=" + id));
     }
 
+    @PostMapping("/register")
+    public int register(@Valid @RequestBody UserRegister userRegister) {
+        return userService.register(userRegister);
+    }
+
     @RolesAllowed({"ADMIN"})
     @PostMapping
-    public int create(@RequestBody UserRequest userRequest) {
+    public int create(@Valid @RequestBody UserRequest userRequest) {
         return userService.create(userRequest);
     }
 
     @RolesAllowed({"ADMIN"})
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable int id, @RequestBody UserRequest userRequest) {
+    public void update(@PathVariable int id, @Valid @RequestBody UserRequest userRequest) {
         userService.update(userRequest, id);
     }
 

@@ -1,5 +1,6 @@
 package com.catarsi.Rifugio_Animali.views.item;
 
+import com.catarsi.Rifugio_Animali.business.model.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +20,7 @@ public class UserView {
     private String phone;
     private Character gender;
     private LocalDate birthDate;
-    private String role;
+    private Role role;
     private Boolean active;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

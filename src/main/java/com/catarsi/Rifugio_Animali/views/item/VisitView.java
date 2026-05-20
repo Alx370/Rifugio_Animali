@@ -1,5 +1,6 @@
 package com.catarsi.Rifugio_Animali.views.item;
 
+import com.catarsi.Rifugio_Animali.business.model.enums.RequestStatus;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +21,7 @@ public class VisitView {
     private String visitType;
     private String description;
     private BigDecimal cost;
-    private String status;
+    private RequestStatus status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

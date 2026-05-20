@@ -1,6 +1,7 @@
 package com.catarsi.Rifugio_Animali.business.services.impl;
 
 import com.catarsi.Rifugio_Animali.business.model.Visit;
+import com.catarsi.Rifugio_Animali.business.model.enums.RequestStatus;
 import com.catarsi.Rifugio_Animali.business.repos.AnimalRepository;
 import com.catarsi.Rifugio_Animali.business.repos.UserRepository;
 import com.catarsi.Rifugio_Animali.business.repos.VeterinarianRepository;
@@ -78,7 +79,7 @@ public class VisitServiceImpl implements VisitService {
         visitRequest.getVisitType().ifPresentOrElse(visit::setVisitType, () -> visit.setVisitType(null));
         visitRequest.getDescription().ifPresentOrElse(visit::setDescription, () -> visit.setDescription(null));
         visitRequest.getCost().ifPresentOrElse(visit::setCost, () -> visit.setCost(null));
-        visitRequest.getStatus().ifPresentOrElse(visit::setStatus, () -> visit.setStatus("RICHIESTA"));
+        visitRequest.getStatus().ifPresentOrElse(visit::setStatus, () -> visit.setStatus(RequestStatus.RICHIESTA));
 
         Visit saved = repository.save(visit);
         return saved.getId();

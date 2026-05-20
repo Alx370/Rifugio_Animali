@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.catarsi.Rifugio_Animali.business.model.enums.RequestStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -53,7 +56,8 @@ public class Visit {
     private BigDecimal cost;
 
     @Column(name = "stato", nullable = false, length = 20)
-    private String status = "RICHIESTA";
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status = RequestStatus.RICHIESTA;
 
     @Column(name = "creato_il")
     private LocalDateTime createdAt;
