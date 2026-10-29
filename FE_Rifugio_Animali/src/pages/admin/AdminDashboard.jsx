@@ -12,7 +12,8 @@ const cards = [
   ["visits", "Gestione Visite", "Visite veterinarie", "/backoffice/visite", "visits"],
   ["veterinarians", "Gestione Dottori", "Veterinari registrati", "/backoffice/dottori", "doctors"],
   ["users", "Gestione Utenti", "Account utenti", "/backoffice/utenti", "users"],
-  ["organizations", "Gestione Enti", "Enti collegati", "/backoffice/enti", "entities"]
+  ["organizations", "Gestione Enti", "Enti collegati", "/backoffice/enti", "entities"],
+  ["diaries", "Gestione Diari", "Diari degli animali", "/backoffice/diari", "animals"]
 ];
 
 export default function AdminDashboard() {
@@ -28,7 +29,8 @@ export default function AdminDashboard() {
       ["visits", apiPage("/visits", { size: 1 })],
       ["veterinarians", apiPage("/veterinarians", { size: 1 })],
       ["users", apiPage("/users", { size: 1 })],
-      ["organizations", apiPage("/organizations", { size: 1 })]
+      ["organizations", apiPage("/organizations", { size: 1 })],
+      ["diaries", apiPage("/diaries", { size: 1 })]
     ];
     Promise.all(loaders.map(([key, promise]) => promise.then((page) => [key, page])))
       .then((entries) => {

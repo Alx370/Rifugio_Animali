@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { loadStoredAuth, removeStoredAuth, storeAuth } from "./api";
 import Layout, { RequireAuth } from "./components/Layout";
+import { backofficeRoutes } from "./constants";
 import AdoptionFormPage from "./pages/AdoptionFormPage";
 import AnimalDetailPage from "./pages/AnimalDetailPage";
 import AnimalsPage from "./pages/AnimalsPage";
@@ -10,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/RegisterPage";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminEntityPage from "./pages/admin/AdminEntityPage";
 import { currentRoute, navigate } from "./navigation";
 
 export default function App() {
@@ -96,6 +98,17 @@ function renderPage(route, auth, handleLogin) {
       <RequireAuth auth={auth} admin>
         <AdminDashboard />
       </RequireAuth>
+    );
+  }
+
+  if (path.startsWith("/backoffice/")) {
+    const entityKey = backofficeRoutes[path.split("/")[2]];
+    return entityKey ? (
+      <RequireAuth auth={auth} admin>
+        <AdminEntityPage key={entityKey} entityKey={entityKey} />
+      </RequireAuth>
+    ) : (
+      <NotFound />
     );
   }
 
