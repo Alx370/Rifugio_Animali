@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { loadStoredAuth, removeStoredAuth, storeAuth } from "./api";
-import Layout from "./components/Layout";
+import Layout, { RequireAuth } from "./components/Layout";
+import AnimalDetailPage from "./pages/AnimalDetailPage";
+import AnimalsPage from "./pages/AnimalsPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
@@ -52,6 +54,22 @@ function renderPage(route, auth, handleLogin) {
 
   if (path === "/signin") {
     return <RegisterPage />;
+  }
+
+  if (path === "/animali") {
+    return <RequireAuth auth={auth}><AnimalsPage key="all" /></RequireAuth>;
+  }
+
+  if (path === "/adozioni/visualizza") {
+    return <RequireAuth auth={auth}><AnimalsPage key="available" availableOnly /></RequireAuth>;
+  }
+
+  if (path.startsWith("/animali/")) {
+    return (
+      <RequireAuth auth={auth}>
+        <AnimalDetailPage key={path} id={path.split("/")[2]} auth={auth} />
+      </RequireAuth>
+    );
   }
 
   return <NotFound />;
