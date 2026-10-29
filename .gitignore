@@ -1,33 +1,57 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# REACT + VITE
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Dipendenze
+node_modules/
 
-### IntelliJ IDEA ###
-.idea
+# Build
+dist/
+coverage/
+.vite/
+
+# Log
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Variabili d'ambiente
+.env
+.env.*
+!.env.example
+
+# INTELLIJ IDEA
+
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# JAVA / SPRING BOOT / MAVEN
 
-### VS Code ###
+target/
+build/
+*.class
+
+# Eclipse / STS
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# Configurazioni locali Spring
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# POSTGRESQL
+
+# Backup e dump del database
+*.dump
+*.backup
+*.sql.gz
+
+# VS Code
 .vscode/
