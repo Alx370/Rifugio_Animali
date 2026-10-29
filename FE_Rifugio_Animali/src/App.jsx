@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 import RegisterPage from "./pages/RegisterPage";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import { currentRoute, navigate } from "./navigation";
 
 export default function App() {
@@ -86,6 +87,14 @@ function renderPage(route, auth, handleLogin) {
     return (
       <RequireAuth auth={auth}>
         <DonationFormPage auth={auth} />
+      </RequireAuth>
+    );
+  }
+
+  if (path === "/gest") {
+    return (
+      <RequireAuth auth={auth} admin>
+        <AdminDashboard />
       </RequireAuth>
     );
   }
