@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { loadStoredAuth, removeStoredAuth, storeAuth } from "./api";
 import Layout, { RequireAuth } from "./components/Layout";
+import AdoptionFormPage from "./pages/AdoptionFormPage";
 import AnimalDetailPage from "./pages/AnimalDetailPage";
 import AnimalsPage from "./pages/AnimalsPage";
 import HomePage from "./pages/HomePage";
@@ -68,6 +69,14 @@ function renderPage(route, auth, handleLogin) {
     return (
       <RequireAuth auth={auth}>
         <AnimalDetailPage key={path} id={path.split("/")[2]} auth={auth} />
+      </RequireAuth>
+    );
+  }
+
+  if (path === "/adozioni/form") {
+    return (
+      <RequireAuth auth={auth}>
+        <AdoptionFormPage key={route.query.get("animal")} auth={auth} animalId={route.query.get("animal")} />
       </RequireAuth>
     );
   }
