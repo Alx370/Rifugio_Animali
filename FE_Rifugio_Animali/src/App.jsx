@@ -4,6 +4,7 @@ import Layout, { RequireAuth } from "./components/Layout";
 import AdoptionFormPage from "./pages/AdoptionFormPage";
 import AnimalDetailPage from "./pages/AnimalDetailPage";
 import AnimalsPage from "./pages/AnimalsPage";
+import DonationFormPage from "./pages/DonationFormPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
@@ -77,6 +78,14 @@ function renderPage(route, auth, handleLogin) {
     return (
       <RequireAuth auth={auth}>
         <AdoptionFormPage key={route.query.get("animal")} auth={auth} animalId={route.query.get("animal")} />
+      </RequireAuth>
+    );
+  }
+
+  if (path === "/donazioni/form") {
+    return (
+      <RequireAuth auth={auth}>
+        <DonationFormPage auth={auth} />
       </RequireAuth>
     );
   }
