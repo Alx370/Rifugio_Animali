@@ -1,122 +1,116 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { loadStoredAuth, removeStoredAuth, storeAuth } from "./api";
+import Layout, { RequireAuth } from "./components/Layout";
+import { backofficeRoutes } from "./constants";
+import AdoptionFormPage from "./pages/AdoptionFormPage";
+import AnimalDetailPage from "./pages/AnimalDetailPage";
+import AnimalsPage from "./pages/AnimalsPage";
+import DonationFormPage from "./pages/DonationFormPage";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import NotFound from "./pages/NotFound";
+import RegisterPage from "./pages/RegisterPage";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminEntityPage from "./pages/admin/AdminEntityPage";
+import { currentRoute, navigate } from "./navigation";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [route, setRoute] = useState(currentRoute);
+  const [auth, setAuth] = useState(loadStoredAuth);
+
+  useEffect(() => {
+    const syncRoute = () => setRoute(currentRoute());
+    window.addEventListener("popstate", syncRoute);
+    window.addEventListener("app:navigate", syncRoute);
+    return () => {
+      window.removeEventListener("popstate", syncRoute);
+      window.removeEventListener("app:navigate", syncRoute);
+    };
+  }, []);
+
+  function handleLogin(nextAuth) {
+    storeAuth(nextAuth);
+    setAuth(nextAuth);
+  }
+
+  function handleLogout() {
+    removeStoredAuth();
+    setAuth(null);
+    navigate("/");
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <Layout auth={auth} onLogout={handleLogout}>
+      {renderPage(route, auth, handleLogin)}
+    </Layout>
+  );
 }
 
-export default App
+function renderPage(route, auth, handleLogin) {
+  const path = route.path;
+
+  if (path === "/") {
+    return <HomePage />;
+  }
+
+  if (path === "/login") {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
+  if (path === "/signin") {
+    return <RegisterPage />;
+  }
+
+  if (path === "/animali") {
+    return <RequireAuth auth={auth}><AnimalsPage key="all" /></RequireAuth>;
+  }
+
+  if (path === "/adozioni/visualizza") {
+    return <RequireAuth auth={auth}><AnimalsPage key="available" availableOnly /></RequireAuth>;
+  }
+
+  if (path.startsWith("/animali/")) {
+    return (
+      <RequireAuth auth={auth}>
+        <AnimalDetailPage key={path} id={path.split("/")[2]} auth={auth} />
+      </RequireAuth>
+    );
+  }
+
+  if (path === "/adozioni/form") {
+    return (
+      <RequireAuth auth={auth}>
+        <AdoptionFormPage key={route.query.get("animal")} auth={auth} animalId={route.query.get("animal")} />
+      </RequireAuth>
+    );
+  }
+
+  if (path === "/donazioni/form") {
+    return (
+      <RequireAuth auth={auth}>
+        <DonationFormPage auth={auth} />
+      </RequireAuth>
+    );
+  }
+
+  if (path === "/gest") {
+    return (
+      <RequireAuth auth={auth} admin>
+        <AdminDashboard />
+      </RequireAuth>
+    );
+  }
+
+  if (path.startsWith("/backoffice/")) {
+    const entityKey = backofficeRoutes[path.split("/")[2]];
+    return entityKey ? (
+      <RequireAuth auth={auth} admin>
+        <AdminEntityPage key={entityKey} entityKey={entityKey} />
+      </RequireAuth>
+    ) : (
+      <NotFound />
+    );
+  }
+
+  return <NotFound />;
+}
