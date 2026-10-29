@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import { loadStoredAuth, removeStoredAuth, storeAuth } from "./api";
 import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
-import { currentRoute } from "./navigation";
+import RegisterPage from "./pages/RegisterPage";
+import { currentRoute, navigate } from "./navigation";
 
 export default function App() {
   const [route, setRoute] = useState(currentRoute);
+  const [auth, setAuth] = useState(loadStoredAuth);
 
   useEffect(() => {
     const syncRoute = () => setRoute(currentRoute());
@@ -17,9 +21,38 @@ export default function App() {
     };
   }, []);
 
+  function handleLogin(nextAuth) {
+    storeAuth(nextAuth);
+    setAuth(nextAuth);
+  }
+
+  function handleLogout() {
+    removeStoredAuth();
+    setAuth(null);
+    navigate("/");
+  }
+
   return (
-    <Layout>
-      {route.path === "/" ? <HomePage /> : <NotFound />}
+    <Layout auth={auth} onLogout={handleLogout}>
+      {renderPage(route, auth, handleLogin)}
     </Layout>
   );
+}
+
+function renderPage(route, auth, handleLogin) {
+  const path = route.path;
+
+  if (path === "/") {
+    return <HomePage />;
+  }
+
+  if (path === "/login") {
+    return <LoginPage onLogin={handleLogin} />;
+  }
+
+  if (path === "/signin") {
+    return <RegisterPage />;
+  }
+
+  return <NotFound />;
 }
